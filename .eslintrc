@@ -1,0 +1,33 @@
+{
+    "extends": ["airbnb", "plugin:meteor/recommended"],
+    "plugins": [
+        "meteor"
+    ],
+    "parser": "babel-eslint",
+    "env": {
+        "meteor": true
+    },
+    "globals": {
+        "FlowRouter": true
+    },
+    "settings": {
+        "import/resolver": "meteor"
+    },
+    "rules": {
+        "strict": 0,
+        "indent": [
+            2,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "comma-dangle": [
+            0
+        ],
+        "react/jsx-indent-props": [
+            2,
+            4
+        ]
+    }
+}

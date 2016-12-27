@@ -1,0 +1,55 @@
+@import './defaultTheme';
+
+
+// Registered themes.
+
+// ****** !!!! Theme must be assigned here to work !!!! ******
+$themes: 'default';
+$themesMap: (
+    default: $default
+);
+
+// List of defined color names.
+
+// ****** !!!! Color name must be defined here to work !!!! ******
+$colorNames: 'primary', 'formPrimary', 'headerSubText', 'headerIconsTextColor', 'alarmBackground', 'acceptColor', 'declineColor', 'alarmTextColor';
+
+// Since scss does not implement map-set, we make one using map-merge.
+@function map-set($map, $key, $value) {
+    // Declare map named 'new' with just one key/value.
+    $new: ($key: $value);
+    // Now use the built in map-merge to merge it into the destination map.
+    @return map-merge($map, $new);
+}
+
+// Placeholder for all theme/color combinations.
+$colors: ();
+
+// Lets make all theme/color combinations.
+@each $theme in $themes{
+    @each $color in $colorNames {
+        $colors: map-set($colors, #{$theme}-#{$color}, map_get(map_get($themesMap, $theme), $color));
+    }
+}
+
+// Adds a rule for all themes, based on the body.<theme>Theme rule.
+@mixin themedRule($rule, $colorName, $directive:'') {
+    @each $theme in $themes {
+
+        :global(body.#{$theme}Theme) & {
+            #{$rule}: map-get($colors, #{$theme}-#{$colorName}) unquote($directive);
+        }
+
+    }
+}
+
+// Adds a rule for all themes, based on the body.<theme>Theme rule.
+// Adds the alpha channel to the color.
+@mixin themedRuleRGBA($rule, $colorName, $opacity, $directive:'') {
+    @each $theme in $themes {
+        :global(body.#{$theme}Theme) & {
+            #{$rule}: rgba(map-get($colors, #{$theme}-#{$colorName}), $opacity) unquote($directive);
+        }
+
+    }
+}

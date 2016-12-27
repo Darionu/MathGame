@@ -1,0 +1,8 @@
+node_modules
+*.log
+.idea
+.DS_Store
+.npm
+/lang/build
+/lang/build_tmp
+/lang/dist

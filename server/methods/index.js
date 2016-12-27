@@ -1,0 +1,5 @@
+export default () => {
+    Meteor.methods({
+
+    });
+}
