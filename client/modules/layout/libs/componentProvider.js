@@ -10,7 +10,7 @@ export class ComponentProvider {
     }
 
     getComponent(normal) {
-      return normal;
+        return normal;
     }
 }
 

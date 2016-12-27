@@ -16,16 +16,16 @@ export class ThemeProvider {
         this._pages = this._themes.pages;
     }
     getPage(page) {
-      this.getCurrentTheme();
-      const layout = this._localState.get(localStateKeys.layout);
-      if (!this._defaults) {
-        throw Error(`No such layout (${layout}) defined in themesDefault.`);
-      }
-      let version = 0;
-      if (this._defaults[layout].pageVersions[page]) {
-        version = this._defaults[layout].pageVersions[page] - 1;
-      }
-      return this._pages[page][version];
+        this.getCurrentTheme();
+        const layout = this._localState.get(localStateKeys.layout);
+        if (!this._defaults) {
+            throw Error(`No such layout (${layout}) defined in themesDefault.`);
+        }
+        let version = 0;
+        if (this._defaults[layout].pageVersions[page]) {
+            version = this._defaults[layout].pageVersions[page] - 1;
+        }
+        return this._pages[page][version];
     }
 
     getTexts() {

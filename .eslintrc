@@ -1,5 +1,4 @@
 {
-    "extends": ["airbnb", "plugin:meteor/recommended"],
     "plugins": [
         "meteor"
     ],
@@ -8,13 +7,15 @@
         "meteor": true
     },
     "globals": {
-        "FlowRouter": true
+        "FlowRouter": true,
+        "Migrations": true
     },
     "settings": {
         "import/resolver": "meteor"
     },
     "rules": {
         "strict": 0,
+        "no-underscore-dangle": 0,
         "indent": [
             2,
             4,
@@ -25,8 +26,9 @@
         "comma-dangle": [
             0
         ],
-        "react/jsx-indent-props": [
+        "max-len": [
             2,
+            150,
             4
         ]
     }

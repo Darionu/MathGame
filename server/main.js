@@ -13,4 +13,4 @@ Meteor.startup(() => {
     dbMigrations();
 });
 
-new Logging();
+new Logging(); // eslint-disable-line no-new

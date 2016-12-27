@@ -3,25 +3,22 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 const fs = require('fs');
-
 const lang = {};
 const available = 'en,pl';
 
-available.split(',').forEach(function (item) {
+available.split(',').forEach((item) => {
     lang[item] = require('../lang/' + item + '.json');
 });
 
-function delFiles() {
+const delFiles = () => {
     return require('del')([
         '../lang/build',
         '../lang/build_tmp'
     ], { force: true });
-}
-
+};
 
 gulp.task('lang:clean', delFiles);
-
-gulp.task('lang:generate', ['lang:clean'], function () {
+gulp.task('lang:generate', ['lang:clean'], () => {
     return gulp.src('../client/**/*.js')
         .pipe($.babel({
             presets: [
@@ -37,17 +34,16 @@ gulp.task('lang:generate', ['lang:clean'], function () {
         .pipe(gulp.dest('../lang/build_tmp'));
 });
 
-gulp.task('lang:concat', ['lang:generate'], function () {
-    gulp.src('../lang/build/msg/**/*.json').pipe($.jsonConcat('lang.json', function (data) {
+gulp.task('lang:concat', ['lang:generate'], () => {
+    gulp.src('../lang/build/msg/**/*.json').pipe($.jsonConcat('lang.json', (data) => {
         const outputJson = {};
-
-        for (var i in Object.keys(data)) {
-            var fileName = Object.keys(data)[i];
-            data[fileName].forEach(function (item) {
+        for (const i in Object.keys(data)) {
+            const fileName = Object.keys(data)[i];
+            data[fileName].forEach((item) => {
                 const id = item.id;
                 const defaultMessage = item.defaultMessage;
 
-                available.split(',').forEach(function (item) {
+                available.split(',').forEach((item) => {
                     if (item === 'en') {
                         if (lang[item][id] === undefined) {
                             lang[item][id] = defaultMessage;
@@ -58,23 +54,21 @@ gulp.task('lang:concat', ['lang:generate'], function () {
             });
         }
 
-        available.split(',').forEach(function (item) {
+        available.split(',').forEach((item) => {
             fs.writeFileSync('../lang/' + item + '.json', JSON.stringify(lang[item], null, 2));
         });
 
         delFiles();
 
         return new Buffer(JSON.stringify(data));
-    }))
-        .pipe(gulp.dest('../lang/dist'))
+    })).pipe(gulp.dest('../lang/dist'))
 });
 
-gulp.task('versionPropagate', function() {
+gulp.task('versionPropagate', () => {
     // Read the versions.
     const packageJson = require('../package.json');
     const version = packageJson.version;
     const mobileVersion = packageJson.mobileVersion;
-
     console.log(`Versions set in package.json: backend-${version}, client-${mobileVersion}`);
 
     // Server

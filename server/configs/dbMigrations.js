@@ -1,6 +1,6 @@
 import Logger from '/lib/logging/Logger';
 import MigrationConstants from '/lib/constants/migrationConstants';
-import { SetSchemas } from '/lib/collections/index';
+import { setSchemas } from '/lib/collections/index';
 import migrationV1Up from './migrations/migrationV1Up';
 
 export default () => {
@@ -8,27 +8,29 @@ export default () => {
     Migrations.add({
         version: MigrationConstants.DB_MIGRATION_VERSION_1,
         up: () => {
-            SetSchemas(MigrationConstants.DB_MIGRATION_VERSION_1);
+            setSchemas(MigrationConstants.DB_MIGRATION_VERSION_1);
             migrationV1Up();
         }
     });
 
 
   /* Migrations config */
-    const migrationsLogger = (opts) => {
-        switch (opts.level) {
+    const migrationsLogger = (options) => {
+        switch (options.level) {
             case MigrationConstants.debug:
-                Logger.debug(`${opts.tag} ${opts.message}`, __filename);
-            break;
+                Logger.debug(`${options.tag} ${options.message}`, __filename);
+                break;
             case MigrationConstants.info:
-                Logger.info(`${opts.tag} ${opts.message}`, __filename);
-            break;
+                Logger.info(`${options.tag} ${options.message}`, __filename);
+                break;
             case MigrationConstants.warn:
-                Logger.warn(`${opts.tag} ${opts.message}`, __filename);
-            break;
+                Logger.warn(`${options.tag} ${options.message}`, __filename);
+                break;
             case MigrationConstants.error:
-                Logger.error(`${opts.tag} ${opts.message}`, __filename);
-            break;
+                Logger.error(`${options.tag} ${options.message}`, __filename);
+                break;
+            default:
+                break;
         }
     };
 
@@ -40,7 +42,7 @@ export default () => {
 
   /* Reattaching db schemes after Meteor restart */
     if (Migrations.getVersion()) {
-        SetSchemas(Migrations.getVersion());
+        setSchemas(Migrations.getVersion());
     }
 
   /* DB migration target */

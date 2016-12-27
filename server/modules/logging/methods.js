@@ -1,5 +1,5 @@
 import dbLogging from '/lib/logging/databaseLogging';
-import { check } from 'meteor/check'
+import { check } from 'meteor/check';
 
 export default () => {
     Meteor.methods({
@@ -13,4 +13,4 @@ export default () => {
             dbLogging(logLevel, log, filename, user, type, date);
         }
     });
-}
+};
