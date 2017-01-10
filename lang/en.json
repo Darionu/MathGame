@@ -1,5 +1,7 @@
 {
-  "app.loginPage.login": "Login",
-  "app.loginPage.username": "Username",
-  "app.loginPage.password": "Password"
+    "app.homePage.login": "Login",
+    "app.homePage.homePage": "Home Page",
+    "app.homePage.description": "Your source of fun",
+    "app.homePage.username": "Username",
+    "app.homePage.password": "Password"
 }

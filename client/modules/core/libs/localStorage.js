@@ -3,7 +3,7 @@ import LocalStorageConstants from '/lib/constants/localStorageConstants';
 export default class LocalStorage {
     constructor() {
         // To be compatible we will user Meteor._localStorage which normally points to
-        // window.LocalStorage anyway. On Desktop however we are replacing Meteor._localStoarge with
+        // window.LocalStorage anyway. On Desktop however we are replacing Meteor._localStorage with
         // our own implementation.
         this.storage = Meteor._localStorage;
     }

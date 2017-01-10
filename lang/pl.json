@@ -1,5 +1,7 @@
 {
-  "app.loginPage.login": "Zaloguj",
-  "app.loginPage.username": "Nazwa użytkownika",
-  "app.loginPage.password": "Hasło"
+    "app.homePage.login": "Zaloguj",
+    "app.homePage.homePage": "Strona Główna",
+    "app.homePage.description": "Twoje źródło zabawy",
+    "app.homePage.username": "Nazwa użytkownika",
+    "app.homePage.password": "Hasło"
 }

@@ -1,0 +1,66 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
+.cardImage {
+    position: relative;
+    margin: 2% 6%;
+    height: 96%;
+    width: 88%;
+    @include themedRule('background-color', 'formPrimary');
+}
+
+.top {
+    height: 50%;
+    width: 100%;
+    @include themedRule('background-color', 'formPrimary');
+    padding: 1px;
+}
+
+.middle {
+    height: 35%;
+    width: 100%;
+    @include themedRule('background-color', 'formPrimary');
+    padding:1px;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    height: 15%;
+    width: 100%;
+    @include themedRule('background-color', 'formPrimary');
+    padding:1px;
+}
+
+.button {
+    height: 100%;
+    width: 100%;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    border-top: 1px solid #696969;
+    @include themedRule('color', 'primary');
+    @extend .fontRoboto18Light;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+}
+
+.title {
+    @include themedRule('color', 'primary');
+    @extend .fontRoboto28Medium;
+    margin-top: 0.35em;
+}
+
+.description {
+    @include themedRule('color', 'subText');
+    @extend .fontRoboto18Light;
+    text-align: justify;
+    padding: 0.75em 2em 0 2em;
+}
