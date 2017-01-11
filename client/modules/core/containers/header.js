@@ -5,8 +5,10 @@ export const composer = ({}, onData) => {
     onData(null, {});
 };
 
-export const depsMapper = (context) => ({
-    context: () => context
+export const depsMapper = (context, actions) => ({
+    context: () => context,
+    switchLoginBoxState: actions.interfaceActions.switchLoginBoxState,
+    goToHomePage: actions.interfaceActions.goToHomePage
 });
 
 export default composeAll(

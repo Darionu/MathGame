@@ -3,6 +3,7 @@ import styles from './home.scss';
 import Header from '/client/modules/core/containers/header';
 import Footer from '/client/modules/core/containers/footer';
 import CardImage from '/client/modules/core/containers/cardImage';
+import LoginModal from '/client/modules/core/containers/loginModal';
 
 const HomePage = () => (
     <div>
@@ -23,6 +24,8 @@ const HomePage = () => (
         </div>
 
         <Footer/>
+
+        <LoginModal/>
     </div>
 );
 

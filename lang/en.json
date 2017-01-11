@@ -3,5 +3,9 @@
     "app.homePage.homePage": "Home Page",
     "app.homePage.description": "Your source of fun",
     "app.homePage.username": "Username",
-    "app.homePage.password": "Password"
+    "app.homePage.password": "Password",
+    "app.loginModal.logIn": "LOG IN",
+    "app.loginModal.signUp": "SIGN UP",
+    "app.loginModal.username": "Username",
+    "app.loginModal.password": "Password"
 }

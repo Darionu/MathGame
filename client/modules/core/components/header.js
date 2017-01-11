@@ -28,8 +28,8 @@ const Header = class extends React.Component {
                         <span className={styles.description}>Math Game - {formatMessage(messages.description)}</span>
                     </div>
                     <div className={styles.navigationBar}>
-                        <Button className={styles.navigationButton} text={formatMessage(messages.login)}/>
-                        <Button className={styles.navigationButton} text={formatMessage(messages.home)}/>
+                        <Button className={styles.navigationButton} text={formatMessage(messages.login)} onClick={this.props.switchLoginBoxState}/>
+                        <Button className={styles.navigationButton} text={formatMessage(messages.home)} onClick={this.props.goToHomePage}/>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,9 @@ const Header = class extends React.Component {
 };
 
 Header.propTypes = {
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    switchLoginBoxState: React.PropTypes.func.isRequired,
+    goToHomePage: React.PropTypes.func.isRequired
 };
 
 export default injectIntl(Header);
