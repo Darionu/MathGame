@@ -188,7 +188,8 @@ const LoginModal = class extends React.Component {
     closeLoginModal() {
         this.setState({
             isSelectingAvatar: false,
-            isLoginForm: true
+            isLoginForm: true,
+            language: 'en'
         }, () => {
             this.props.switchLoginBoxState();
         });
