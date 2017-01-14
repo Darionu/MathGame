@@ -17,9 +17,9 @@
 
 .descriptionBar {
     float: left;
+    width: 100%;
     height: 100%;
     color: white;
-    background-color: red;
 }
 
 .description {
@@ -39,7 +39,7 @@
 
 .navigationButton {
     display: inline-block;
-    min-width: 6em;
+    width: 7.5em;
     padding: 0 1em;
     height: 3em;
     margin: 10px;

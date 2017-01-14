@@ -1,0 +1,13 @@
+.avatarCircle {
+    width: 3em;
+    height: 3em;
+    -webkit-border-radius: 3em;
+    -moz-border-radius: 3em;
+    -ms-border-radius: 3em;
+    border-radius: 3em;
+
+    -mox-box-shadow: 0 0 5px white;
+    -webkit-box-shadow: 0 0 5px white;
+    box-shadow: 0 0 5px white;
+    vertical-align: middle;
+}

@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './styles/input.scss';
-import Button from '/client/modules/core/components/button';
-
 
 const Input = class extends React.Component {
     getLabel() {
@@ -16,7 +14,7 @@ const Input = class extends React.Component {
         return (
             <div className={styles.inputWrapper}>
                 {this.props.label ? this.getLabel() : null}
-                <input className={styles.input} type={this.props.type ? this.props.type : 'text'} name={this.props.label} />
+                <input className={styles.input} type={this.props.type ? this.props.type : 'text'} name={this.props.name} onChange={this.props.onChangeValue}/>
             </div>
         );
     }
@@ -24,7 +22,9 @@ const Input = class extends React.Component {
 
 Input.propTypes = {
     type: React.PropTypes.string,
-    label: React.PropTypes.string
+    label: React.PropTypes.string,
+    name: React.PropTypes.string,
+    onChangeValue: React.PropTypes.func
 };
 
 export default Input;

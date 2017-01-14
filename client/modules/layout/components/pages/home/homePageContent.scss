@@ -1,0 +1,17 @@
+.wrapperContainer {
+    width: 80%;
+    margin: 10em auto;
+    text-align: center;
+}
+
+.cardImageHolder {
+    display: flex;
+    height: 65vh;
+    width: 100%;
+}
+
+.cardImage {
+    flex: 1;
+    width: 33%;
+    height: 100%;
+}

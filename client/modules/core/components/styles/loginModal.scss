@@ -60,6 +60,7 @@
 }
 
 .content {
+    height: 100%;
     width: 80%;
     margin: 1.5em auto;
 }
@@ -112,10 +113,10 @@
 
 .footerButton {
     height: 100%;
-    width: 6em;
+    width: 8em;
     margin: 0 0.5em;
     padding: 0.5em;
-    @extend .fontRoboto20Medium;
+    @extend .fontRoboto16Medium;
 }
 
 .loginForm {
@@ -123,6 +124,7 @@
 }
 
 .registerForm {
+    height: 100%;
     text-align: center;
 }
 
@@ -131,4 +133,34 @@
     width: 75%;
     object-fit: cover;
     opacity: 0.85;
+}
+
+.chooseAvatarLabel {
+    margin-top: 1em;
+    @extend .fontRoboto16Light;
+}
+
+.clickToChangeLabel {
+
+    @extend .fontRoboto14Light;
+}
+
+
+.selectedAvatar {
+    height: 35%;
+    margin: 0.25em;
+    border: 0.1em solid black;
+    cursor: pointer;
+}
+
+.avatarsWrapper {
+    height: 100%;
+}
+
+.avatarToChoose {
+    height: 25%;
+    border: 0.1em solid black;
+    margin: 0.5em;
+    display: inline-block;
+    cursor: pointer;
 }

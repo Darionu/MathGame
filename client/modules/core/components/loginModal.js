@@ -20,6 +20,38 @@ const messages = defineMessages({
     password: {
         id: 'app.loginModal.password',
         defaultMessage: 'Password'
+    },
+    loginSuccess: {
+        id: 'app.loginModal.loginSuccess',
+        defaultMessage: 'Logged in successfully!'
+    },
+    loginFail: {
+        id: 'app.loginModal.loginFail',
+        defaultMessage: 'Failed to log in'
+    },
+    registerSuccess: {
+        id: 'app.loginModal.registerSuccess',
+        defaultMessage: 'Account registered successfully!'
+    },
+    registerFail: {
+        id: 'app.loginModal.registerFail',
+        defaultMessage: 'Register failed'
+    },
+    yourAvatar: {
+        id: 'app.loginModal.yourAvatar',
+        defaultMessage: 'Your profile avatar'
+    },
+    clickToChange: {
+        id: 'app.loginModal.clickToChange',
+        defaultMessage: 'Click on avatar to change'
+    },
+    leave: {
+        id: 'app.loginModal.leave',
+        defaultMessage: 'LEAVE'
+    },
+    selectAvatar: {
+        id: 'app.loginModal.selectAvatar',
+        defaultMessage: 'Select avatar'
     }
 });
 
@@ -27,19 +59,54 @@ const LoginModal = class extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoginForm: true
+            isLoginForm: true,
+            isSelectingAvatar: false,
+            username: '',
+            password: '',
+            chosenAvatar: 'otter'
         };
 
-        this.switchFormType = this.switchFormType.bind(this);
-        this.getCurrentActionMessage = this.getCurrentActionMessage.bind(this);
+        this.switchFormType = ::this.switchFormType;
+        this.getCurrentActionMessage = ::this.getCurrentActionMessage;
+        this.handleChangeValue = ::this.handleChangeValue;
+        this.selectAvatar = ::this.selectAvatar;
+        this.openAvatarSelection = ::this.openAvatarSelection;
+        this.leaveAvatarSelection = ::this.leaveAvatarSelection;
     }
 
-    loginAttempt() {
+    submit() {
+        const { formatMessage } = this.props.intl;
+        const alertMessages = {
+            loginSuccess: formatMessage(messages.loginSuccess),
+            loginFail: formatMessage(messages.loginFail),
+            registerSuccess: formatMessage(messages.registerSuccess),
+            registerFail: formatMessage(messages.registerFail)
+        };
 
+        if (this.state.isLoginForm) {
+            this.props.loginAttempt(this.state.username, this.state.password, alertMessages);
+        } else {
+            this.props.registerAttempt(this.state.username, this.state.password, this.state.chosenAvatar, alertMessages);
+        }
+    }
+
+    handleChangeValue (event) {
+        switch (event.target.name) {
+            case 'username':
+                this.setState({ username: event.target.value });
+                break;
+            case 'password':
+                this.setState({ password: event.target.value });
+                break;
+            default:
+        }
     }
 
     switchFormType() {
-        this.setState({ isLoginForm: !this.state.isLoginForm });
+        this.setState({
+            isSelectingAvatar: false,
+            isLoginForm: !this.state.isLoginForm
+        });
     }
 
     getCurrentActionMessage(reverted) {
@@ -48,33 +115,67 @@ const LoginModal = class extends React.Component {
         return isLoginForm ? formatMessage(messages.logIn) : formatMessage(messages.signUp);
     }
 
+    openAvatarSelection() {
+        this.setState({ isSelectingAvatar: true });
+    }
+
+    selectAvatar(event) {
+        this.setState({
+            isSelectingAvatar: false,
+            chosenAvatar: event.target.name
+        });
+    }
+
     getLoginForm() {
         const { formatMessage } = this.props.intl;
         return (
             <div className={styles.loginForm}>
                 <form>
-                    <Input label={`${formatMessage(messages.username)} :`}/>
-                    <Input label={`${formatMessage(messages.password)} :`} type="password"/>
+                    <Input label={`${formatMessage(messages.username)} :`} name="username" onChangeValue={this.handleChangeValue}/>
+                    <Input label={`${formatMessage(messages.password)} :`} name="password" type="password" onChangeValue={this.handleChangeValue}/>
                 </form>
-                <img className={styles.image} src="/images/squirrel.jpeg" />
+                <img className={styles.image} src={this.props.images.squirrel} />
             </div>
         )
     }
 
     getRegisterForm() {
         const { formatMessage } = this.props.intl;
-        return (
-            <div className={styles.registerForm}>
-                <form>
-                    <Input label={`${formatMessage(messages.username)} :`}/>
-                    <Input label={`${formatMessage(messages.password)} :`} type="password"/>
-                </form>
-                <img className={styles.image} src="/images/squirrel.jpeg" />
-            </div>
-        )
+        if (this.state.isSelectingAvatar) {
+            return (
+                <div className={styles.registerForm}>
+                    <div className={styles.chooseAvatarLabel}>{ formatMessage(messages.selectAvatar) }</div>
+                    <div className={styles.avatarsWrapper}>
+                        <img className={styles.avatarToChoose} src={this.props.images.avatars.bird} name="bird" selected="true" onClick={this.selectAvatar}/>
+                        <img className={styles.avatarToChoose} src={this.props.images.avatars.bird2} name="bird2" selected="true" onClick={this.selectAvatar}/>
+                        <img className={styles.avatarToChoose} src={this.props.images.avatars.eagle} name="eagle" selected="true" onClick={this.selectAvatar}/>
+                        <img className={styles.avatarToChoose} src={this.props.images.avatars.giraffe} name="giraffe" selected="true" onClick={this.selectAvatar}/>
+                        <img className={styles.avatarToChoose} src={this.props.images.avatars.otter} name="otter" selected="true" onClick={this.selectAvatar}/>
+                        <img className={styles.avatarToChoose} src={this.props.images.avatars.tiger} name="tiger" selected="true" onClick={this.selectAvatar}/>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className={styles.registerForm}>
+                    <form>
+                        <Input label={`${formatMessage(messages.username)} :`} name="username" onChangeValue={this.handleChangeValue}/>
+                        <Input label={`${formatMessage(messages.password)} :`} name="password" type="password" onChangeValue={this.handleChangeValue}/>
+                    </form>
+                    <div className={styles.chooseAvatarLabel}>{ formatMessage(messages.yourAvatar) }</div>
+                    <img className={styles.selectedAvatar} src={this.props.images.avatars[this.state.chosenAvatar]} selected="true" onClick={this.openAvatarSelection}/>
+                    <div className={styles.clickToChangeLabel}>* { formatMessage(messages.clickToChange) }</div>
+                </div>
+            )
+        }
+    }
+
+    leaveAvatarSelection() {
+        this.setState({ isSelectingAvatar: false });
     }
 
     render() {
+        const { formatMessage } = this.props.intl;
         return (
             <div className={`${styles.loginModal} ${this.props.isLoginModalVisible ? null : styles.loginModalHidden}`}>
                 <div className={styles.wrapper}>
@@ -89,8 +190,14 @@ const LoginModal = class extends React.Component {
                     </div>
                     <div className={styles.footer}>
                         <div className={styles.footerButtonWrapper}>
-                            <Button className={styles.footerButton} text={this.getCurrentActionMessage(true)} onClick={this.switchFormType}/>
-                            <Button className={styles.footerButton} text={this.getCurrentActionMessage()} onClick={this.loginAttempt.bind(this)}/>
+                            {this.state.isSelectingAvatar
+                                ? <Button className={styles.footerButton} text={formatMessage(messages.leave)} onClick={this.leaveAvatarSelection}/>
+                                :
+                                <div>
+                                    <Button className={styles.footerButton} text={this.getCurrentActionMessage(true)} onClick={this.switchFormType}/>
+                                    <Button className={styles.footerButton} text={this.getCurrentActionMessage()} onClick={::this.submit}/>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -102,7 +209,9 @@ const LoginModal = class extends React.Component {
 LoginModal.propTypes = {
     intl: intlShape.isRequired,
     isLoginModalVisible: React.PropTypes.bool.isRequired,
-    switchLoginBoxState: React.PropTypes.func.isRequired
+    switchLoginBoxState: React.PropTypes.func.isRequired,
+    loginAttempt: React.PropTypes.func.isRequired,
+    registerAttempt: React.PropTypes.func.isRequired
 };
 
 export default injectIntl(LoginModal);

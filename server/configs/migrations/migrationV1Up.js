@@ -5,23 +5,20 @@ export default () => {
 
     const users = [
         {
-            firstName: 'Tomasz',
-            lastName: 'Przytuła',
-            username: 'darionu',
+            username: 'Mamorina',
             password: 'qwerty',
-            language: 'pl'
+            language: 'en',
+            avatar: 'otter'
         }, {
-            firstName: 'Tomasz',
-            lastName: 'Przytuła',
-            username: 'darionu2',
+            username: 'Darionu',
             password: 'qwerty',
-            language: 'en'
+            language: 'pl',
+            avatar: 'tiger'
         }
     ];
 
     users.forEach((user) => {
         const userId = Accounts.createUser({
-            email: `${user.username}@a.com`,
             username: user.username,
             password: user.password
         });
@@ -29,9 +26,8 @@ export default () => {
         Meteor.users.update({ _id: userId }, {
             $set: {
                 userData: {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    language: user.language
+                    language: user.language,
+                    avatar: user.avatar
                 }
             }
         });

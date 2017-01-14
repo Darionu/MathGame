@@ -17,6 +17,7 @@ const Button = (props) => (
         id={props.id}
         className={getButtonStyle(props.className, props.overrideDefault)}
         onClick={props.onClick}
+        type={props.type}
         disabled={isButtonDisabled(props.disabled)}
     >
         {props.text}
@@ -28,6 +29,7 @@ Button.propTypes = {
     overrideDefault: React.PropTypes.bool,
     text: React.PropTypes.string.isRequired,
     disabled: React.PropTypes.bool,
-    onClick: React.PropTypes.func
+    onClick: React.PropTypes.func,
+    type: React.PropTypes.string
 };
 export default Button;
