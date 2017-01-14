@@ -1,5 +1,9 @@
 ## MathGame
 
+### Live Demo
+
+* Go to <http://darionu.pl:3000>
+
 ### Setting Up
 
 * Clone this repo
