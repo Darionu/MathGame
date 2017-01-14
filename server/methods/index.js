@@ -1,9 +1,10 @@
 
 export default () => {
     Meteor.methods({
-        registerUser: (username, password, avatar) => {
+        registerUser: (username, password, language, avatar) => {
             check(username, String);
             check(password, String);
+            check(language, String);
             check(avatar, String);
 
             const userId = Accounts.createUser({
@@ -15,7 +16,7 @@ export default () => {
                $set: {
                    userData: {
                        avatar: avatar,
-                       language: 'pl'
+                       language: language
                    }
                }
             });

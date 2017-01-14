@@ -26,5 +26,8 @@
     "app.loginModal.yourAvatar": "Twój avatar",
     "app.loginModal.clickToChange": "Kliknij na avatar aby zmienić",
     "app.loginModal.leave": "WYJDŹ",
-    "app.loginModal.selectAvatar": "Wybierz avatar"
+    "app.loginModal.selectAvatar": "Wybierz avatar",
+    "app.loginModal.language": "Język",
+    "app.loginModal.english": "Angielski",
+    "app.loginModal.polish": "Polski"
 }

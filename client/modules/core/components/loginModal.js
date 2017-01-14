@@ -52,6 +52,18 @@ const messages = defineMessages({
     selectAvatar: {
         id: 'app.loginModal.selectAvatar',
         defaultMessage: 'Select avatar'
+    },
+    language: {
+        id: 'app.loginModal.language',
+        defaultMessage: 'Language'
+    },
+    english: {
+        id: 'app.loginModal.english',
+        defaultMessage: 'English'
+    },
+    polish: {
+        id: 'app.loginModal.polish',
+        defaultMessage: 'Polish'
     }
 });
 
@@ -63,6 +75,7 @@ const LoginModal = class extends React.Component {
             isSelectingAvatar: false,
             username: '',
             password: '',
+            language: 'en',
             chosenAvatar: 'otter'
         };
 
@@ -72,6 +85,7 @@ const LoginModal = class extends React.Component {
         this.selectAvatar = ::this.selectAvatar;
         this.openAvatarSelection = ::this.openAvatarSelection;
         this.leaveAvatarSelection = ::this.leaveAvatarSelection;
+        this.closeLoginModal = ::this.closeLoginModal;
     }
 
     submit() {
@@ -86,20 +100,12 @@ const LoginModal = class extends React.Component {
         if (this.state.isLoginForm) {
             this.props.loginAttempt(this.state.username, this.state.password, alertMessages);
         } else {
-            this.props.registerAttempt(this.state.username, this.state.password, this.state.chosenAvatar, alertMessages);
+            this.props.registerAttempt(this.state.username, this.state.password, this.state.language, this.state.chosenAvatar, alertMessages);
         }
     }
 
     handleChangeValue (event) {
-        switch (event.target.name) {
-            case 'username':
-                this.setState({ username: event.target.value });
-                break;
-            case 'password':
-                this.setState({ password: event.target.value });
-                break;
-            default:
-        }
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     switchFormType() {
@@ -161,8 +167,13 @@ const LoginModal = class extends React.Component {
                     <form>
                         <Input label={`${formatMessage(messages.username)} :`} name="username" onChangeValue={this.handleChangeValue}/>
                         <Input label={`${formatMessage(messages.password)} :`} name="password" type="password" onChangeValue={this.handleChangeValue}/>
+                        <span className={styles.label}>{formatMessage(messages.language)}: </span>
+                        <select name="language" onChange={this.handleChangeValue}>
+                            <option value="en">{formatMessage(messages.english)}</option>
+                            <option value="pl">{formatMessage(messages.polish)}</option>
+                        </select>
                     </form>
-                    <div className={styles.chooseAvatarLabel}>{ formatMessage(messages.yourAvatar) }</div>
+                    <div className={styles.label}>{ formatMessage(messages.yourAvatar) }</div>
                     <img className={styles.selectedAvatar} src={this.props.images.avatars[this.state.chosenAvatar]} selected="true" onClick={this.openAvatarSelection}/>
                     <div className={styles.clickToChangeLabel}>* { formatMessage(messages.clickToChange) }</div>
                 </div>
@@ -174,13 +185,22 @@ const LoginModal = class extends React.Component {
         this.setState({ isSelectingAvatar: false });
     }
 
+    closeLoginModal() {
+        this.setState({
+            isSelectingAvatar: false,
+            isLoginForm: true
+        }, () => {
+            this.props.switchLoginBoxState();
+        });
+    }
+
     render() {
         const { formatMessage } = this.props.intl;
         return (
             <div className={`${styles.loginModal} ${this.props.isLoginModalVisible ? null : styles.loginModalHidden}`}>
                 <div className={styles.wrapper}>
                     <div className={styles.header}>
-                        <Button className={styles.closeModal} text="X" onClick={this.props.switchLoginBoxState}/>
+                        <Button className={styles.closeModal} text="X" onClick={this.closeLoginModal}/>
                         <span className={styles.headerTitle}>{this.getCurrentActionMessage()}</span>
                     </div>
                     <div className={styles.contentWrapper}>
