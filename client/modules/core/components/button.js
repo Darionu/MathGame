@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles/button.scss';
 
 const getButtonStyle = (className, overrideDefault = false) => {
-    let style;
+    let style = '';
 
     if (!overrideDefault) {
         style = styles.defaultButton;
@@ -10,6 +10,7 @@ const getButtonStyle = (className, overrideDefault = false) => {
 
     return className ? `${style} ${className}` : style;
 };
+
 const isButtonDisabled = (disabled) => !!disabled;
 
 const Button = (props) => (
@@ -23,13 +24,15 @@ const Button = (props) => (
         {props.text}
     </button>
 );
+
 Button.propTypes = {
     id: React.PropTypes.string,
     className: React.PropTypes.string,
     overrideDefault: React.PropTypes.bool,
-    text: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     onClick: React.PropTypes.func,
-    type: React.PropTypes.string
+    text: React.PropTypes.string.isRequired
 };
+
 export default Button;

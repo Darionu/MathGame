@@ -13,12 +13,12 @@ export default () => {
             });
 
             const result = Meteor.users.update(userId, {
-               $set: {
-                   userData: {
-                       avatar: avatar,
-                       language: language
-                   }
-               }
+                $set: {
+                    userData: {
+                        avatar: avatar,
+                        language: language
+                    }
+                }
             });
 
             return result === 1;

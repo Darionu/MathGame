@@ -8,6 +8,7 @@ export const composer = ({ context }, onData) => {
         const images = context().providers.pageProvider.getImages();
         userAvatar = images.avatars[user.userData.avatar];
     }
+
     onData(null, {
         user,
         userAvatar

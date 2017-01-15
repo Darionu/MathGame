@@ -2,8 +2,8 @@ import React from 'react';
 import { IntlProvider } from 'react-intl';
 
 const LanguageProvider = ({ locale, messages, children }) => (
-    <IntlProvider locale={locale} messages={messages}>
-        {children}
+    <IntlProvider locale={ locale } messages={ messages }>
+        { children }
     </IntlProvider>
 );
 

@@ -3,9 +3,7 @@
  * layoutType field in LocalState.
  */
 export class ComponentProvider {
-    constructor(
-        { LocalState }
-    ) {
+    constructor({ LocalState }) {
         this._localState = LocalState;
     }
 

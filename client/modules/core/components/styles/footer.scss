@@ -9,13 +9,13 @@
     height: 6em;
 
     @include themedRule('background-color', 'primaryDark');
-}
 
-.copyright {
-    position: absolute;
-    top: 50%;
-    right: 15%;
-    transform: translate(0%,-50%);
+    .copyright {
+        position: absolute;
+        top: 50%;
+        right: 15%;
+        transform: translate(0%,-50%);
 
-    @include themedRule('color', 'formPrimary');
+        @include themedRule('color', 'formPrimary');
+    }
 }

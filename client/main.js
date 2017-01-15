@@ -18,8 +18,6 @@ import learnModule from './modules/learn';
 // Do not touch - this is updated by gulp.
 Meteor.clientVersion = '0.1.0';
 
-// modules
-
 // init context
 const context = initContext();
 
@@ -29,6 +27,7 @@ addLocaleData(plLocaleData);
 
 // create app
 const app = createApp(context);
+
 app.loadModule(coreModule);
 app.loadModule(layoutModule);
 app.loadModule(rankingsModule);

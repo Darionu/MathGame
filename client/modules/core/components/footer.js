@@ -11,8 +11,4 @@ const Footer = class extends React.Component {
     }
 };
 
-Footer.propTypes = {
-
-};
-
 export default Footer;

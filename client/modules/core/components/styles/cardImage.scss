@@ -8,72 +8,75 @@
     width: 88%;
 
     @include themedRule('background-color', 'formPrimary');
-}
 
-.top {
-    height: 50%;
-    width: 100%;
-    padding: 1px;
+    .top {
+        height: 50%;
+        width: 100%;
+        padding: 1px;
 
-    @include themedRule('background-color', 'formPrimary');
-}
+        @include themedRule('background-color', 'formPrimary');
 
-.middle {
-    height: 35%;
-    width: 100%;
-    padding:1px;
-    overflow: hidden;
+        .image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+    }
 
-    @include themedRule('background-color', 'formPrimary');
-}
+    .middle {
+        height: 35%;
+        width: 100%;
+        padding: 1px;
+        overflow: hidden;
 
-.bottom {
-    position: absolute;
-    bottom: 0;
-    height: 15%;
-    width: 100%;
-    padding:1px;
+        @include themedRule('background-color', 'formPrimary');
 
-    @include themedRule('background-color', 'formPrimary');
-}
+        .title {
+            margin-top: 0.35em;
 
-.button {
-    height: 100%;
-    width: 100%;
-    background: transparent no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    border-top: 1px solid #696969;
-    @include themedRule('color', 'primary');
-    @extend .fontRoboto18Light;
+            @include themedRule('color', 'primary');
+            @extend .fontRoboto28Medium;
+        }
 
-    &:hover {
-        @include themedRule('color', 'formPrimary');
-        @include themedRule('border-color', 'primary');
-        @include themedRule('background-color', 'primaryDark');
-        opacity: 0.90;
+        .description {
+            text-align: justify;
+            padding: 0.75em 2em 0 2em;
+
+            @include themedRule('color', 'subText');
+            @extend .fontRoboto18Light;
+        }
+    }
+
+    .bottom {
+        position: absolute;
+        bottom: 0;
+        height: 15%;
+        width: 100%;
+        padding: 1px;
+
+        @include themedRule('background-color', 'formPrimary');
+
+        .button {
+            height: 100%;
+            width: 100%;
+            background: transparent no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            border-top: 1px solid #696969;
+
+            @include themedRule('color', 'primary');
+            @extend .fontRoboto18Light;
+
+            &:hover {
+                opacity: 0.90;
+
+                @include themedRule('color', 'formPrimary');
+                @include themedRule('border-color', 'primary');
+                @include themedRule('background-color', 'primaryDark');
+            }
+        }
     }
 }
 
-.image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    opacity: 0.85;
-}
-
-.title {
-    margin-top: 0.35em;
-
-    @include themedRule('color', 'primary');
-    @extend .fontRoboto28Medium;
-}
-
-.description {
-    text-align: justify;
-    padding: 0.75em 2em 0 2em;
-
-    @include themedRule('color', 'subText');
-    @extend .fontRoboto18Light;
-}

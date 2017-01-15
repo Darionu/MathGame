@@ -3,10 +3,10 @@ import MainLayout from '../components/mainLayout';
 
 export const composer = ({ context }, onData) => {
     let ready = true;
-
     const data = {
         ready
     };
+
     onData(null, data);
 };
 

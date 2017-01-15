@@ -14,7 +14,12 @@ const Input = class extends React.Component {
         return (
             <div className={styles.inputWrapper}>
                 {this.props.label ? this.getLabel() : null}
-                <input className={styles.input} type={this.props.type ? this.props.type : 'text'} name={this.props.name} onChange={this.props.onChangeValue}/>
+                <input
+                    className={styles.input}
+                    type={this.props.type ? this.props.type : 'text'}
+                    name={this.props.name}
+                    onChange={this.props.onChangeValue}
+                />
             </div>
         );
     }

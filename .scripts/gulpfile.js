@@ -63,24 +63,3 @@ gulp.task('lang:concat', ['lang:generate'], () => {
         return new Buffer(JSON.stringify(data));
     })).pipe(gulp.dest('../lang/dist'))
 });
-
-gulp.task('versionPropagate', () => {
-    // Read the versions.
-    const packageJson = require('../package.json');
-    const version = packageJson.version;
-    const mobileVersion = packageJson.mobileVersion;
-    console.log(`Versions set in package.json: backend-${version}, client-${mobileVersion}`);
-
-    // Server
-    let fileContents;
-    fileContents = fs.readFileSync('../server/main.js', 'UTF-8');
-    fileContents = fileContents.replace(/(Meteor\.backendVersion = )('\d+\.\d+\.\d+')/, `$1'${version}'`);
-    fs.writeFileSync('../server/main.js', fileContents);
-    console.log(`updated /server/main.js - set Meteor.backendVersion to ${version}`);
-
-    // Client
-    fileContents = fs.readFileSync('../client/main.js', 'UTF-8');
-    fileContents = fileContents.replace(/(Meteor\.clientVersion = )('\d+\.\d+\.\d+')/, `$1'${mobileVersion}'`);
-    fs.writeFileSync('../client/main.js', fileContents);
-    console.log(`updated /client/main.js - set Meteor.clientVersion to ${mobileVersion}`);
-});

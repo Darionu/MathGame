@@ -152,12 +152,48 @@ const LoginModal = class extends React.Component {
                 <div className={styles.registerForm}>
                     <div className={styles.chooseAvatarLabel}>{ formatMessage(messages.selectAvatar) }</div>
                     <div className={styles.avatarsWrapper}>
-                        <img className={styles.avatarToChoose} src={this.props.images.avatars.bird} name="bird" selected="true" onClick={this.selectAvatar}/>
-                        <img className={styles.avatarToChoose} src={this.props.images.avatars.bird2} name="bird2" selected="true" onClick={this.selectAvatar}/>
-                        <img className={styles.avatarToChoose} src={this.props.images.avatars.eagle} name="eagle" selected="true" onClick={this.selectAvatar}/>
-                        <img className={styles.avatarToChoose} src={this.props.images.avatars.giraffe} name="giraffe" selected="true" onClick={this.selectAvatar}/>
-                        <img className={styles.avatarToChoose} src={this.props.images.avatars.otter} name="otter" selected="true" onClick={this.selectAvatar}/>
-                        <img className={styles.avatarToChoose} src={this.props.images.avatars.tiger} name="tiger" selected="true" onClick={this.selectAvatar}/>
+                        <img
+                            className={styles.avatarToChoose}
+                            src={this.props.images.avatars.bird}
+                            name="bird"
+                            selected="true"
+                            onClick={this.selectAvatar}
+                        />
+                        <img
+                            className={styles.avatarToChoose}
+                            src={this.props.images.avatars.bird2}
+                            name="bird2"
+                            selected="true"
+                            onClick={this.selectAvatar}
+                        />
+                        <img
+                            className={styles.avatarToChoose}
+                            src={this.props.images.avatars.eagle}
+                            name="eagle"
+                            selected="true"
+                            onClick={this.selectAvatar}
+                        />
+                        <img
+                            className={styles.avatarToChoose}
+                            src={this.props.images.avatars.giraffe}
+                            name="giraffe"
+                            selected="true"
+                            onClick={this.selectAvatar}
+                        />
+                        <img
+                            className={styles.avatarToChoose}
+                            src={this.props.images.avatars.otter}
+                            name="otter"
+                            selected="true"
+                            onClick={this.selectAvatar}
+                        />
+                        <img
+                            className={styles.avatarToChoose}
+                            src={this.props.images.avatars.tiger}
+                            name="tiger"
+                            selected="true"
+                            onClick={this.selectAvatar}
+                        />
                     </div>
                 </div>
             )
@@ -165,8 +201,17 @@ const LoginModal = class extends React.Component {
             return (
                 <div className={styles.registerForm}>
                     <form>
-                        <Input label={`${formatMessage(messages.username)} :`} name="username" onChangeValue={this.handleChangeValue}/>
-                        <Input label={`${formatMessage(messages.password)} :`} name="password" type="password" onChangeValue={this.handleChangeValue}/>
+                        <Input
+                            label={`${formatMessage(messages.username)} :`}
+                            name="username"
+                            onChangeValue={this.handleChangeValue}
+                        />
+                        <Input
+                            label={`${formatMessage(messages.password)} :`}
+                            name="password"
+                            type="password"
+                            onChangeValue={this.handleChangeValue}
+                        />
                         <span className={styles.label}>{formatMessage(messages.language)}: </span>
                         <select name="language" onChange={this.handleChangeValue}>
                             <option value="en">{formatMessage(messages.english)}</option>
@@ -174,7 +219,12 @@ const LoginModal = class extends React.Component {
                         </select>
                     </form>
                     <div className={styles.label}>{ formatMessage(messages.yourAvatar) }</div>
-                    <img className={styles.selectedAvatar} src={this.props.images.avatars[this.state.chosenAvatar]} selected="true" onClick={this.openAvatarSelection}/>
+                    <img
+                        className={styles.selectedAvatar}
+                        src={this.props.images.avatars[this.state.chosenAvatar]}
+                        selected="true"
+                        onClick={this.openAvatarSelection}
+                    />
                     <div className={styles.clickToChangeLabel}>* { formatMessage(messages.clickToChange) }</div>
                 </div>
             )

@@ -36,10 +36,22 @@ const Header = class extends React.Component {
                     </div>
                     <div className={styles.navigationBar}>
                         {this.props.userIsLogged
-                            ? <Button className={styles.navigationButton} text={formatMessage(messages.logout)} onClick={this.props.logout}/>
-                            : <Button className={styles.navigationButton} text={formatMessage(messages.login)} onClick={this.props.switchLoginBoxState}/>
+                            ? <Button
+                                className={styles.navigationButton}
+                                text={formatMessage(messages.logout)}
+                                onClick={this.props.logout}
+                              />
+                            : <Button
+                                className={styles.navigationButton}
+                                text={formatMessage(messages.login)}
+                                onClick={this.props.switchLoginBoxState}
+                              />
                         }
-                        <Button className={styles.navigationButton} text={formatMessage(messages.home)} onClick={this.props.goToHomePage}/>
+                        <Button
+                            className={styles.navigationButton}
+                            text={formatMessage(messages.home)}
+                            onClick={this.props.goToHomePage}
+                        />
                     </div>
                 </div>
             </div>

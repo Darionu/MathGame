@@ -3,29 +3,29 @@
 
 .inputWrapper {
     padding: 0.5em;
-}
 
-.input {
-    @extend .fontRoboto14Regular;
-    width: 100%;
-    margin-top: 0.5em;
-    padding: 0.5em;
-    border: 1px solid #cccccc;
+    .label {
+        display: block;
+        text-align: left;
+        @extend .fontRoboto16Light;
+    }
 
-    &:-webkit-autofill {
-        background-color: #ffffff !important;
+    .input {
+        @extend .fontRoboto14Regular;
+        width: 100%;
+        margin-top: 0.5em;
+        padding: 0.5em;
         border: 1px solid #cccccc;
-        -webkit-text-fill-color: inherit !important;
-        -webkit-box-shadow: 0 0 0 1000px white inset;
-    }
 
-    &:focus {
-        @include themedRule('border-color', 'primary');
-    }
-}
+        &:-webkit-autofill {
+            background-color: #ffffff !important;
+            border: 1px solid #cccccc;
+            -webkit-text-fill-color: inherit !important;
+            -webkit-box-shadow: 0 0 0 1000px white inset;
+        }
 
-.label {
-    display: block;
-    text-align: left;
-    @extend .fontRoboto16Light;
+        &:focus {
+            @include themedRule('border-color', 'primary');
+        }
+    }
 }

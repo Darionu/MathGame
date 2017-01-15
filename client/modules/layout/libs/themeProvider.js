@@ -3,10 +3,7 @@ import $themesDefaults from '../configs/themesDefaults';
 import localStateKeys from '/lib/constants/localStateKeys';
 
 export class ThemeProvider {
-    constructor(
-        { LocalState },
-        themes
-    ) {
+    constructor({ LocalState }, themes) {
         this._localState = LocalState;
         this._themes = themes;
     }

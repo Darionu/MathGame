@@ -7,8 +7,8 @@ import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 const Layout = ({ content = () => null }) => (
     <LanguageProvider>
         <div>
-            <Alert position={'top-right'} effect={'jelly'} timeout={3000} stack={{ limit: 1 }} />
-            {content()}
+            <Alert position={ 'top-right' } effect={ 'jelly' } timeout={ 3000 } stack={{ limit: 1 }} />
+            { content() }
         </div>
     </LanguageProvider>
 );
