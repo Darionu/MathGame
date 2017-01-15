@@ -8,5 +8,14 @@ export default {
     },
     goToHomePage({ FlowRouter }) {
         FlowRouter.go(RouteNames.home);
+    },
+    goToRankings({ FlowRouter }) {
+        FlowRouter.go(RouteNames.rankings);
+    },
+    goToPlayBoard({ FlowRouter }) {
+        FlowRouter.go(RouteNames.playBoard);
+    },
+    goToLearn({ FlowRouter }) {
+        FlowRouter.go(RouteNames.learn);
     }
 };

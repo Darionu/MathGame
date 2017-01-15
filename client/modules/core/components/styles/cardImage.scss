@@ -6,22 +6,25 @@
     margin: 2% 6%;
     height: 96%;
     width: 88%;
+
     @include themedRule('background-color', 'formPrimary');
 }
 
 .top {
     height: 50%;
     width: 100%;
-    @include themedRule('background-color', 'formPrimary');
     padding: 1px;
+
+    @include themedRule('background-color', 'formPrimary');
 }
 
 .middle {
     height: 35%;
     width: 100%;
-    @include themedRule('background-color', 'formPrimary');
     padding:1px;
     overflow: hidden;
+
+    @include themedRule('background-color', 'formPrimary');
 }
 
 .bottom {
@@ -29,21 +32,28 @@
     bottom: 0;
     height: 15%;
     width: 100%;
-    @include themedRule('background-color', 'formPrimary');
     padding:1px;
+
+    @include themedRule('background-color', 'formPrimary');
 }
 
 .button {
     height: 100%;
     width: 100%;
-    background-color: Transparent;
-    background-repeat:no-repeat;
+    background: transparent no-repeat;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     overflow: hidden;
     border-top: 1px solid #696969;
     @include themedRule('color', 'primary');
     @extend .fontRoboto18Light;
+
+    &:hover {
+        @include themedRule('color', 'formPrimary');
+        @include themedRule('border-color', 'primary');
+        @include themedRule('background-color', 'primaryDark');
+        opacity: 0.90;
+    }
 }
 
 .image {
@@ -54,14 +64,16 @@
 }
 
 .title {
+    margin-top: 0.35em;
+
     @include themedRule('color', 'primary');
     @extend .fontRoboto28Medium;
-    margin-top: 0.35em;
 }
 
 .description {
-    @include themedRule('color', 'subText');
-    @extend .fontRoboto18Light;
     text-align: justify;
     padding: 0.75em 2em 0 2em;
+
+    @include themedRule('color', 'subText');
+    @extend .fontRoboto18Light;
 }

@@ -1,16 +1,21 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
 .footer {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 6em;
-    background-color: #112030;
+
+    @include themedRule('background-color', 'primaryDark');
 }
 
 .copyright {
-    color: white;
     position: absolute;
     top: 50%;
     right: 15%;
     transform: translate(0%,-50%);
+
+    @include themedRule('color', 'formPrimary');
 }

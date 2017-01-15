@@ -10,7 +10,10 @@ export const composer = ({ context }, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-    context: () => context
+    context: () => context,
+    goToRankings: actions.interfaceActions.goToRankings,
+    goToPlayBoard: actions.interfaceActions.goToPlayBoard,
+    goToLearn: actions.interfaceActions.goToLearn
 });
 
 export default composeAll(

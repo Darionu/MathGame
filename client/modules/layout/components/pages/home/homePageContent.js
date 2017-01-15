@@ -27,7 +27,7 @@ const messages = defineMessages({
     },
     playButton: {
         id: 'app.home.cardImage.play.button',
-        defaultMessage: 'I want to play'
+        defaultMessage: 'I want to playboard'
     },
     learnTitle: {
         id: 'app.home.cardImage.learn.title',
@@ -50,13 +50,13 @@ const HomePageContent = class extends React.Component {
             <div className={styles.wrapperContainer}>
                 <div className={styles.cardImageHolder}>
                     <div className={styles.cardImage}>
-                        <CardImage title={formatMessage(messages.rankingsTitle)} description={formatMessage(messages.rankingsDescription)} buttonText={formatMessage(messages.rankingsButton)} image={this.props.images.dogs}/>
+                        <CardImage title={formatMessage(messages.rankingsTitle)} description={formatMessage(messages.rankingsDescription)} buttonText={formatMessage(messages.rankingsButton)} buttonClick={this.props.goToRankings} image={this.props.images.dogs}/>
                     </div>
                     <div className={styles.cardImage}>
-                        <CardImage title={formatMessage(messages.playTitle)} description={formatMessage(messages.playDescription)} buttonText={formatMessage(messages.playButton)} image={this.props.images.parrot}/>
+                        <CardImage title={formatMessage(messages.playTitle)} description={formatMessage(messages.playDescription)} buttonText={formatMessage(messages.playButton)} buttonClick={this.props.goToPlayBoard} image={this.props.images.parrot}/>
                     </div>
                     <div className={styles.cardImage}>
-                        <CardImage title={formatMessage(messages.learnTitle)} description={formatMessage(messages.learnDescription)} buttonText={formatMessage(messages.learnButton)} image={this.props.images.owl}/>
+                        <CardImage title={formatMessage(messages.learnTitle)} description={formatMessage(messages.learnDescription)} buttonText={formatMessage(messages.learnButton)} buttonClick={this.props.goToLearn} image={this.props.images.owl}/>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,10 @@ const HomePageContent = class extends React.Component {
 
 HomePageContent.propTypes = {
     intl: intlShape.isRequired,
-    images: React.PropTypes.object
+    images: React.PropTypes.object,
+    goToRankings: React.PropTypes.func.isRequired,
+    goToPlayBoard: React.PropTypes.func.isRequired,
+    goToLearn: React.PropTypes.func.isRequired
 };
 
 export default injectIntl(HomePageContent);

@@ -12,7 +12,7 @@ $themesMap: (
 // List of defined color names.
 
 // ****** !!!! Color name must be defined here to work !!!! ******
-$colorNames: 'primary', 'formPrimary', 'subText', 'headerSubText', 'headerIconsTextColor';
+$colorNames: 'primary', 'primaryDark', 'formPrimary', 'subText', 'headerSubText', 'headerIconsTextColor';
 
 // Since scss does not implement map-set, we make one using map-merge.
 @function map-set($map, $key, $value) {

@@ -3,7 +3,10 @@ import PageNames from '/lib/constants/pageNames';
 const themeDefaults = {
     default: {
         pageVersions: {
-            [PageNames.homePage]: 1
+            [PageNames.homePage]: 1,
+            [PageNames.rankings]: 1,
+            [PageNames.playBoard]: 1,
+            [PageNames.learn]: 1
         },
         texts: {
             test: 'testDefault'

@@ -24,7 +24,12 @@ const CardImage = class extends React.Component {
                     <div className={styles.description}>{this.props.description}</div>
                 </div>
                 <div className={styles.bottom}>
-                    <Button text={this.props.buttonText ? this.props.buttonText : formatMessage(messages.buttonText)} overrideDefault className={styles.button}/>
+                    <Button
+                        text={this.props.buttonText ? this.props.buttonText : formatMessage(messages.buttonText)}
+                        overrideDefault
+                        className={styles.button}
+                        onClick={this.props.buttonClick ? this.props.buttonClick : null}
+                    />
                 </div>
             </div>
         );
@@ -35,7 +40,8 @@ CardImage.propTypes = {
     intl: intlShape.isRequired,
     title: React.PropTypes.string,
     image: React.PropTypes.string,
-    buttonText: React.PropTypes.string
+    buttonText: React.PropTypes.string,
+    buttonClick: React.PropTypes.func
 };
 
 export default injectIntl(CardImage);

@@ -72,6 +72,14 @@
 .closeModal {
     float: right;
     margin: 0.5em;
+
+
+    &:hover {
+        @include themedRule('color', 'formPrimary');
+        @include themedRule('border-color', 'primary');
+        @include themedRule('background-color', 'primaryDark');
+        opacity: 0.90;
+    }
 }
 
 .header {
@@ -141,7 +149,6 @@
 }
 
 .clickToChangeLabel {
-
     @extend .fontRoboto14Light;
 }
 
@@ -151,6 +158,10 @@
     margin: 0.25em;
     border: 0.1em solid black;
     cursor: pointer;
+
+    &:hover {
+        opacity: 0.85;
+    }
 }
 
 .avatarsWrapper {
@@ -163,4 +174,9 @@
     margin: 0.5em;
     display: inline-block;
     cursor: pointer;
+    opacity: 0.85;
+
+    &:hover {
+        opacity: 1;
+    }
 }
