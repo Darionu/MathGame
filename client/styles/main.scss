@@ -1,10 +1,16 @@
 /* SCSS declarations go here */
+html {
+    height: 100%;
+}
+
 body {
     margin: 0 0;
     padding: 0 0;
     font-family: "Roboto";
     user-select: none;
     cursor: default;
+    position: relative;
+    min-height: 100%;
 }
 
 html, body {

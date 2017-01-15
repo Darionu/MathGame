@@ -21,6 +21,7 @@
     width: 100%;
     @include themedRule('background-color', 'formPrimary');
     padding:1px;
+    overflow: hidden;
 }
 
 .bottom {
