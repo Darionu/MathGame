@@ -20,12 +20,24 @@
 
             @include themedRule('color', 'formPrimary');
 
-            .description {
+            .wrapper {
                 position: absolute;
                 top: 50%;
                 left: 15%;
-                transform: translate(0%,-50%);
+                right: calc(15% + 23em);
+                transform: translate(0%, -50%);
+                vertical-align: middle;
+            }
 
+            .logo {
+                height: 5em;
+            }
+
+            .description {
+                position: absolute;
+                top: 50%;
+                margin-left: 10px;
+                transform: translateY(-50%);
                 @extend .fontRoboto20Medium;
             }
         }

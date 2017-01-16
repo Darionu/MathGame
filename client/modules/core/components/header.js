@@ -31,8 +31,11 @@ const Header = class extends React.Component {
             <div className={styles.header}>
                 <div className={styles.container}>
                     <div className={styles.descriptionBar}>
-                        <span className={styles.description}>Math Game - {formatMessage(messages.description)}</span>
-                        {this.props.userIsLogged ? <UserName/> : null}
+                        <div className={styles.wrapper}>
+                            <img className={styles.logo} src="general/logo.png" />
+                            <span className={styles.description}>Math Game</span>
+                            {this.props.userIsLogged ? <UserName/> : null}
+                        </div>
                     </div>
                     <div className={styles.navigationBar}>
                         {this.props.userIsLogged

@@ -156,42 +156,36 @@ const LoginModal = class extends React.Component {
                             className={styles.avatarToChoose}
                             src={this.props.images.avatars.bird}
                             name="bird"
-                            selected="true"
                             onClick={this.selectAvatar}
                         />
                         <img
                             className={styles.avatarToChoose}
                             src={this.props.images.avatars.bird2}
                             name="bird2"
-                            selected="true"
                             onClick={this.selectAvatar}
                         />
                         <img
                             className={styles.avatarToChoose}
                             src={this.props.images.avatars.eagle}
                             name="eagle"
-                            selected="true"
                             onClick={this.selectAvatar}
                         />
                         <img
                             className={styles.avatarToChoose}
                             src={this.props.images.avatars.giraffe}
                             name="giraffe"
-                            selected="true"
                             onClick={this.selectAvatar}
                         />
                         <img
                             className={styles.avatarToChoose}
                             src={this.props.images.avatars.otter}
                             name="otter"
-                            selected="true"
                             onClick={this.selectAvatar}
                         />
                         <img
                             className={styles.avatarToChoose}
                             src={this.props.images.avatars.tiger}
                             name="tiger"
-                            selected="true"
                             onClick={this.selectAvatar}
                         />
                     </div>
@@ -222,7 +216,6 @@ const LoginModal = class extends React.Component {
                     <img
                         className={styles.selectedAvatar}
                         src={this.props.images.avatars[this.state.chosenAvatar]}
-                        selected="true"
                         onClick={this.openAvatarSelection}
                     />
                     <div className={styles.clickToChangeLabel}>* { formatMessage(messages.clickToChange) }</div>

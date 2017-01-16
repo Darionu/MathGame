@@ -10,6 +10,15 @@
 
     @include themedRule('background-color', 'primaryDark');
 
+    .description {
+        position: absolute;
+        top: 50%;
+        left: 15%;
+        transform: translate(0%,-50%);
+
+        @include themedRule('color', 'formPrimary');
+    }
+
     .copyright {
         position: absolute;
         top: 50%;

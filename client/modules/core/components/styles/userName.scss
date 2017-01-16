@@ -4,7 +4,8 @@
 .userName {
     position: absolute;
     top: 50%;
-    right: calc(15% + 22em);
+    float: right;
+    right: 0;
     transform: translate(0%,-50%);
 
     .userNameLabel {
