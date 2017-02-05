@@ -1,0 +1,47 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
+.gameTypeItem {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    cursor: pointer;
+
+    -moz-box-shadow:    5px 5px 15px #222;
+    -webkit-box-shadow: 5px 5px 15px #222;
+    box-shadow:         5px 5px 15px #222;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 2em;
+    width: 20%;
+    transform: translate(0%, -50%);
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 80%;
+    transform: translate(0%, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column; /* column | row */
+    text-align: center;
+}
+
+.title {
+
+    @extend .fontRoboto26Light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 2em;
+}

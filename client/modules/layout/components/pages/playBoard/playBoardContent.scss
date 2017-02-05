@@ -1,0 +1,27 @@
+.wrapperContainer {
+    padding-top: 8em;
+    margin: 0 auto;
+}
+
+.gameTypesHolder {
+    margin: 5em auto;
+    width: 80%;
+    max-width: 1020px;
+    text-align: center;
+    overflow: auto;
+}
+
+.gameType {
+    display: inline-block;
+    margin: 1em;
+    width: 45%;
+    min-width: 22em;
+    height: 8em;
+}
+
+.lion {
+    margin-top: 5em;
+    height: 15em;
+    opacity: 0.85;
+    border: 2px solid white;
+}

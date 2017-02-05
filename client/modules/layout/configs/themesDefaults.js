@@ -16,6 +16,7 @@ const themeDefaults = {
             owl: 'images/owl.jpg',
             parrot: 'images/parrot.jpg',
             squirrel: '/images/squirrel.jpg',
+            lion: 'images/lion.jpg',
             avatars: {
                 bird: 'images/avatars/bird.jpg',
                 bird2: 'images/avatars/bird2.jpg',
@@ -23,6 +24,12 @@ const themeDefaults = {
                 giraffe: 'images/avatars/giraffe.jpg',
                 otter: 'images/avatars/otter.jpg',
                 tiger: 'images/avatars/tiger.jpg'
+            },
+            mathSigns: {
+                plus: 'images/mathOperations/plus.png',
+                subtract: 'images/mathOperations/subtract.png',
+                multiply: 'images/mathOperations/multiply.png',
+                divide: 'images/mathOperations/divide.png'
             }
         },
         colors: {
