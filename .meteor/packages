@@ -27,3 +27,4 @@ nathantreid:css-modules@2.1.0
 percolate:migrations
 aldeed:simple-schema
 aldeed:collection2
+omega:custom-protocol

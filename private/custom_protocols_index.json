@@ -1,0 +1,10 @@
+{
+    "JsonProtocol": {
+        "id": 1,
+        "package": "omega:custom-protocol"
+    },
+    "GameProtocol": {
+        "id": 2,
+        "package": "app"
+    }
+}

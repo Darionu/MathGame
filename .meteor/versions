@@ -61,6 +61,8 @@ nathantreid:css-modules@2.3.1
 npm-bcrypt@0.9.2
 npm-mongo@2.2.11_2
 observe-sequence@1.0.14
+omega:custom-protocol@3.1.0
+omega:direct-stream-access@3.0.2
 ordered-dict@1.0.9
 percolate:migrations@0.9.8
 promise@0.8.8
