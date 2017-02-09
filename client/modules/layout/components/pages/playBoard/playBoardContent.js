@@ -2,6 +2,7 @@ import React from 'react';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
 import styles from './playBoardContent.scss';
 import GameTypeItem from '/client/modules/playboard/containers/gameTypeItem';
+import { GameTypes } from '/lib/constants/gameConstants';
 
 const messages = defineMessages({
     subtraction: {
@@ -29,18 +30,37 @@ const PlayBoardContent = class extends React.Component {
             <div className={styles.wrapperContainer}>
                 <div className={styles.gameTypesHolder}>
                     <div className={styles.gameType}>
-                        <GameTypeItem icon={this.props.images.mathSigns.plus} title={formatMessage(messages.addition)}/>
+                        <GameTypeItem
+                            icon={this.props.images.mathSigns.plus}
+                            title={formatMessage(messages.addition)}
+                            gameType={GameTypes.addition}
+                        />
                     </div>
                     <div className={styles.gameType}>
-                        <GameTypeItem icon={this.props.images.mathSigns.subtract} title={formatMessage(messages.subtraction)}/>
+                        <GameTypeItem
+                            icon={this.props.images.mathSigns.subtract}
+                            title={formatMessage(messages.subtraction)}
+                            gameType={GameTypes.subtraction}
+                        />
                     </div>
                     <div className={styles.gameType}>
-                        <GameTypeItem icon={this.props.images.mathSigns.multiply} title={formatMessage(messages.multiplication)}/>
+                        <GameTypeItem
+                            icon={this.props.images.mathSigns.multiply}
+                            title={formatMessage(messages.multiplication)}
+                            gameType={GameTypes.multiplication}
+                        />
                     </div>
                     <div className={styles.gameType}>
-                        <GameTypeItem icon={this.props.images.mathSigns.divide} title={formatMessage(messages.division)}/>
+                        <GameTypeItem
+                            icon={this.props.images.mathSigns.divide}
+                            title={formatMessage(messages.division)}
+                            gameType={GameTypes.division}
+                        />
                     </div>
-                    <img className={styles.lion} src={this.props.images.lion}/>
+                    <img
+                        className={styles.lion}
+                        src={this.props.images.lion}
+                    />
                 </div>
             </div>
         );
