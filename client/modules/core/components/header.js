@@ -4,6 +4,7 @@ import { defineMessages, intlShape, injectIntl } from 'react-intl';
 
 import Button from '/client/modules/core/components/button';
 import UserName from '/client/modules/core/containers/userName';
+import QueueBox from '/client/modules/core/containers/queueBox';
 
 const messages = defineMessages({
     home: {
@@ -32,8 +33,13 @@ const Header = class extends React.Component {
                 <div className={styles.container}>
                     <div className={styles.descriptionBar}>
                         <div className={styles.wrapper}>
-                            <img className={styles.logo} src="general/logo.png" />
-                            <span className={styles.description}>Math Game</span>
+                            {this.props.queueStarted
+                                ? <QueueBox/>
+                                : <div>
+                                    <img className={styles.logo} src={this.props.images.siteLogo} />
+                                    <span className={styles.description}>Math Game</span>
+                                </div>
+                            }
                             {this.props.userIsLogged ? <UserName/> : null}
                         </div>
                     </div>
@@ -67,7 +73,9 @@ Header.propTypes = {
     userIsLogged: React.PropTypes.bool.isRequired,
     switchLoginBoxState: React.PropTypes.func.isRequired,
     goToHomePage: React.PropTypes.func.isRequired,
-    logout: React.PropTypes.func.isRequired
+    logout: React.PropTypes.func.isRequired,
+    queueStarted: React.PropTypes.bool.isRequired,
+    images: React.PropTypes.object
 };
 
 export default injectIntl(Header);

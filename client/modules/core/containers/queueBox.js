@@ -1,29 +1,30 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
-import Header from '../components/header';
+import QueueBox from '../components/queueBox';
 import { QueueHistory } from '/lib/collections';
 import QueueStatuses from '/lib/constants/queueStatuses';
 
 export const composer = ({ context }, onData) => {
-    const images = context().providers.pageProvider.getImages();
-    const userIsLogged = !!Meteor.user();
-    const queueStarted = !!QueueHistory.findOne({
+    const queueObject = QueueHistory.findOne({
         status: QueueStatuses.started
     });
+
+    let startingTime = 0;
+    if (queueObject) {
+        startingTime = Date.parse(queueObject.startDate);
+    }
+
     onData(null, {
-        userIsLogged,
-        queueStarted,
-        images
+        queueObject,
+        startingTime
     });
 };
 
 export const depsMapper = (context, actions) => ({
     context: () => context,
-    switchLoginBoxState: actions.interfaceActions.switchLoginBoxState,
-    goToHomePage: actions.interfaceActions.goToHomePage,
-    logout: actions.userActions.logout
+    quitQueue: actions.queueActions.quitQueue
 });
 
 export default composeAll(
     composeWithTracker(composer),
     useDeps(depsMapper)
-)(Header);
+)(QueueBox);

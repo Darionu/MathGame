@@ -1,3 +1,5 @@
-export default {
+import queueActions from './queueActions';
 
+export default {
+    queueActions
 };

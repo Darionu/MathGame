@@ -12,6 +12,7 @@ const themeDefaults = {
             test: 'testDefault'
         },
         images: {
+            siteLogo: 'general/logo.png',
             dogs: 'images/dogs.jpg',
             owl: 'images/owl.jpg',
             parrot: 'images/parrot.jpg',
