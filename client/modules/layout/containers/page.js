@@ -23,6 +23,8 @@ export const composer = ({ context, page, saveCurrentLayout, switchLayout, switc
 
     if (Meteor && Meteor.user()) {
         Meteor.subscribe(PublicationNames.users).ready();
+        Meteor.subscribe(PublicationNames.userQueue).ready();
+        Meteor.subscribe(PublicationNames.myStatus).ready();
     }
 
     const texts = context().providers.pageProvider.getTexts();

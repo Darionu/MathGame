@@ -33,5 +33,6 @@
   "app.playBoard.subtraction": "Subtraction",
   "app.playBoard.addition": "Addition",
   "app.playBoard.multiplication": "Multiplication",
-  "app.playBoard.division": "Division"
+  "app.playBoard.division": "Division",
+  "app.queueBox.inQueue": "In queue"
 }

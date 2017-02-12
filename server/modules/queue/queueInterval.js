@@ -138,7 +138,7 @@ export default class QueueInterval {
                     endDate: new Date()
                 }
             });
-            Logger.error(`[QueueInterval] Change priority of id (${id}) to (${newPriority}).`, __dirname);
+            Logger.info(`[QueueInterval] Change priority of id (${id}) to (${newPriority}).`, __dirname);
         } else {
             QueueHistory.update(id, {
                 $set: {

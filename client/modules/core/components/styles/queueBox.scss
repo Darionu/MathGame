@@ -1,0 +1,11 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
+.description {
+    display: inline-block;
+    padding-right: 1em;
+}
+
+.quitQueueButton {
+    @extend .fontRoboto14Light;
+}

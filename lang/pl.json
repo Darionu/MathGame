@@ -33,5 +33,6 @@
   "app.playBoard.subtraction": "Odejmowanie",
   "app.playBoard.addition": "Dodawanie",
   "app.playBoard.multiplication": "Mnożenie",
-  "app.playBoard.division": "Dzielenie"
+  "app.playBoard.division": "Dzielenie",
+  "app.queueBox.inQueue": "W kolejce"
 }
