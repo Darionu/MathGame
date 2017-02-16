@@ -38,6 +38,12 @@ export default new class {
         }, { multi: true });
     }
 
+    /**
+     * Stops the queue for two users.
+     * Mostly used after they are matched together.
+     * @param {string} playerOne - id of a first user.
+     * @param {string} playerTwo - id of a second user.
+     */
     stopQueue(playerOne, playerTwo) {
         Logger.info(`[QueueManager] Stopping queue for users ${playerOne.username}(${playerOne._id}) & ${playerTwo.username}(${playerTwo._id}).`, __dirname);
         QueueHistory.update({
