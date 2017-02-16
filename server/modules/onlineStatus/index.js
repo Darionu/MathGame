@@ -10,12 +10,12 @@ export default class OnlineStatus {
         publications();
         Meteor.onConnection(function connectionHandler(connection) {
             const connectionId = connection.id;
-            Logger.debug(`Open connection with id: ${connectionId}`, __filename);
+            Logger.debug(`[OnlineStatus] Open connection with id: ${connectionId}`, __filename);
             connection.onClose(() => {
                 const user = Meteor.users.findOne({ sessionIds: { $in: [connectionId] } });
                 if (user && connectionId) {
                     QueueManager.removeUserFromQueue(user._id);
-                    Logger.debug(`Connection close for user id: ${user._id} and connection id: ${connectionId}`, __filename);
+                    Logger.debug(`[OnlineStatus] Connection close for user id: ${user._id} and connection id: ${connectionId}`, __filename);
                 }
             });
         });

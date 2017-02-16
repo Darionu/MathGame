@@ -1,4 +1,3 @@
-
 export default () => {
     Meteor.methods({
         registerUser: (username, password, language, avatar) => {
@@ -17,6 +16,10 @@ export default () => {
                     userData: {
                         avatar: avatar,
                         language: language
+                    },
+                    gameData: {
+                        wins: 0,
+                        loses: 0
                     }
                 }
             });
