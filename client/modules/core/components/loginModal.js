@@ -98,14 +98,26 @@ const LoginModal = class extends React.Component {
         };
 
         if (this.state.isLoginForm) {
-            this.props.loginAttempt(this.state.username, this.state.password, alertMessages);
+            this.props.loginAttempt(
+                this.state.username,
+                this.state.password,
+                alertMessages
+            );
         } else {
-            this.props.registerAttempt(this.state.username, this.state.password, this.state.language, this.state.chosenAvatar, alertMessages);
+            this.props.registerAttempt(
+                this.state.username,
+                this.state.password,
+                this.state.language,
+                this.state.chosenAvatar,
+                alertMessages
+            );
         }
     }
 
     handleChangeValue (event) {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     }
 
     switchFormType() {
@@ -137,8 +149,17 @@ const LoginModal = class extends React.Component {
         return (
             <div className={styles.loginForm}>
                 <form>
-                    <Input label={`${formatMessage(messages.username)} :`} name="username" onChangeValue={this.handleChangeValue}/>
-                    <Input label={`${formatMessage(messages.password)} :`} name="password" type="password" onChangeValue={this.handleChangeValue}/>
+                    <Input
+                        label={`${formatMessage(messages.username)} :`}
+                        name="username"
+                        onChangeValue={this.handleChangeValue}
+                    />
+                    <Input
+                        label={`${formatMessage(messages.password)} :`}
+                        name="password"
+                        type="password"
+                        onChangeValue={this.handleChangeValue}
+                    />
                 </form>
                 <img className={styles.image} src={this.props.images.squirrel} />
             </div>
@@ -255,11 +276,23 @@ const LoginModal = class extends React.Component {
                     <div className={styles.footer}>
                         <div className={styles.footerButtonWrapper}>
                             {this.state.isSelectingAvatar
-                                ? <Button className={styles.footerButton} text={formatMessage(messages.leave)} onClick={this.leaveAvatarSelection}/>
+                                ? <Button
+                                    className={styles.footerButton}
+                                    text={formatMessage(messages.leave)}
+                                    onClick={this.leaveAvatarSelection}
+                                />
                                 :
                                 <div>
-                                    <Button className={styles.footerButton} text={this.getCurrentActionMessage(true)} onClick={this.switchFormType}/>
-                                    <Button className={styles.footerButton} text={this.getCurrentActionMessage()} onClick={::this.submit}/>
+                                    <Button
+                                        className={styles.footerButton}
+                                        text={this.getCurrentActionMessage(true)}
+                                        onClick={this.switchFormType}
+                                    />
+                                    <Button
+                                        className={styles.footerButton}
+                                        text={this.getCurrentActionMessage()}
+                                        onClick={::this.submit}
+                                    />
                                 </div>
                             }
                         </div>

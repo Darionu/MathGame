@@ -83,7 +83,11 @@ export default class Matchmaking {
                 if (playerOne && playerTwo) {
                     const result = this.isDifferenceAcceptable(player.priority, playerOne, playerTwo);
                     if (result) {
-                        Logger.info(`[Matchmaking] Matched players ${playerOne.username}(${playerOne._id}) & ${playerTwo.username}(${playerTwo._id})`, __dirname);
+                        Logger.info(
+                            `[Matchmaking] Matched players ${playerOne.username}(${playerOne._id}) &\
+                            ${playerTwo.username}(${playerTwo._id})`,
+                            __dirname
+                        );
                         new Game(playerOne, playerTwo, this.gameType);
                         matchedPlayer = true;
                         return false;

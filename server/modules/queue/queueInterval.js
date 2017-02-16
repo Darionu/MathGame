@@ -135,7 +135,10 @@ export default class QueueInterval {
                         endDate: new Date()
                     }
                 });
-                Logger.info('[QueueInterval] Player extended the limit of waiting time. Set status to timeout.', __dirname);
+                Logger.info(
+                    '[QueueInterval] Player extended the limit of waiting time. Set status to timeout.',
+                    __dirname
+                );
                 break;
             default:
                 QueueHistory.update(id, {
@@ -144,7 +147,10 @@ export default class QueueInterval {
                         endDate: new Date()
                     }
                 });
-                Logger.error(`[QueueInterval] Unknown priority (${priority}) for id (${id}). Set status to error.`, __dirname);
+                Logger.error(
+                    `[QueueInterval] Unknown priority (${priority}) for id (${id}). Set status to error.`,
+                    __dirname
+                );
                 break;
         }
     }

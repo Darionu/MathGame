@@ -45,7 +45,11 @@ export default new class {
      * @param {string} playerTwo - id of a second user.
      */
     stopQueue(playerOne, playerTwo) {
-        Logger.info(`[QueueManager] Stopping queue for users ${playerOne.username}(${playerOne._id}) & ${playerTwo.username}(${playerTwo._id}).`, __dirname);
+        Logger.info(
+            `[QueueManager] Stopping queue for users ${playerOne.username}(${playerOne._id})\
+             & ${playerTwo.username}(${playerTwo._id}).`
+            , __dirname
+        );
         QueueHistory.update({
             userId: {
                 $in: [

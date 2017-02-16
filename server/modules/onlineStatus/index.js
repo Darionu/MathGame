@@ -15,7 +15,11 @@ export default class OnlineStatus {
                 const user = Meteor.users.findOne({ sessionIds: { $in: [connectionId] } });
                 if (user && connectionId) {
                     QueueManager.removeUserFromQueue(user._id);
-                    Logger.debug(`[OnlineStatus] Connection close for user id: ${user._id} and connection id: ${connectionId}`, __filename);
+                    Logger.debug(
+                        `[OnlineStatus] Connection close for user \
+                        id: ${user._id} and connection id: ${connectionId}`,
+                        __filename
+                    );
                 }
             });
         });

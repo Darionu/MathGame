@@ -20,7 +20,9 @@ export default class {
 
     init() {
         Logger.info(
-            `[GameManager] Game manager initialized for players ${this.playerOne.username}(${this.playerOne._id}) & ${this.playerTwo.username}(${this.playerTwo._id})`,
+            `[GameManager] Game manager initialized for players \
+            ${this.playerOne.username}(${this.playerOne._id}) &\
+            ${this.playerTwo.username}(${this.playerTwo._id})`,
             __dirname
         );
         QueueManager.stopQueue(this.playerOne._id, this.playerTwo._id);

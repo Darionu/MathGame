@@ -35,7 +35,8 @@ const messages = defineMessages({
     },
     learnDescription: {
         id: 'app.home.cardImage.learn.description',
-        defaultMessage: 'Easy to get game knowledge. Be better than others and learn all the secrets that awaits for you!'
+        defaultMessage: `Easy to get game knowledge. \
+        Be better than others and learn all the secrets that awaits for you!`
     },
     learnButton: {
         id: 'app.home.cardImage.learn.button',
