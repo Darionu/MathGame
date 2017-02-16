@@ -28,6 +28,10 @@ export default () => {
                 userData: {
                     language: user.language,
                     avatar: user.avatar
+                },
+                gameData: {
+                    wins: 0,
+                    loses: 0
                 }
             }
         });
