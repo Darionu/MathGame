@@ -1,7 +1,8 @@
 import { check } from 'meteor/check';
+import { QueueHistory } from '/lib/collections/index';
 import QueueManager from './index';
 import QueueStatuses from '/lib/constants/queueStatuses';
-import { QueueHistory } from '/lib/collections/index';
+import Logger from '/lib/logging/Logger';
 
 /**
  * Methods related to Queue handling to be called from the client.
@@ -17,7 +18,7 @@ export default () => {
             check(gameType, Number);
 
             if (!this.userId) {
-                throw new Meteor.Error("Unauthorized", "You have to be online to join the queue");
+                throw new Meteor.Error("Unauthorized", "You have to be online to join the queue", __dirname);
             }
 
             const queueRecord = QueueHistory.findOne({
@@ -30,7 +31,7 @@ export default () => {
             });
 
             if (queueRecord) {
-               return `User (${this.userId}) is already in queue`;
+                return `User (${this.userId}) is already in queue`;
             }
 
             return QueueManager.putUserToQueue(this.userId, gameType);
@@ -41,7 +42,7 @@ export default () => {
          */
         quitQueue: function () {
             if (!this.userId) {
-                throw new Meteor.Error("Unauthorized", "You have to be online to join the queue");
+                throw new Meteor.Error("Unauthorized", "You have to be online to join the queue", __dirname);
             }
 
             const queueRecord = QueueHistory.findOne({
@@ -54,6 +55,7 @@ export default () => {
             });
 
             if (!queueRecord) {
+                Logger.warn(`User ${this.userId} tried to leave queue without being in one.`, __dirname);
                 return `User (${this.userId}) is not in queue`;
             }
 
