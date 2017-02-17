@@ -13,7 +13,7 @@ jquery@1.11.10                  # Helpful client-side library
 tracker@1.1.2                 # Meteor's client-side reactive programming library
 
 es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.7.0-beta.6              # Enable ECMAScript2015+ syntax in app code
+ecmascript@0.7.0-beta.7              # Enable ECMAScript2015+ syntax in app code
 accounts-password@1.3.4
 
 kadira:flow-router
@@ -28,4 +28,4 @@ percolate:migrations
 aldeed:simple-schema
 aldeed:collection2
 omega:custom-protocol
-dynamic-import
+dynamic-import@0.1.0-beta.7
