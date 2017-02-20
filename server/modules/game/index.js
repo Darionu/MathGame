@@ -32,6 +32,7 @@ export default class {
 
     startGame() {
         Logger.info(`[GameManager] Game manager initialization for players ${this.playerOne.username}(${this.playerOne._id}) & ${this.playerTwo.username}(${this.playerTwo._id})`, __dirname);
-        this._protocol.send(this._protocol.GAME_IS_READY, {}, _.concat(this.playerOne.sessionIds, this.playerTwo.sessionIds));
+        const sessionIds =  _.concat(this.playerOne.sessionIds, this.playerTwo.sessionIds);
+        this._protocol.send(this._protocol.GAME_IS_READY, {}, sessionIds);
     }
 };
