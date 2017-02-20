@@ -22,23 +22,26 @@ export default class Matchmaking {
      * Returns promise's resolve after finish.
      */
     initMatchmaking() {
-        return new Promise((resolve) => {
-            this.matchMadeCycle(resolve);
+        return new Promise((resolve, reject) => {
+            this.matchMadeCycle(resolve, reject);
         });
     }
 
     /**
      * A single matchMade cycle.
      * @param {function} resolve - Promise's resolve function
+     * @param {function} reject - Promise's reject function
      */
-    matchMadeCycle(resolve) {
+    matchMadeCycle(resolve, reject) {
         const playersInsideQueue = this.getAwaitingPlayers();
         this.loopThroughPlayers(playersInsideQueue).then((result) => {
             if (result) {
-                this.matchMadeCycle(resolve);
+                this.matchMadeCycle(resolve, reject);
             } else {
                 resolve();
             }
+        }).catch((error) => {
+            reject(error);
         });
     }
 
@@ -84,8 +87,7 @@ export default class Matchmaking {
                     const result = this.isDifferenceAcceptable(player.priority, playerOne, playerTwo);
                     if (result) {
                         Logger.info(
-                            `[Matchmaking] Matched players ${playerOne.username}(${playerOne._id}) &\
-                            ${playerTwo.username}(${playerTwo._id})`,
+                            `[Matchmaking] Matched players ${playerOne.username}(${playerOne._id}) & ${playerTwo.username}(${playerTwo._id})`,
                             __dirname
                         );
                         new Game(playerOne, playerTwo, this.gameType);

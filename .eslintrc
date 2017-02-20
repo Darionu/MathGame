@@ -28,8 +28,12 @@
         ],
         "max-len": [
             2,
-            120,
-            4
+            {
+                "code": 120,
+                "ignoreComments": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
+            }
         ]
     }
 }

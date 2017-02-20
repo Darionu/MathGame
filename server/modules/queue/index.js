@@ -46,8 +46,7 @@ export default new class {
      */
     stopQueue(playerOne, playerTwo) {
         Logger.info(
-            `[QueueManager] Stopping queue for users ${playerOne.username}(${playerOne._id})\
-             & ${playerTwo.username}(${playerTwo._id}).`
+            `[QueueManager] Stopping queue for users ${playerOne} & ${playerTwo}.`
             , __dirname
         );
         QueueHistory.update({

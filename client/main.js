@@ -10,6 +10,7 @@ import enLocaleData from 'react-intl/locale-data/en';
 import plLocaleData from 'react-intl/locale-data/pl';
 
 import coreModule from './modules/core';
+import gameModule from './modules/game';
 import layoutModule from './modules/layout';
 import rankingsModule from './modules/rankings';
 import playBoardModule from './modules/playboard';
@@ -29,6 +30,7 @@ addLocaleData(plLocaleData);
 const app = createApp(context);
 
 app.loadModule(coreModule);
+app.loadModule(gameModule);
 app.loadModule(layoutModule);
 app.loadModule(rankingsModule);
 app.loadModule(playBoardModule);

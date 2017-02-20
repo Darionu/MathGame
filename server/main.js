@@ -14,5 +14,11 @@ Meteor.startup(() => {
     dbMigrations();
 });
 
+Meteor.users.update({}, {
+    $set: {
+        sessionIds: []
+    }
+}, { multi: true });
+
 new Logging(); // eslint-disable-line no-new
 new OnlineStatus(); // eslint-disable-line no-new
