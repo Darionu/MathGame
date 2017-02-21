@@ -2,6 +2,7 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import Header from '../components/header';
 import { QueueHistory } from '/lib/collections';
 import QueueStatuses from '/lib/constants/queueStatuses';
+import RouteNames from '/lib/constants/routeNames';
 
 export const composer = ({ context }, onData) => {
     const images = context().providers.pageProvider.getImages();
@@ -9,10 +10,13 @@ export const composer = ({ context }, onData) => {
     const queueStarted = !!QueueHistory.findOne({
         status: QueueStatuses.started
     });
+    const isInGame = (context().FlowRouter.current().route.name === RouteNames.game);
+    console.log(isInGame);
     onData(null, {
         userIsLogged,
         queueStarted,
-        images
+        images,
+        isInGame
     });
 };
 

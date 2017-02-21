@@ -26,13 +26,19 @@ const messages = defineMessages({
 });
 
 const Header = class extends React.Component {
+    getWrapperStyle() {
+        return this.props.isInGame
+            ? `${styles.wrapper} ${styles.wrapperInGame}`
+            : styles.wrapper;
+    }
+
     render() {
         const { formatMessage } = this.props.intl;
         return (
             <div className={styles.header}>
                 <div className={styles.container}>
                     <div className={styles.descriptionBar}>
-                        <div className={styles.wrapper}>
+                        <div className={this.getWrapperStyle()}>
                             {this.props.queueStarted
                                 ? <QueueBox/>
                                 : <div>
@@ -56,11 +62,15 @@ const Header = class extends React.Component {
                                 onClick={this.props.switchLoginBoxState}
                               />
                         }
-                        <Button
-                            className={styles.navigationButton}
-                            text={formatMessage(messages.home)}
-                            onClick={this.props.goToHomePage}
-                        />
+                        {this.props.isInGame
+                            ? null
+                            : <Button
+                                className={styles.navigationButton}
+                                text={formatMessage(messages.home)}
+                                onClick={this.props.goToHomePage}
+                             />
+                        }
+
                     </div>
                 </div>
             </div>
@@ -75,7 +85,8 @@ Header.propTypes = {
     goToHomePage: React.PropTypes.func.isRequired,
     logout: React.PropTypes.func.isRequired,
     queueStarted: React.PropTypes.bool.isRequired,
-    images: React.PropTypes.object
+    images: React.PropTypes.object,
+    isInGame: React.PropTypes.bool
 };
 
 export default injectIntl(Header);

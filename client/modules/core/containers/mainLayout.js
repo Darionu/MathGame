@@ -1,13 +1,31 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import MainLayout from '../components/mainLayout';
+import { Games } from '/lib/collections';
+import { GameStatuses } from '/lib/constants/gameConstants';
+import RouteNames from '/lib/constants/routeNames';
 
 export const composer = ({ context }, onData) => {
-    let ready = true;
-    const data = {
-        ready
-    };
+    const gameInProgress = Games.findOne({
+        status: {
+            $in: [
+                GameStatuses.created,
+                GameStatuses.initialized,
+                GameStatuses.started
+            ]
+        }
+    });
 
-    onData(null, data);
+    if (gameInProgress &&
+        context().FlowRouter.current().route.name !== RouteNames.game) {
+        context().FlowRouter.go(RouteNames.game);
+    }
+
+    if (!gameInProgress &&
+        context().FlowRouter.current().route.name === RouteNames.game) {
+        context().FlowRouter.go(RouteNames.home);
+    }
+
+    onData(null, {});
 };
 
 export const depsMapper = (context) => ({
