@@ -1,25 +1,28 @@
 import React from 'react';
-import { defineMessages, intlShape, injectIntl } from 'react-intl';
+import Button from '/client/modules/core/components/button';
 import styles from './styles/answerButton.scss';
 
-const messages = defineMessages({
-
-});
-
 const AnswerButton = class extends React.Component {
+    sendAnswer() {
+        this.props.sendAnswer(this.props.answer);
+    }
+
     render() {
-        const { formatMessage } = this.props.intl;
         return (
             <div className={styles.answerButton}>
-                {this.props.answer}
+                <Button
+                    className={styles.answerButton}
+                    text={this.props.answer.toString()}
+                    onClick={::this.sendAnswer}
+                />
             </div>
         );
     }
 };
 
 AnswerButton.propTypes = {
-    intl: intlShape.isRequired,
-    answer: React.PropTypes.number
+    answer: React.PropTypes.number,
+    sendAnswer: React.PropTypes.func.isRequired
 };
 
-export default injectIntl(AnswerButton);
+export default AnswerButton;

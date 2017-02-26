@@ -10,10 +10,15 @@ const GameBoard = class extends React.Component {
                 {this.props.firstNumber} {this.props.equation} {this.props.secondNumber} = ?
 
                 <br/>ANSWERS
-                <AnswerButton answer={this.props.answerOne}/>
-                <AnswerButton answer={this.props.answerTwo}/>
-                <AnswerButton answer={this.props.answerThird}/>
-                <AnswerButton answer={this.props.answerFour}/>
+                <div className={styles.singleAnswerLine}>
+                    <AnswerButton answer={this.props.answerOne}/>
+                    <AnswerButton answer={this.props.answerTwo}/>
+                </div>
+
+                <div className={styles.singleAnswerLine}>
+                    <AnswerButton answer={this.props.answerThird}/>
+                    <AnswerButton answer={this.props.answerFour}/>
+                </div>
             </div>
         );
     }

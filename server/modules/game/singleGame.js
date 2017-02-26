@@ -2,7 +2,7 @@ import QueueManager from '../queue';
 import Logger from '/lib/logging/Logger';
 import ReadyCheck from './readyCheck';
 import GameProtocol from './gameProtocol';
-import { Games } from '/lib/collections';
+import { Games, Exercises } from '/lib/collections';
 import ExerciseGenerator from '/server/modules/exerciseGenerator';
 import { GameStatuses } from '/lib/constants/gameConstants';
 
@@ -114,5 +114,32 @@ export default class {
                 winnerId
             }
         });
+    }
+
+    /**
+     *
+     * @param playerId - player which made an answer.
+     * @param answer - chosen answer.
+     */
+    addAnswer(playerId, answer) {
+        const game = Games.findOne(this.gameId);
+        const currentExercise = _.last(game.exercises);
+        const playerType = game.playerA === playerId
+            ? 'playerAChoice'
+            : 'playerBChoice';
+
+        const exercise = Exercises.findOne(currentExercise);
+        if (exercise[playerType]){
+            Logger.warn('Player already answered to the question', __dirname);
+            return true;
+        }
+
+        const result = Exercises.update(currentExercise, {
+            $set: {
+                [playerType]: answer
+            }
+        });
+
+        return result === 1;
     }
 };

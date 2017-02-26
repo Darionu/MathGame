@@ -5,8 +5,9 @@ export const composer = ({}, onData) => {
     onData(null, {});
 };
 
-export const depsMapper = (context) => ({
-    context: () => context
+export const depsMapper = (context, actions) => ({
+    context: () => context,
+    sendAnswer: actions.gameActions.sendAnswer
 });
 
 export default composeAll(

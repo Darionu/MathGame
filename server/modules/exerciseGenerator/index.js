@@ -2,6 +2,7 @@ import Logger from '/lib/logging/Logger';
 import _ from 'lodash';
 import { GameTypes } from '/lib/constants/gameConstants';
 import { Exercises } from '/lib/collections';
+import ExerciseConstants from '/lib/constants/exerciseConstants';
 
 /**
  * ExerciseGenerator
@@ -60,11 +61,17 @@ export default class {
     /**
      * Creates subtraction exercise.
      * The result is a difference of two generated numbers.
+     * Ensures that the difference result is positive.
      * @returns {string} _id - id of created exercise.
      */
     generateSubtractionExercise() {
         this.firstNumber = Math.floor((Math.random() * 100) + 1);
         this.secondNumber = Math.floor((Math.random() * 100) + 1);
+        if (this.firstNumber < this.secondNumber) {
+            const numberHolder = this.firstNumber;
+            this.firstNumber = this.secondNumber;
+            this.secondNumber = numberHolder;
+        }
         this.result = this.firstNumber - this.secondNumber;
         this.generateFalseResults();
 
@@ -88,14 +95,16 @@ export default class {
     }
 
     /**
+     * TODO: Add division exercise generator and keep in mind to not let the function create floating results.
      * Creates division exercise.
      * The result is a division of two generated numbers.
-     * TODO: Don't let the function create floating results.
      * @returns {string} _id - id of created exercise.
      */
     generateDivisionExercise() {
-        this.firstNumber = Math.floor((Math.random() * 100) + 1);
-        this.secondNumber = Math.floor((Math.random() * 100) + 1);
+        // this.firstNumber = Math.floor((Math.random() * 100) + 1);
+        // this.secondNumber = Math.floor((Math.random() * 100) + 1);
+        this.firstNumber = 10;
+        this.secondNumber = 2;
         this.result = Math.floor(this.firstNumber / this.secondNumber);
         this.generateFalseResults();
 
@@ -106,29 +115,18 @@ export default class {
     /**
      * Creating an array with up to 4 results.
      * The array is containing one correct result and 3 false ones.
-     * Shuffling the array afterwards.
+     * Generates false results and shuffling the array afterwards.
      */
     generateFalseResults() {
         Logger.info('[ExerciseGenerator] Generating additional results', __dirname);
         const arrayOfResults = [this.result];
-        arrayOfResults.push(this.generateResult(arrayOfResults));
-        arrayOfResults.push(this.generateResult(arrayOfResults));
-        arrayOfResults.push(this.generateResult(arrayOfResults));
+        while (arrayOfResults.length < ExerciseConstants.answerCount) {
+            const newNumber = Math.floor(Math.random() * (this.result * 2 - this.result / 2) + this.result / 2);
+            if (!_.some(arrayOfResults, newNumber)) {
+                arrayOfResults.push(newNumber);
+            }
+        }
         this.arrayOfResults = _.shuffle(arrayOfResults);
-    }
-
-    /**
-     * Generate new false result similar to the original one.
-     * Created results can't be duplicated.
-     * @param arrayOfResults - array of already existing results.
-     * @returns {number} - new fake result.
-     * TODO: It's not working as expected
-     */
-    generateResult(arrayOfResults) {
-        const newNumber = Math.floor(Math.random() * (this.result * 2 - this.result / 2) + this.result / 2);
-        return _.some(arrayOfResults, newNumber)
-            ? this.generateResult(arrayOfResults)
-            : newNumber;
     }
 
     /**

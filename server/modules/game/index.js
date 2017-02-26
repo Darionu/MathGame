@@ -85,4 +85,11 @@ export default new class GameManager {
             gameObject.game.finishGame(winner);
         }
     }
+
+    answer(playerId, answer) {
+        const gameObject = this.findGameByPlayer(playerId);
+        return gameObject
+            ? gameObject.game.addAnswer(playerId, answer)
+            : false;
+    }
 };
