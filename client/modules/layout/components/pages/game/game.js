@@ -1,12 +1,16 @@
 import React from 'react';
 import Header from '/client/modules/core/containers/header';
 import LoginModal from '/client/modules/core/containers/loginModal';
+import styles from '/client/modules/layout/components/pages/game/game.scss';
+import GameBoard from '/client/modules/game/containers/gameBoard';
 
 const Game = () => (
-    <div>
+    <div className={styles.pageWrapper}>
         <Header/>
         <LoginModal/>
-        Game
+        <div className={styles.wrapperContainer}>
+            <GameBoard/>
+        </div>
     </div>
 );
 

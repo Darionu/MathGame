@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import PublicationNames from '/lib/constants/publicationsNames';
-import { QueueHistory, Games } from '/lib/collections';
+import { QueueHistory, Games, Exercises } from '/lib/collections';
+import { GameStatuses }from '/lib/constants/gameConstants';
 
 export default () => {
     Meteor.publish(PublicationNames.users, () => Meteor.users.find());
@@ -14,5 +15,47 @@ export default () => {
                 { playerB: this.userId }
             ]
         })
+    });
+    Meteor.publish(PublicationNames.userExercises, function() {
+        this.autorun(() => {
+            const game = Games.findOne({
+                $and: [
+                    {
+                        status: {
+                            $in: [
+                                GameStatuses.created,
+                                GameStatuses.initialized,
+                                GameStatuses.started
+                            ]
+                        }
+                    },
+                    {
+                        $or: [
+                            { playerA: this.userId },
+                            { playerB: this.userId }
+                        ]
+                    }
+                ]
+            }, {
+                fields: {
+                    exercises: 1
+                }
+            });
+
+            return game
+                ? Exercises.find({
+                    _id: {
+                        $in: game.exercises
+                    }
+                }, {
+                    fields: {
+                        answers: 1,
+                        firstNumber: 1,
+                        secondNumber: 1,
+                        type: 1
+                    }
+                })
+                : [];
+        });
     });
 };

@@ -1,7 +1,9 @@
 import Logger from '/lib/logging/Logger';
 import LocalStateKeys from '/lib/constants/localStateKeys';
 import Alert from 'react-s-alert';
-import ServerMethodsNames from '/lib/constants/serverMethodsNames'
+import ServerMethodsNames from '/lib/constants/serverMethodsNames';
+import { Games } from '/lib/collections';
+import { GameStatuses } from '/lib/constants/gameConstants';
 
 export default {
     loginAttempt({ LocalState, providers }, login, password, messages) {
@@ -35,6 +37,23 @@ export default {
         });
     },
     logout({}) {
-        Meteor.logout();
+        const game = Games.findOne({
+           status: {
+               $in: [
+                   GameStatuses.created,
+                   GameStatuses.started,
+                   GameStatuses.initialized
+               ]
+           }
+        });
+
+        if (game) {
+            const answer = confirm('You are currently in game. Are you sure you want to log out? It will make you lost the game.');
+            if (answer) {
+                Meteor.logout();
+            }
+        } else {
+            Meteor.logout();
+        }
     }
 };
