@@ -6,7 +6,10 @@ const GameBoard = class extends React.Component {
     render() {
         return (
             <div className={styles.gameBoard}>
-                GAME
+                EQUATION <br/>
+                {this.props.firstNumber} {this.props.equation} {this.props.secondNumber} = ?
+
+                <br/>ANSWERS
                 <AnswerButton answer={this.props.answerOne}/>
                 <AnswerButton answer={this.props.answerTwo}/>
                 <AnswerButton answer={this.props.answerThird}/>

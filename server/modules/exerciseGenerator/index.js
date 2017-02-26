@@ -80,7 +80,7 @@ export default class {
     generateMultiplicationExercise() {
         this.firstNumber = Math.floor((Math.random() * 15) + 1);
         this.secondNumber = Math.floor((Math.random() * 15) + 1);
-        this.result = this.firstNumber / this.secondNumber;
+        this.result = this.firstNumber * this.secondNumber;
         this.generateFalseResults();
 
         Logger.info(`[ExerciseGenerator] Addition multiplication generated. ${this.firstNumber} * ${this.secondNumber} = ${this.result} with result table [${this.arrayOfResults}]`, __dirname);
@@ -96,7 +96,7 @@ export default class {
     generateDivisionExercise() {
         this.firstNumber = Math.floor((Math.random() * 100) + 1);
         this.secondNumber = Math.floor((Math.random() * 100) + 1);
-        this.result = this.firstNumber * this.secondNumber;
+        this.result = Math.floor(this.firstNumber / this.secondNumber);
         this.generateFalseResults();
 
         Logger.info(`[ExerciseGenerator] Addition division generated. ${this.firstNumber} / ${this.secondNumber} = ${this.result} with result table [${this.arrayOfResults}]`, __dirname);
@@ -122,6 +122,7 @@ export default class {
      * Created results can't be duplicated.
      * @param arrayOfResults - array of already existing results.
      * @returns {number} - new fake result.
+     * TODO: It's not working as expected
      */
     generateResult(arrayOfResults) {
         const newNumber = Math.floor(Math.random() * (this.result * 2 - this.result / 2) + this.result / 2);
