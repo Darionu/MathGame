@@ -29,3 +29,4 @@ aldeed:simple-schema
 aldeed:collection2
 omega:custom-protocol
 dynamic-import@0.1.0-beta.8
+peerlibrary:reactive-publish

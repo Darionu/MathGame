@@ -1,6 +1,7 @@
 import PublicationNames from '/lib/constants/publicationsNames';
 import Logger from '/lib/logging/Logger';
-import QueueManager from '../queue/index';
+import QueueManager from '../queue';
+import GameManager from '../game';
 
 export default function () {
     Meteor.publish(PublicationNames.myStatus, function myStatus() {
@@ -16,6 +17,7 @@ export default function () {
             );
             this.onStop(() => {
                 QueueManager.removeUserFromQueue(this.userId);
+                GameManager.forfeitGame(this.userId);
                 Meteor.users.update(this.userId, {
                     $pull: {
                         sessionIds: connectionId

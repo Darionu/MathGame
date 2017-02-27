@@ -34,5 +34,8 @@
   "app.playBoard.addition": "Addition",
   "app.playBoard.multiplication": "Multiplication",
   "app.playBoard.division": "Division",
-  "app.queueBox.inQueue": "In queue"
+  "app.queueBox.inQueue": "In queue",
+  "app.game.equation": "EQUATION",
+  "app.game.answers": "ANSWERS",
+  "app.game.alphaWarning": "* ALPHA VERSION! TO END GAME SIMPLY LOG OUT!"
 }

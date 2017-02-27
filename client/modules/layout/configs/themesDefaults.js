@@ -30,7 +30,9 @@ const themeDefaults = {
                 plus: 'images/mathOperations/plus.png',
                 subtract: 'images/mathOperations/subtract.png',
                 multiply: 'images/mathOperations/multiply.png',
-                divide: 'images/mathOperations/divide.png'
+                divide: 'images/mathOperations/divide.png',
+                questionMark: 'images/mathOperations/questionMark.png',
+                equals: 'images/mathOperations/equals.png'
             }
         },
         colors: {

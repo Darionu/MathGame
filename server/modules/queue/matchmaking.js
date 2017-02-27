@@ -3,7 +3,7 @@ import { QueueHistory } from '/lib/collections/index';
 import QueueStatuses from '/lib/constants/queueStatuses';
 import { QueuePriorities } from '/lib/constants/queuePriorities';
 import Logger from '/lib/logging/Logger';
-import Game from './../game';
+import GameManager from './../game';
 
 /**
  * Matchmaking
@@ -90,7 +90,7 @@ export default class Matchmaking {
                             `[Matchmaking] Matched players ${playerOne.username}(${playerOne._id}) & ${playerTwo.username}(${playerTwo._id})`,
                             __dirname
                         );
-                        new Game(playerOne, playerTwo, this.gameType);
+                        GameManager.startGame(playerOne, playerTwo, this.gameType);
                         matchedPlayer = true;
                         return false;
                     }
