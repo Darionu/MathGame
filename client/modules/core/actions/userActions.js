@@ -38,13 +38,13 @@ export default {
     },
     logout({}) {
         const game = Games.findOne({
-           status: {
-               $in: [
-                   GameStatuses.created,
-                   GameStatuses.started,
-                   GameStatuses.initialized
-               ]
-           }
+            status: {
+                $in: [
+                    GameStatuses.created,
+                    GameStatuses.started,
+                    GameStatuses.initialized
+                ]
+            }
         });
 
         if (game) {
