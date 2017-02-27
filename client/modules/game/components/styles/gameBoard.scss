@@ -1,6 +1,8 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
 .gameBoard {
     margin: 5em auto;
-    border: 1px solid red;
     width: 80%;
     max-width: 1020px;
     text-align: center;
@@ -8,4 +10,17 @@
 
 .singleAnswerLine {
     display: block;
+}
+
+.gameBoardFont {
+    display: block;
+    @include themedRule('color', 'formPrimary');
+    @extend .fontRoboto34Regular;
+}
+
+.warning {
+    margin-top: 3em;
+    display: block;
+    color: red;
+    @extend .fontRoboto16Light;
 }

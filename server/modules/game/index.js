@@ -20,6 +20,7 @@ export default new class GameManager {
 
     /**
      * Logic to do at the class initialization.
+     * @private
      */
     init() {
         this.stopAllGames();
@@ -27,6 +28,7 @@ export default new class GameManager {
 
     /**
      * Find all not ended games and finish them afterwards.
+     * @public
      */
     stopAllGames() {
         Games.update({
@@ -49,6 +51,7 @@ export default new class GameManager {
      * @param {Object} playerOne
      * @param {Object} playerTwo
      * @param {number} gameType - chosen game type
+     * @public
      */
     startGame(playerOne, playerTwo, gameType) {
         const game = new SingleGame(playerOne, playerTwo, gameType);
@@ -61,19 +64,23 @@ export default new class GameManager {
     }
 
     /**
-     *
-     * @param playerId - _id of the player to find the game for.
-     * @returns {Object} game
+     * Handle received answer for a question by specific player.
+     * @param {string} playerId - _id of a player.
+     * @param {number} answer - chosen answer.
+     * @returns {boolean} result - success/fail.
+     * @public
      */
-    findGameByPlayer(playerId) {
-        return _.find(this.gameList, (singleGame) => {
-            return singleGame.playerA === playerId || singleGame.playerB === playerId;
-        });
+    answer(playerId, answer) {
+        const gameObject = this.findGameByPlayer(playerId);
+        return gameObject
+            ? gameObject.game.addAnswer(playerId, answer)
+            : false;
     }
 
     /**
      * Forfeit the game for a specific player and mark the other one as a winner.
      * @param {string} playerId - _id of a player which forfeited.
+     * @public
      */
     forfeitGame(playerId) {
         const gameObject = this.findGameByPlayer(playerId);
@@ -84,12 +91,30 @@ export default new class GameManager {
                 : gameObject.playerB;
             gameObject.game.finishGame(winner);
         }
+        this.removeGame(playerId);
     }
 
-    answer(playerId, answer) {
-        const gameObject = this.findGameByPlayer(playerId);
-        return gameObject
-            ? gameObject.game.addAnswer(playerId, answer)
-            : false;
+    /**
+     *
+     * @param playerId - _id of the player to find the game for.
+     * @returns {Object} game
+     * @private
+     */
+    findGameByPlayer(playerId) {
+        return _.find(this.gameList, (singleGame) => {
+            return singleGame.playerA === playerId || singleGame.playerB === playerId;
+        });
+    }
+
+    /**
+     * Removes single game instance from the GameList array.
+     * @param {string} playerId - _id of participant of the game.
+     * @private
+     */
+    removeGame(playerId) {
+        Logger.info(`[GameManager] Remove game for player ${playerId} from game list.`, __dirname);
+        _.remove(this.gameList, (singleGame) => {
+            return singleGame.playerA === playerId || singleGame.playerB === playerId;
+        });
     }
 };

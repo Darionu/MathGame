@@ -1,32 +1,70 @@
 import React from 'react';
 import styles from './styles/gameBoard.scss';
 import AnswerButton from '/client/modules/game/containers/answerButton';
+import Equation from '/client/modules/game/containers/equation';
+import { defineMessages, intlShape, injectIntl } from 'react-intl';
+
+const messages = defineMessages({
+    equation: {
+        id: 'app.game.equation',
+        defaultMessage: 'EQUATION'
+    },
+    answers: {
+        id: 'app.game.answers',
+        defaultMessage: 'ANSWERS'
+    },
+    alphaWarning: {
+        id: 'app.game.alphaWarning',
+        defaultMessage: '* ALPHA VERSION! TO END GAME SIMPLY LOG OUT!'
+    }
+});
 
 const GameBoard = class extends React.Component {
     render() {
+        const { formatMessage } = this.props.intl;
         return (
             <div className={styles.gameBoard}>
-                ALPHA VERSION! TO END GAME SIMPLY LOG OUT! <br/>
-                EQUATION <br/>
-                {this.props.firstNumber} {this.props.equation} {this.props.secondNumber} = ?
+                <span className={styles.gameBoardFont}>
+                     {formatMessage(messages.equation)}
+                </span>
 
-                <br/>ANSWERS
+                <Equation
+                    first={this.props.firstNumber}
+                    second={this.props.secondNumber}
+                    type={this.props.gameType}
+                />
+
+                <span className={styles.gameBoardFont}>
+                    {formatMessage(messages.answers)}
+                </span>
+
                 <div className={styles.singleAnswerLine}>
                     <AnswerButton answer={this.props.answerOne}/>
                     <AnswerButton answer={this.props.answerTwo}/>
                 </div>
 
                 <div className={styles.singleAnswerLine}>
-                    <AnswerButton answer={this.props.answerThird}/>
+                    <AnswerButton answer={this.props.answerThree}/>
                     <AnswerButton answer={this.props.answerFour}/>
                 </div>
+
+                <span className={styles.warning}>
+                     {formatMessage(messages.alphaWarning)}
+                </span>
             </div>
         );
     }
 };
 
 GameBoard.propTypes = {
-
+    intl: intlShape.isRequired,
+    firstNumber: React.PropTypes.number,
+    secondNumber: React.PropTypes.number,
+    gameType: React.PropTypes.number,
+    answerOne: React.PropTypes.number,
+    answerTwo: React.PropTypes.number,
+    answerThree: React.PropTypes.number,
+    answerFour: React.PropTypes.number
 };
 
-export default GameBoard;
+export default injectIntl(GameBoard);

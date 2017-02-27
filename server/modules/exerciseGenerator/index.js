@@ -17,29 +17,25 @@ export default class {
     /**
      * Create a specific exercise according to the chosen game type.
      * @returns {string | boolean} _id - id of created exercise or false otherwise.
+     * @public
      */
     init() {
         switch (this.gameType) {
             case GameTypes.addition:
                 Logger.info('[ExerciseGenerator] Generating addition exercise..', __dirname);
                 return this.generateAdditionExercise();
-                break;
             case GameTypes.subtraction:
                 Logger.info('[ExerciseGenerator] Generating subtraction exercise..', __dirname);
                 return this.generateSubtractionExercise();
-                break;
             case GameTypes.multiplication:
                 Logger.info('[ExerciseGenerator] Generating multiplication exercise..', __dirname);
                 return this.generateMultiplicationExercise();
-                break;
             case GameTypes.division:
                 Logger.info('[ExerciseGenerator] Generating division exercise..', __dirname);
                 return this.generateDivisionExercise();
-                break;
             default:
                 Logger.error(`[ExerciseGenerator] Unknown gameType provided: ${this.gameType}`, __dirname);
                 return false;
-                break;
         }
     }
 
@@ -47,6 +43,7 @@ export default class {
      * Creates addition exercise.
      * The result is a sum of two generated numbers.
      * @returns {string} _id - id of created exercise.
+     * @private
      */
     generateAdditionExercise() {
         this.firstNumber = Math.floor((Math.random() * 100) + 1);
@@ -63,6 +60,7 @@ export default class {
      * The result is a difference of two generated numbers.
      * Ensures that the difference result is positive.
      * @returns {string} _id - id of created exercise.
+     * @private
      */
     generateSubtractionExercise() {
         this.firstNumber = Math.floor((Math.random() * 100) + 1);
@@ -83,6 +81,7 @@ export default class {
      * Creates multiplication exercise.
      * The result is a product of two generated numbers.
      * @returns {string} _id - id of created exercise.
+     * @private
      */
     generateMultiplicationExercise() {
         this.firstNumber = Math.floor((Math.random() * 15) + 1);
@@ -95,16 +94,21 @@ export default class {
     }
 
     /**
-     * TODO: Add division exercise generator and keep in mind to not let the function create floating results.
      * Creates division exercise.
      * The result is a division of two generated numbers.
+     * Modulo of the division is always 0.
      * @returns {string} _id - id of created exercise.
+     * @private
      */
     generateDivisionExercise() {
-        // this.firstNumber = Math.floor((Math.random() * 100) + 1);
-        // this.secondNumber = Math.floor((Math.random() * 100) + 1);
-        this.firstNumber = 10;
-        this.secondNumber = 2;
+        this.firstNumber =  Math.floor((Math.random() * 100) + 1);
+        this.secondNumber = Math.floor((Math.random() * 100) + 1);
+
+        while (this.firstNumber % this.secondNumber !== 0) {
+            this.firstNumber = Math.floor((Math.random() * 100) + 1);
+            this.secondNumber = Math.floor((Math.random() * 100) + 1);
+        }
+
         this.result = Math.floor(this.firstNumber / this.secondNumber);
         this.generateFalseResults();
 
@@ -116,13 +120,14 @@ export default class {
      * Creating an array with up to 4 results.
      * The array is containing one correct result and 3 false ones.
      * Generates false results and shuffling the array afterwards.
+     * @private
      */
     generateFalseResults() {
         Logger.info('[ExerciseGenerator] Generating additional results', __dirname);
         const arrayOfResults = [this.result];
         while (arrayOfResults.length < ExerciseConstants.answerCount) {
             const newNumber = Math.floor(Math.random() * (this.result * 2 - this.result / 2) + this.result / 2);
-            if (!_.some(arrayOfResults, newNumber)) {
+            if (!_.includes(arrayOfResults, newNumber)) {
                 arrayOfResults.push(newNumber);
             }
         }
@@ -132,6 +137,7 @@ export default class {
     /**
      * Insert just created exercise.
      * @returns {string} _id - exercise's id.
+     * @private
      */
     insertExercise() {
         Logger.info(`[ExerciseGenerator] Inserting exercise to the database.`, __dirname);

@@ -34,5 +34,8 @@
   "app.playBoard.addition": "Dodawanie",
   "app.playBoard.multiplication": "Mnożenie",
   "app.playBoard.division": "Dzielenie",
-  "app.queueBox.inQueue": "W kolejce"
+  "app.queueBox.inQueue": "W kolejce",
+  "app.game.equation": "RÓWNANIE",
+  "app.game.answers": "ODPOWIEDZI",
+  "app.game.alphaWarning": "* WERSJA ALPHA! WYLOGUJ SIĘ ABY ZAKOŃCZYĆ GRĘ!"
 }
