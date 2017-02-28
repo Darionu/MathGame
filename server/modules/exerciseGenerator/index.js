@@ -124,6 +124,12 @@ export default class {
      */
     generateFalseResults() {
         Logger.info('[ExerciseGenerator] Generating additional results', __dirname);
+        if (this.result < 3) {
+            const preparedArray = [ 1, 2, 3, 4 ];
+            this.arrayOfResults = _.shuffle(preparedArray);
+            return;
+        }
+
         const arrayOfResults = [this.result];
         while (arrayOfResults.length < ExerciseConstants.answerCount) {
             const newNumber = Math.floor(Math.random() * (this.result * 2 - this.result / 2) + this.result / 2);
