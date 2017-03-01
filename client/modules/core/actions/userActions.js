@@ -14,7 +14,6 @@ export default {
             } else {
                 LocalState.set(LocalStateKeys.isLoginBoxVisible, false);
                 Logger.info(`User ${login} logged in.`, __filename);
-                Alert.success(messages.loginSuccess);
 
                 Meteor.call(ServerMethodsNames.getUserData, (error, result) => {
                     const language = result.userData.language;

@@ -27,7 +27,7 @@ export default () => {
             return result === 1;
         },
         getUserData: function() {
-            return Meteor.users.findOne({ _id: this.userId });
+            return Meteor.users.findOne(this.userId);
         }
     });
 };

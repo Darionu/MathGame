@@ -1,4 +1,5 @@
 import GameManager from './index';
+import Logger from '/lib/logging/Logger';
 
 /**
  * Methods related to GameSystem to be called from the client.
@@ -12,6 +13,7 @@ export default () => {
          */
         sendAnswer: function (answer) {
             check(answer, Number);
+            Logger.info(`[GameMethods] Received answer (${answer}) from a player (${this.userId})`, __dirname);
             return GameManager.answer(this.userId, answer);
         },
     });

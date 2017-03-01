@@ -90,12 +90,32 @@ export default new class GameManager {
                 ? gameObject.playerA
                 : gameObject.playerB;
             gameObject.game.finishGame(winner);
+            this.announceWinnerAndLoser(winner, playerId);
         }
         this.removeGame(playerId);
     }
 
     /**
-     *
+     * Handles results and changing player statistics based on them.
+     * @param winner - id of a player who won the game
+     * @param looser - id of a player who lost the game
+     */
+    announceWinnerAndLoser(winner, looser) {
+        Meteor.users.update(winner, {
+            $inc: {
+                "gameData.wins": 1
+            }
+        });
+
+        Meteor.users.update(looser, {
+            $inc: {
+                "gameData.loses": 1
+            }
+        });
+    }
+
+    /**
+     * Find a game which has provided player as attendee.
      * @param playerId - _id of the player to find the game for.
      * @returns {Object} game
      * @private
