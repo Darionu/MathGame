@@ -74,7 +74,7 @@ export default new class GameManager {
         const gameObject = this.findGameByPlayer(playerId);
         if (gameObject) {
             const result = gameObject.game.addAnswer(playerId, answer);
-            if (gameObject.gameFinished) {
+            if (gameObject.game.gameFinished) {
                 this.removeGame(playerId);
             }
             return result;
