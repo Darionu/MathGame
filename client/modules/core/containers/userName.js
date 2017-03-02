@@ -4,14 +4,27 @@ import UserName from '../components/userName';
 export const composer = ({ context }, onData) => {
     const user = Meteor.users.findOne({ _id: Meteor.userId() });
     let userAvatar = '';
+    let statistics = {
+        wins: '?',
+        loses: '?'
+    };
+
     if (user && user.userData && user.userData.avatar) {
         const images = context().providers.pageProvider.getImages();
         userAvatar = images.avatars[user.userData.avatar];
     }
 
+    if (user && user.gameData) {
+        statistics = {
+            wins: user.gameData.wins,
+            loses: user.gameData.loses
+        }
+    }
+
     onData(null, {
         user,
-        userAvatar
+        userAvatar,
+        statistics
     });
 };
 

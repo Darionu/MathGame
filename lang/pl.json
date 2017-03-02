@@ -37,5 +37,6 @@
   "app.queueBox.inQueue": "W kolejce",
   "app.game.equation": "RÓWNANIE",
   "app.game.answers": "ODPOWIEDZI",
-  "app.game.alphaWarning": "* WERSJA ALPHA! WYLOGUJ SIĘ ABY ZAKOŃCZYĆ GRĘ!"
+  "app.game.alphaWarning": "* WERSJA ALPHA! WYLOGUJ SIĘ ABY ZAKOŃCZYĆ GRĘ!",
+  "app.game.yourPoints": "Twoje punkty"
 }

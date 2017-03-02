@@ -84,8 +84,7 @@ export default new class {
      * @return {boolean} result - true if almost one of the records were changed.
      */
     removeUserFromQueue(userId) {
-        Logger.info(`[QueueManager] Remove user ${userId} from the queue.`, __dirname);
-        return QueueHistory.update({
+        const result = QueueHistory.update({
             userId,
             status: QueueStatuses.started
         }, {
@@ -93,5 +92,9 @@ export default new class {
                 status: QueueStatuses.stoppedByUser
             }
         }) > 0;
+
+        if (result) {
+            Logger.info(`[QueueManager] Remove user ${userId} from the queue.`, __dirname);
+        }
     }
 };

@@ -11,6 +11,7 @@ export const composer = ({ context }, onData) => {
         status: QueueStatuses.started
     });
     const isInGame = (context().FlowRouter.current().route.name === RouteNames.game);
+
     onData(null, {
         userIsLogged,
         queueStarted,

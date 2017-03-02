@@ -18,6 +18,13 @@
     @extend .fontRoboto34Regular;
 }
 
+.pointsMessage {
+    margin-top: 2em;
+    display: block;
+    @include themedRule('color', 'formPrimary');
+    @extend .fontRoboto30Regular;
+}
+
 .warning {
     margin-top: 3em;
     display: block;

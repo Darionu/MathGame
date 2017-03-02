@@ -11,8 +11,8 @@ export default () => {
     Meteor.publish(PublicationNames.userGames, function() {
         return Games.find({
             $or: [
-                { playerA: this.userId },
-                { playerB: this.userId }
+                { "playerA.id": this.userId },
+                { "playerB.id": this.userId }
             ]
         })
     });
@@ -31,8 +31,8 @@ export default () => {
                     },
                     {
                         $or: [
-                            { playerA: this.userId },
-                            { playerB: this.userId }
+                            { "playerA.id": this.userId },
+                            { "playerB.id": this.userId }
                         ]
                     }
                 ]

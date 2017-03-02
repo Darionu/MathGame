@@ -15,6 +15,9 @@ export const composer = ({}, onData) => {
     });
     if (game && game.exercises && game.roundNumber > 0) {
         const currentExercise = game.exercises[game.roundNumber - 1];
+        const myPoints = game.playerA.id === Meteor.userId()
+            ? game.playerA.points
+            : game.playerB.points;
         if (currentExercise) {
             const exercise = Exercises.findOne(currentExercise);
             if (exercise) {
@@ -25,7 +28,9 @@ export const composer = ({}, onData) => {
                     answerOne: exercise.answers[0],
                     answerTwo: exercise.answers[1],
                     answerThree: exercise.answers[2],
-                    answerFour: exercise.answers[3]
+                    answerFour: exercise.answers[3],
+                    roundNumber: game.roundNumber,
+                    userPoints: myPoints
                 });
             }
         }

@@ -3,6 +3,7 @@ import styles from './styles/gameBoard.scss';
 import AnswerButton from '/client/modules/game/containers/answerButton';
 import Equation from '/client/modules/game/containers/equation';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
+import { GamePointsConstants } from '/lib/constants/gameConstants';
 
 const messages = defineMessages({
     equation: {
@@ -16,6 +17,10 @@ const messages = defineMessages({
     alphaWarning: {
         id: 'app.game.alphaWarning',
         defaultMessage: '* ALPHA VERSION! TO END GAME SIMPLY LOG OUT!'
+    },
+    yourPoints: {
+        id: 'app.game.yourPoints',
+        defaultMessage: 'Your points'
     }
 });
 
@@ -25,7 +30,7 @@ const GameBoard = class extends React.Component {
         return (
             <div className={styles.gameBoard}>
                 <span className={styles.gameBoardFont}>
-                     {formatMessage(messages.equation)}
+                     {formatMessage(messages.equation)} (No. {this.props.roundNumber})
                 </span>
 
                 <Equation
@@ -48,6 +53,10 @@ const GameBoard = class extends React.Component {
                     <AnswerButton answer={this.props.answerFour}/>
                 </div>
 
+                <span className={styles.pointsMessage}>
+                    {`${formatMessage(messages.yourPoints)}: ${this.props.userPoints}/${GamePointsConstants.winRequirement}`}
+                </span>
+
                 <span className={styles.warning}>
                      {formatMessage(messages.alphaWarning)}
                 </span>
@@ -64,7 +73,8 @@ GameBoard.propTypes = {
     answerOne: React.PropTypes.number,
     answerTwo: React.PropTypes.number,
     answerThree: React.PropTypes.number,
-    answerFour: React.PropTypes.number
+    answerFour: React.PropTypes.number,
+    userPoints: React.PropTypes.number
 };
 
 export default injectIntl(GameBoard);

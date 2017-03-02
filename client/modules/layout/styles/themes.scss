@@ -12,7 +12,7 @@ $themesMap: (
 // List of defined color names.
 
 // ****** !!!! Color name must be defined here to work !!!! ******
-$colorNames: 'primary', 'primaryDark', 'formPrimary', 'subText', 'headerSubText', 'headerIconsTextColor';
+$colorNames: 'primary', 'primaryDark', 'formPrimary', 'subText', 'headerSubText', 'headerIconsTextColor', 'success', 'error';
 
 // Since scss does not implement map-set, we make one using map-merge.
 @function map-set($map, $key, $value) {
@@ -35,11 +35,9 @@ $colors: ();
 // Adds a rule for all themes, based on the body.<theme>Theme rule.
 @mixin themedRule($rule, $colorName, $directive:'') {
     @each $theme in $themes {
-
         :global(body.#{$theme}Theme) & {
             #{$rule}: map-get($colors, #{$theme}-#{$colorName}) unquote($directive);
         }
-
     }
 }
 
@@ -50,6 +48,5 @@ $colors: ();
         :global(body.#{$theme}Theme) & {
             #{$rule}: rgba(map-get($colors, #{$theme}-#{$colorName}), $opacity) unquote($directive);
         }
-
     }
 }

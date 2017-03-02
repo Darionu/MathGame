@@ -13,3 +13,17 @@
     }
 }
 
+.statistics {
+    display: inline-block;
+    margin-left: 1em;
+}
+
+.wins {
+    padding: 0.2em;
+    @include themedRule('color', 'success');
+}
+
+.loses {
+    padding: 0.2em;
+    @include themedRule('color', 'error');
+}

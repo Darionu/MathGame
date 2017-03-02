@@ -4,7 +4,7 @@ import ReadyCheck from './readyCheck';
 import GameProtocol from './gameProtocol';
 import { Games, Exercises } from '/lib/collections';
 import ExerciseGenerator from '/server/modules/exerciseGenerator';
-import { GameStatuses } from '/lib/constants/gameConstants';
+import { GameStatuses, GamePointsConstants } from '/lib/constants/gameConstants';
 
 /**
  * SingleGame
@@ -18,6 +18,7 @@ export default class {
         this.gameType = gameType;
         this._protocol = GameProtocol.getProtocol();
         this.gameId = null;
+        this.gameFinished = false;
 
         this.init();
     }
@@ -45,8 +46,12 @@ export default class {
         Logger.info(`[SingleGame] Game manager initialization for players ${this.playerOne.username}(${this.playerOne._id}) & ${this.playerTwo.username}(${this.playerTwo._id})`, __dirname);
         this.gameId = Games.insert({
             type: this.gameType,
-            playerA: this.playerOne._id,
-            playerB: this.playerTwo._id
+            playerA: {
+                id: this.playerOne._id
+            },
+            playerB: {
+                id: this.playerTwo._id
+            }
         });
 
         if (this.gameId) {
@@ -70,6 +75,7 @@ export default class {
                 winnerId
             }
         });
+        this.gameFinished = true;
     }
 
     /**
@@ -81,7 +87,7 @@ export default class {
     addAnswer(playerId, answer) {
         const game = Games.findOne(this.gameId);
         const currentExercise = _.last(game.exercises);
-        const playerType = game.playerA === playerId
+        const playerType = game.playerA.id === playerId
             ? 'playerAChoice'
             : 'playerBChoice';
 
@@ -97,7 +103,7 @@ export default class {
             }
         });
 
-        this.checkIfStartNewTurn();
+        this.checkIfProcessCurrentTurn();
         return result === 1;
     }
 
@@ -148,17 +154,68 @@ export default class {
     }
 
     /**
-     * Checks if all the requirements for starting a new turn are set.
-     * If so then starts a new turn.
+     * Checks if all the requirements for ending current turn are set.
+     * If so then starts ends current turn and calculate points.
      * @private
      */
-    checkIfStartNewTurn() {
+    checkIfProcessCurrentTurn() {
         const game = Games.findOne(this.gameId);
         const currentExerciseId = _.last(game.exercises);
         const currentExercise = Exercises.findOne(currentExerciseId);
 
         if (currentExercise && currentExercise.playerAChoice && currentExercise.playerBChoice) {
-            this.startNewRound();
+            this.calculatePoints(currentExercise);
         }
+    }
+
+    /**
+     * Handles adding points to a specific user if their answer were correctly.
+     * Also checks if win conditions were met.
+     * @param currentExercise - exercise which is currently in progress.
+     * @private
+     */
+    calculatePoints(currentExercise) {
+        if (currentExercise.playerAChoice === currentExercise.correctAnswer) {
+            Logger.info(`[SingleGame] Adding 10 points to player A`, __dirname);
+            this.addPoints("playerA.points", GamePointsConstants.exercisePoints);
+        }
+
+        if (currentExercise.playerBChoice === currentExercise.correctAnswer) {
+            Logger.info(`[SingleGame] Adding 10 points to player B`, __dirname);
+            this.addPoints("playerB.points", GamePointsConstants.exercisePoints);
+        }
+
+        const game = Games.findOne(this.gameId);
+        if (game) {
+            if (game.playerA.points >= GamePointsConstants.winRequirement && game.playerB.points >= GamePointsConstants.winRequirement) {
+                this.finishGame("DRAW");
+                Logger.info(`[SingleGame] Game ended with draw.`, __dirname);
+            } else if (game.playerA.points >= GamePointsConstants.winRequirement) {
+                this.finishGame(game.playerA.id);
+                Logger.info(`[SingleGame] Player A (${game.playerA.id}) won the game.`, __dirname);
+            } else if (game.playerB.points >= GamePointsConstants.winRequirement) {
+                this.finishGame(game.playerB.id);
+                Logger.info(`[SingleGame] Player B (${game.playerB.id}) won the game.`, __dirname);
+            } else {
+                Logger.info(`[SingleGame] Starting new round of the game ${this.gameId}.`, __dirname);
+                this.startNewRound();
+            }
+        } else {
+            Logger.error(`[SingleGame] Couldn't calculate points because game object is undefined.`, __dirname);
+        }
+    }
+
+    /**
+     * Add provided points to a specific player from this game.
+     * @param field - field of a player to add points.
+     * @param points - amount of points to add to a player.
+     * @private
+     */
+    addPoints(field, points) {
+        Games.update(this.gameId, {
+            $inc: {
+                [field]: points
+            }
+        })
     }
 };

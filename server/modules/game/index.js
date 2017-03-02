@@ -72,9 +72,14 @@ export default new class GameManager {
      */
     answer(playerId, answer) {
         const gameObject = this.findGameByPlayer(playerId);
-        return gameObject
-            ? gameObject.game.addAnswer(playerId, answer)
-            : false;
+        if (gameObject) {
+            const result = gameObject.game.addAnswer(playerId, answer);
+            if (gameObject.gameFinished) {
+                this.removeGame(playerId);
+            }
+            return result;
+        }
+        return false;
     }
 
     /**
@@ -129,7 +134,7 @@ export default new class GameManager {
     /**
      * Removes single game instance from the GameList array.
      * @param {string} playerId - _id of participant of the game.
-     * @private
+     * @protected
      */
     removeGame(playerId) {
         Logger.info(`[GameManager] Remove game for player ${playerId} from game list.`, __dirname);
