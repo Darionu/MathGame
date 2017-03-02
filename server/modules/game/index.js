@@ -75,6 +75,14 @@ export default new class GameManager {
         if (gameObject) {
             const result = gameObject.game.addAnswer(playerId, answer);
             if (gameObject.game.gameFinished) {
+                const game = Games.findOne(gameObject.game.gameId);
+                if (game.winnerId !== 'DRAW') {
+                    if (game.winnerId === game.playerA.id) {
+                        this.announceWinnerAndLoser(game.playerA.id, game.playerB.id);
+                    } else {
+                        this.announceWinnerAndLoser(game.playerB.id, game.playerA.id);
+                    }
+                }
                 this.removeGame(playerId);
             }
             return result;

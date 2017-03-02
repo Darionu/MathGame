@@ -69,13 +69,13 @@ export default class {
      */
     finishGame(winnerId) {
         Logger.info(`[SingleGame] Finishing game. Winner of the game is ${winnerId}`, __dirname);
-        Games.update(this.gameId, {
+        this.gameFinished = true;
+        return Games.update(this.gameId, {
             $set: {
                 status: GameStatuses.finished,
                 winnerId
             }
         });
-        this.gameFinished = true;
     }
 
     /**
