@@ -175,34 +175,33 @@ export default class {
      * @private
      */
     calculatePoints(currentExercise) {
-        const game = Games.findOne(this.gameId);
-        if (!game) {
-            Logger.error(`[SingleGame] Couldn't calculate points because game object is undefined.`, __dirname);
-            return;
-        }
-
         if (currentExercise.playerAChoice === currentExercise.correctAnswer) {
-            Logger.info(`[SingleGame] Adding 10 points to player A (${game.playerA.id})`, __dirname);
+            Logger.info(`[SingleGame] Adding 10 points to player A (${this.playerOne})`, __dirname);
             this.addPoints("playerA.points", GamePointsConstants.exercisePoints);
         }
 
         if (currentExercise.playerBChoice === currentExercise.correctAnswer) {
-            Logger.info(`[SingleGame] Adding 10 points to player B (${game.playerB.id})`, __dirname);
+            Logger.info(`[SingleGame] Adding 10 points to player B (${this.playerTwo})`, __dirname);
             this.addPoints("playerB.points", GamePointsConstants.exercisePoints);
         }
 
-        if (game.playerA.points >= GamePointsConstants.winRequirement && game.playerB.points >= GamePointsConstants.winRequirement) {
-            this.finishGame("DRAW");
-            Logger.info(`[SingleGame] Game ended with draw.`, __dirname);
-        } else if (game.playerA.points >= GamePointsConstants.winRequirement) {
-            this.finishGame(game.playerA.id);
-            Logger.info(`[SingleGame] Player A (${game.playerA.id}) won the game.`, __dirname);
-        } else if (game.playerB.points >= GamePointsConstants.winRequirement) {
-            this.finishGame(game.playerB.id);
-            Logger.info(`[SingleGame] Player B (${game.playerB.id}) won the game.`, __dirname);
+        const game = Games.findOne(this.gameId);
+        if (game) {
+            if (game.playerA.points >= GamePointsConstants.winRequirement && game.playerB.points >= GamePointsConstants.winRequirement) {
+                this.finishGame("DRAW");
+                Logger.info(`[SingleGame] Game ended with draw.`, __dirname);
+            } else if (game.playerA.points >= GamePointsConstants.winRequirement) {
+                this.finishGame(game.playerA.id);
+                Logger.info(`[SingleGame] Player A (${game.playerA.id}) won the game.`, __dirname);
+            } else if (game.playerB.points >= GamePointsConstants.winRequirement) {
+                this.finishGame(game.playerB.id);
+                Logger.info(`[SingleGame] Player B (${game.playerB.id}) won the game.`, __dirname);
+            } else {
+                Logger.info(`[SingleGame] Starting new round of the game ${this.gameId}.`, __dirname);
+                this.startNewRound();
+            }
         } else {
-            Logger.info(`[SingleGame] Starting new round of the game ${this.gameId}.`, __dirname);
-            this.startNewRound();
+            Logger.error(`[SingleGame] Couldn't calculate points because game object is undefined.`, __dirname);
         }
     }
 
