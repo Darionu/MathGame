@@ -14,6 +14,10 @@
         width: 70%;
         margin: 0 auto;
 
+        @media (max-width: 1080px) {
+            width: 90%;
+         }
+
         .descriptionBar {
             float: left;
             width: 100%;
@@ -28,6 +32,11 @@
                 right: calc(15% + 20em);
                 transform: translate(0%, -50%);
                 vertical-align: middle;
+
+                @media (max-width: 1080px) {
+                    left: 7.5%;
+                    right: calc(10% + 20em);
+                }
             }
 
             .wrapperInGame {
@@ -52,6 +61,10 @@
             top: 50%;
             right: 15%;
             transform: translate(0%,-50%);
+
+            @media (max-width: 1080px) {
+                right: 5%;
+            }
 
             .navigationButton {
                 display: inline-block;
