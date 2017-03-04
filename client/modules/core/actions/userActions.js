@@ -32,6 +32,17 @@ export default {
                 Logger.info(`New user ${username} created.`, __filename);
                 LocalState.set(LocalStateKeys.isLoginBoxVisible, false);
                 Alert.success(messages.registerSuccess);
+                Meteor.loginWithPassword(username, password, (error) => {
+                    if (!error) {
+                        LocalState.set(LocalStateKeys.isLoginBoxVisible, false);
+                        Logger.info(`User ${username} logged in.`, __filename);
+                        Meteor.call(ServerMethodsNames.getUserData, (error, result) => {
+                            const language = result.userData.language;
+                            LocalState.set(LocalStateKeys.language, language);
+                            providers.localStorageProvider.setLanguage(language);
+                        });
+                    }
+                });
             }
         });
     },
