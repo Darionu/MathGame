@@ -94,7 +94,7 @@ export default class {
         const exercise = Exercises.findOne(currentExercise);
         if (exercise[playerType]){
             Logger.warn('Player already answered to the question', __dirname);
-            return true;
+            return;
         }
 
         const result = Exercises.update(currentExercise, {
@@ -104,7 +104,12 @@ export default class {
         });
 
         this.checkIfProcessCurrentTurn();
-        return result === 1;
+
+        if (result === 1) {
+            return exercise.correctAnswer === answer;
+        } else {
+            return result;
+        }
     }
 
     /**
@@ -164,7 +169,10 @@ export default class {
         const currentExercise = Exercises.findOne(currentExerciseId);
 
         if (currentExercise && currentExercise.playerAChoice && currentExercise.playerBChoice) {
-            this.calculatePoints(currentExercise);
+            // TODO: Send to players opponent answer // points difference
+            Meteor.setTimeout(() => {
+                this.calculatePoints(currentExercise);
+            }, 1000);
         }
     }
 

@@ -87,7 +87,6 @@ export default new class GameManager {
             }
             return result;
         }
-        return false;
     }
 
     /**

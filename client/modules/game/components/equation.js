@@ -7,13 +7,13 @@ const Equation = class extends React.Component {
         const { images, type } = this.props;
         switch(type) {
             case GameTypes.addition:
-                return images.mathSigns.plus;
+                return '+';
             case GameTypes.subtraction:
-                return images.mathSigns.subtract;
+                return '-';
             case GameTypes.multiplication:
-                return images.mathSigns.multiply;
+                return '*';
             case GameTypes.division:
-                return images.mathSigns.divide;
+                return '/';
             default:
                 return '';
         }
@@ -23,10 +23,10 @@ const Equation = class extends React.Component {
         return (
             <div className={styles.equation}>
                 <span className={styles.mathFont}> {this.props.first} </span>
-                <img className={styles.mathSign} src={this.getGameEquation()} />
+                <span className={styles.mathFontDark}> {this.getGameEquation()} </span>
                 <span className={styles.mathFont}> {this.props.second} </span>
-                <img className={styles.mathSign} src={this.props.images.mathSigns.equals} />
-                <img className={styles.questionMark} src={this.props.images.mathSigns.questionMark} />
+                <span className={styles.mathFontDark}> = </span>
+                <span className={styles.mathFont}> ? </span>
             </div>
         );
     }

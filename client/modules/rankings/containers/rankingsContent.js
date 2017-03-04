@@ -11,8 +11,8 @@ export const composer = ({ context }, onData) => {
                 userData: 1
             },
             sort: {
-                wins: 1,
-                loses: -1
+                "gameData.wins": -1,
+                "gameData.loses": 1
             }
         }).forEach((user) => {
         if (user.userData && user.gameData) {

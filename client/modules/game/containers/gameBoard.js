@@ -2,8 +2,9 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import GameBoard from '../components/gameBoard';
 import { Games, Exercises }from '/lib/collections';
 import { GameStatuses } from '/lib/constants/gameConstants';
+import LocalStateKeys from '/lib/constants/localStateKeys';
 
-export const composer = ({}, onData) => {
+export const composer = ({ context }, onData) => {
     const game = Games.findOne({
         status: {
             $in: [
@@ -19,6 +20,7 @@ export const composer = ({}, onData) => {
             ? game.playerA.points
             : game.playerB.points;
         if (currentExercise) {
+            const areAnswerButtonsDisabled = context().LocalState.get(LocalStateKeys.waitingForNextRound);
             const exercise = Exercises.findOne(currentExercise);
             if (exercise) {
                 onData(null, {
@@ -30,7 +32,8 @@ export const composer = ({}, onData) => {
                     answerThree: exercise.answers[2],
                     answerFour: exercise.answers[3],
                     roundNumber: game.roundNumber,
-                    userPoints: myPoints
+                    userPoints: myPoints,
+                    areAnswerButtonsDisabled
                 });
             }
         }
@@ -38,7 +41,8 @@ export const composer = ({}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-    context: () => context
+    context: () => context,
+    enableAnswerButtons: actions.gameActions.enableAnswerButtons
 });
 
 export default composeAll(

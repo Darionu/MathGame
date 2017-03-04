@@ -14,10 +14,6 @@ const messages = defineMessages({
         id: 'app.game.answers',
         defaultMessage: 'ANSWERS'
     },
-    alphaWarning: {
-        id: 'app.game.alphaWarning',
-        defaultMessage: '* ALPHA VERSION! TO END GAME SIMPLY LOG OUT!'
-    },
     yourPoints: {
         id: 'app.game.yourPoints',
         defaultMessage: 'Your points'
@@ -25,6 +21,12 @@ const messages = defineMessages({
 });
 
 const GameBoard = class extends React.Component {
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.roundNumber && nextProps.roundNumber > this.props.roundNumber) {
+            this.props.enableAnswerButtons();
+        }
+    }
+
     render() {
         const { formatMessage } = this.props.intl;
         return (
@@ -44,21 +46,17 @@ const GameBoard = class extends React.Component {
                 </span>
 
                 <div className={styles.singleAnswerLine}>
-                    <AnswerButton answer={this.props.answerOne}/>
-                    <AnswerButton answer={this.props.answerTwo}/>
+                    <AnswerButton answer={this.props.answerOne} disabled={this.props.areAnswerButtonsDisabled}/>
+                    <AnswerButton answer={this.props.answerTwo} disabled={this.props.areAnswerButtonsDisabled}/>
                 </div>
 
                 <div className={styles.singleAnswerLine}>
-                    <AnswerButton answer={this.props.answerThree}/>
-                    <AnswerButton answer={this.props.answerFour}/>
+                    <AnswerButton answer={this.props.answerThree} disabled={this.props.areAnswerButtonsDisabled}/>
+                    <AnswerButton answer={this.props.answerFour} disabled={this.props.areAnswerButtonsDisabled}/>
                 </div>
 
                 <span className={styles.pointsMessage}>
                     {`${formatMessage(messages.yourPoints)}: ${this.props.userPoints}/${GamePointsConstants.winRequirement}`}
-                </span>
-
-                <span className={styles.warning}>
-                     {formatMessage(messages.alphaWarning)}
                 </span>
             </div>
         );
@@ -74,7 +72,9 @@ GameBoard.propTypes = {
     answerTwo: React.PropTypes.number,
     answerThree: React.PropTypes.number,
     answerFour: React.PropTypes.number,
-    userPoints: React.PropTypes.number
+    userPoints: React.PropTypes.number,
+    areAnswerButtonsDisabled: React.PropTypes.bool,
+    enableAnswerButtons: React.PropTypes.func.isRequired
 };
 
 export default injectIntl(GameBoard);

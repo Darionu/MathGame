@@ -24,6 +24,11 @@
     @include themedRule('color', 'formPrimary');
 }
 
+.mathFontDark {
+    @extend .mathFont;
+    @include themedRule('color', 'primaryDark');
+}
+
 .questionMark {
     display: inline-block;
     vertical-align: middle;
