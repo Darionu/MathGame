@@ -12,7 +12,7 @@ export default () => {
         }
     }));
     Meteor.publish(PublicationNames.userData, function() {
-       return Meteor.users.findOne(this.userId);
+       return Meteor.users.find({ _id: this.userId });
     });
     Meteor.publish(PublicationNames.userQueue, function() {
         return QueueHistory.find({ userId: this.userId });

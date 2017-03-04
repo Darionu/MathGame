@@ -9,7 +9,7 @@
     border-radius:3px;
     border-collapse: collapse;
     margin: auto;
-    max-width: 35em;
+    max-width: 40em;
     padding:5px;
     width: 100%;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,7 @@ th {
     background:#1b1e24;
     border-bottom:4px solid #9ea7af;
     border-right: 1px solid #343a45;
-    padding:24px;
+    padding: 1.15em;
     text-align:left;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     vertical-align:middle;
@@ -44,8 +44,7 @@ tr {
     border-top: 1px solid #C1C3D1;
     border-bottom: 1px solid #C1C3D1;
     color:#666B85;
-    font-size:16px;
-    font-weight:normal;
+    @extend .fontRoboto16Light;
     text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
 
@@ -79,7 +78,7 @@ tr:last-child td:last-child {
 }
 
 td {
-    padding:20px;
+    padding: 1em;
     vertical-align:middle;
 
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
