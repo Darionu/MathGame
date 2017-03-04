@@ -1,10 +1,10 @@
-import localStateKeys from '/lib/constants/localStateKeys';
+import LocalStateKeys from '/lib/constants/localStateKeys';
 import RouteNames from '/lib/constants/routeNames';
 
 export default {
     switchLoginBoxState({ LocalState }) {
-        const isLoginBoxVisible = !!(LocalState.get(localStateKeys.isLoginBoxVisible));
-        LocalState.set(localStateKeys.isLoginBoxVisible, !isLoginBoxVisible);
+        const isLoginBoxVisible = !!(LocalState.get(LocalStateKeys.isLoginBoxVisible));
+        LocalState.set(LocalStateKeys.isLoginBoxVisible, !isLoginBoxVisible);
     },
     goToHomePage({ FlowRouter }) {
         FlowRouter.go(RouteNames.home);
@@ -17,5 +17,9 @@ export default {
     },
     goToLearn({ FlowRouter }) {
         FlowRouter.go(RouteNames.learn);
+    },
+    setLanguage({ LocalState, providers }, language) {
+        LocalState.set(LocalStateKeys.language, language);
+        providers.localStorageProvider.setLanguage(language);
     }
 };

@@ -33,6 +33,10 @@ const themeDefaults = {
                 divide: 'images/mathOperations/divide.png',
                 questionMark: 'images/mathOperations/questionMark.png',
                 equals: 'images/mathOperations/equals.png'
+            },
+            languages: {
+                pl: 'images/languages/pl.png',
+                en: 'images/languages/en.png'
             }
         },
         colors: {

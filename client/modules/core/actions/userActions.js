@@ -23,7 +23,7 @@ export default {
             }
         });
     },
-    registerAttempt({ LocalState }, username, password, language, avatar, messages) {
+    registerAttempt({ LocalState, providers }, username, password, language, avatar, messages) {
         Meteor.call(ServerMethodsNames.registerUser, username, password, language, avatar, (error) => {
             if (error) {
                 Logger.warn(`Failed to create new user${username ? ' ' + username : ''}.`, __filename);

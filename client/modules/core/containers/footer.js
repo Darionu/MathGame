@@ -1,12 +1,18 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import Footer from '../components/footer';
 
-export const composer = ({}, onData) => {
-    onData(null, {});
+export const composer = ({ context }, onData) => {
+    const images = context().providers.pageProvider.getImages();
+    const isLanguageContainerHidden = !!Meteor.userId();
+    onData(null, {
+        images,
+        isLanguageContainerHidden
+    });
 };
 
-export const depsMapper = (context) => ({
-    context: () => context
+export const depsMapper = (context, actions) => ({
+    context: () => context,
+    setLanguage: actions.interfaceActions.setLanguage
 });
 
 export default composeAll(
