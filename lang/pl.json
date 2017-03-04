@@ -43,5 +43,6 @@
   "app.rankings.player": "Gracz",
   "app.rankings.wins": "Wygrane",
   "app.rankings.loses": "Przegrane",
-  "app.playboard.mustBeOnline": "Musisz się zalogować by dołączyć do kolejki."
+  "app.playboard.mustBeOnline": "Musisz się zalogować by dołączyć do kolejki.",
+  "app.gameBoard.win": "WYGRANA"
 }

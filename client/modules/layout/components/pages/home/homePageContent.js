@@ -1,7 +1,6 @@
 import React from 'react';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
 import styles from './homePageContent.scss';
-
 import CardImage from '/client/modules/core/containers/cardImage';
 
 const messages = defineMessages({

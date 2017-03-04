@@ -4,6 +4,7 @@ import AnswerButton from '/client/modules/game/containers/answerButton';
 import Equation from '/client/modules/game/containers/equation';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
 import { GamePointsConstants } from '/lib/constants/gameConstants';
+import WinProgress from '/client/modules/game/containers/winProgress';
 
 const messages = defineMessages({
     equation: {
@@ -35,6 +36,22 @@ const GameBoard = class extends React.Component {
         const { formatMessage } = this.props.intl;
         return (
             <div className={styles.gameBoard}>
+                <WinProgress
+                    className={styles.winProgressLeft}
+                    name={this.props.opponentData.username}
+                    value={this.props.opponentData.points / 50}
+                    points={this.props.opponentData.points}
+                    avatar={this.props.opponentData.avatar}
+                />
+
+                <WinProgress
+                    className={styles.winProgressRight}
+                    name={this.props.playerData.username}
+                    value={this.props.playerData.points / 50}
+                    points={this.props.playerData.points}
+                    avatar={this.props.playerData.avatar}
+                />
+
                 <span className={styles.gameBoardFont}>
                      {formatMessage(messages.equation)} (No. {this.props.roundNumber})
                 </span>
@@ -60,7 +77,7 @@ const GameBoard = class extends React.Component {
                 </div>
 
                 <span className={styles.pointsMessage}>
-                    {`${formatMessage(messages.yourPoints)}: ${this.props.userPoints}/${GamePointsConstants.winRequirement}`}
+                    {`${formatMessage(messages.yourPoints)}: ${this.props.playerData.points}/${GamePointsConstants.winRequirement}`}
                 </span>
             </div>
         );
@@ -76,9 +93,10 @@ GameBoard.propTypes = {
     answerTwo: React.PropTypes.number,
     answerThree: React.PropTypes.number,
     answerFour: React.PropTypes.number,
-    userPoints: React.PropTypes.number,
     areAnswerButtonsDisabled: React.PropTypes.bool,
-    enableAnswerButtons: React.PropTypes.func.isRequired
+    enableAnswerButtons: React.PropTypes.func.isRequired,
+    playerData: React.PropTypes.object.isRequired,
+    opponentData: React.PropTypes.object.isRequired
 };
 
 export default injectIntl(GameBoard);

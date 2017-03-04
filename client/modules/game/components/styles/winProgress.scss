@@ -1,0 +1,25 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
+.top {
+    padding: 1em 0;
+
+    @extend .fontRoboto16Regular;
+    @include themedRule('color', 'success');
+}
+
+.bottom {
+
+    @extend .fontRoboto16Regular;
+    @include themedRule('color', 'formPrimary');
+}
+
+.avatar {
+    display: block;
+    margin: 1em auto 0.5em auto;
+}
+
+.points {
+    display: block;
+    margin: auto;
+}

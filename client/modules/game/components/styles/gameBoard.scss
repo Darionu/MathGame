@@ -3,8 +3,7 @@
 
 .gameBoard {
     margin: 5em auto;
-    width: 80%;
-    max-width: 1020px;
+    width: 45em;
     text-align: center;
 }
 
@@ -30,4 +29,18 @@
     display: block;
     color: red;
     @extend .fontRoboto16Light;
+}
+
+.winProgressLeft {
+    position: absolute;
+    transform: translate(-50%, 15%);
+    height: 40%;
+    margin: -3.5em auto;
+}
+
+.winProgressRight {
+    position: absolute;
+    height: 40%;
+    margin: -3.5em 0 0 41em ;
+    transform: translate(50%, 15%);
 }

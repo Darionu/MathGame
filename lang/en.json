@@ -43,5 +43,6 @@
   "app.rankings.player": "Player",
   "app.rankings.wins": "Wins",
   "app.rankings.loses": "Loses",
-  "app.playboard.mustBeOnline": "You must be online to join the queue."
+  "app.playboard.mustBeOnline": "You must be online to join the queue.",
+  "app.gameBoard.win": "WIN"
 }

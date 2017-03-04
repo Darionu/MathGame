@@ -5,6 +5,7 @@ import { GameStatuses } from '/lib/constants/gameConstants';
 import LocalStateKeys from '/lib/constants/localStateKeys';
 
 export const composer = ({ context }, onData) => {
+    const images = context().providers.pageProvider.getImages();
     const game = Games.findOne({
         status: {
             $in: [
@@ -16,9 +17,25 @@ export const composer = ({ context }, onData) => {
     });
     if (game && game.exercises && game.roundNumber > 0) {
         const currentExercise = game.exercises[game.roundNumber - 1];
-        const myPoints = game.playerA.id === Meteor.userId()
-            ? game.playerA.points
-            : game.playerB.points;
+        const playerType = game.playerA.id === Meteor.userId()
+            ? "playerA"
+            : "playerB";
+        const opponentType = game.playerA.id !== Meteor.userId()
+            ? "playerA"
+            : "playerB";
+        const myself = Meteor.users.findOne(Meteor.userId());
+        const opponent = Meteor.users.findOne(game[opponentType].id);
+        const playerData = {
+            username: myself.username,
+            points: game[playerType].points,
+            avatar: images.avatars[myself.userData.avatar]
+        };
+        const opponentData = {
+            username: opponent.username,
+            points: game[opponentType].points,
+            avatar: images.avatars[opponent.userData.avatar]
+        };
+
         if (currentExercise) {
             const areAnswerButtonsDisabled = context().LocalState.get(LocalStateKeys.waitingForNextRound);
             const exercise = Exercises.findOne(currentExercise);
@@ -32,8 +49,9 @@ export const composer = ({ context }, onData) => {
                     answerThree: exercise.answers[2],
                     answerFour: exercise.answers[3],
                     roundNumber: game.roundNumber,
-                    userPoints: myPoints,
-                    areAnswerButtonsDisabled
+                    areAnswerButtonsDisabled,
+                    playerData,
+                    opponentData
                 });
             }
         }
