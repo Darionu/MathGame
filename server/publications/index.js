@@ -4,7 +4,16 @@ import { QueueHistory, Games, Exercises } from '/lib/collections';
 import { GameStatuses }from '/lib/constants/gameConstants';
 
 export default () => {
-    Meteor.publish(PublicationNames.users, () => Meteor.users.find());
+    Meteor.publish(PublicationNames.users, () => Meteor.users.find({}, {
+        fields: {
+            gameData: 1,
+            userData: 1,
+            username: 1
+        }
+    }));
+    Meteor.publish(PublicationNames.userData, function() {
+       return Meteor.users.findOne(this.userId);
+    });
     Meteor.publish(PublicationNames.userQueue, function() {
         return QueueHistory.find({ userId: this.userId });
     });

@@ -21,8 +21,9 @@ export const composer = ({ context, page, saveCurrentLayout, switchLayout, switc
         pageComponent = context().providers.pageProvider.getPage(page);
     }
 
+    Meteor.subscribe(PublicationNames.users).ready();
     if (Meteor && Meteor.user()) {
-        Meteor.subscribe(PublicationNames.users).ready();
+        Meteor.subscribe(PublicationNames.userData).ready();
         Meteor.subscribe(PublicationNames.userQueue).ready();
         Meteor.subscribe(PublicationNames.myStatus).ready();
         Meteor.subscribe(PublicationNames.userGames).ready();
