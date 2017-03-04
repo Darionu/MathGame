@@ -117,11 +117,13 @@ export default class {
      * @private
      */
     startNewRound() {
-        this.generateExercise().then(() => {
-            this.bumpRound();
-        }).catch((error) => {
-            Logger.warn(`[SingleGame] Encountered error during creating exercise: ${error}`, __dirname);
-        });
+        Meteor.setTimeout(() => {
+            this.generateExercise().then(() => {
+                this.bumpRound();
+            }).catch((error) => {
+                Logger.warn(`[SingleGame] Encountered error during creating exercise: ${error}`, __dirname);
+            });
+        }, 500);
     }
 
     /**
@@ -170,9 +172,7 @@ export default class {
 
         if (currentExercise && currentExercise.playerAChoice && currentExercise.playerBChoice) {
             // TODO: Send to players opponent answer // points difference
-            Meteor.setTimeout(() => {
-                this.calculatePoints(currentExercise);
-            }, 1000);
+            this.calculatePoints(currentExercise);
         }
     }
 

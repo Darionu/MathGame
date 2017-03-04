@@ -21,6 +21,10 @@ const messages = defineMessages({
 });
 
 const GameBoard = class extends React.Component {
+    componentWillMount() {
+        this.props.enableAnswerButtons();
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.roundNumber && nextProps.roundNumber > this.props.roundNumber) {
             this.props.enableAnswerButtons();

@@ -61,6 +61,7 @@ const PlayBoardContent = class extends React.Component {
                         className={styles.lion}
                         src={this.props.images.lion}
                     />
+                    <div className={styles.dummy}/>
                 </div>
             </div>
         );
