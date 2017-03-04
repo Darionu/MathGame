@@ -37,11 +37,10 @@
 }
 
 .title {
-
-    @extend .fontRoboto26Light;
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin-left: 2em;
+
+    @extend .fontRoboto26Light;
 }

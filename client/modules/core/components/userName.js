@@ -7,7 +7,7 @@ const UserName = class extends React.Component {
     render() {
         return (
             <div className={styles.userName}>
-                <AvatarCircle className={styles.avatar} image={this.props.userAvatar} />
+                <AvatarCircle image={this.props.userAvatar} />
                 <span className={styles.userNameLabel}>{this.props.user.username}</span>
                 <div className={styles.statistics}>
                     <span className={styles.wins}>

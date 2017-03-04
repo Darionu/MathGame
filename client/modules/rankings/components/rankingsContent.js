@@ -1,24 +1,21 @@
 import React from 'react';
 import styles from './styles/rankingsContent.scss';
-import { defineMessages, intlShape, injectIntl } from 'react-intl';
-
-const messages = defineMessages({
-
-});
+import RankingTable from '/client/modules/rankings/components/rankingTable';
 
 const RankingsContent = class extends React.Component {
     render() {
-        const { formatMessage } = this.props.intl;
         return (
             <div className={styles.rankingsContent}>
-                CONTENT
+                <div className={styles.tableWrapper}>
+                    <RankingTable rows={this.props.userData}/>
+                </div>
             </div>
         );
     }
 };
 
 RankingsContent.propTypes = {
-    intl: intlShape.isRequired
+    userData: React.PropTypes.arrayOf(React.PropTypes.object)
 };
 
-export default injectIntl(RankingsContent);
+export default RankingsContent;

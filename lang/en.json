@@ -38,5 +38,9 @@
   "app.game.equation": "EQUATION",
   "app.game.answers": "ANSWERS",
   "app.game.alphaWarning": "* ALPHA VERSION! TO END GAME SIMPLY LOG OUT!",
-  "app.game.yourPoints": "Your points"
+  "app.game.yourPoints": "Your points",
+  "app.rankings.avatar": "Avatar",
+  "app.rankings.player": "Player",
+  "app.rankings.wins": "Wins",
+  "app.rankings.loses": "Loses"
 }

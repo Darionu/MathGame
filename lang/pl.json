@@ -38,5 +38,9 @@
   "app.game.equation": "RÓWNANIE",
   "app.game.answers": "ODPOWIEDZI",
   "app.game.alphaWarning": "* WERSJA ALPHA! WYLOGUJ SIĘ ABY ZAKOŃCZYĆ GRĘ!",
-  "app.game.yourPoints": "Twoje punkty"
+  "app.game.yourPoints": "Twoje punkty",
+  "app.rankings.avatar": "Avatar",
+  "app.rankings.player": "Gracz",
+  "app.rankings.wins": "Wygrane",
+  "app.rankings.loses": "Przegrane"
 }

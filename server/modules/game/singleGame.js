@@ -187,7 +187,8 @@ export default class {
 
         const game = Games.findOne(this.gameId);
         if (game) {
-            if (game.playerA.points >= GamePointsConstants.winRequirement && game.playerB.points >= GamePointsConstants.winRequirement) {
+            if (game.playerA.points >= GamePointsConstants.winRequirement &&
+                game.playerB.points >= GamePointsConstants.winRequirement) {
                 this.finishGame("DRAW");
                 Logger.info(`[SingleGame] Game ended with draw.`, __dirname);
             } else if (game.playerA.points >= GamePointsConstants.winRequirement) {
