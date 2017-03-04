@@ -42,5 +42,6 @@
   "app.rankings.avatar": "Avatar",
   "app.rankings.player": "Player",
   "app.rankings.wins": "Wins",
-  "app.rankings.loses": "Loses"
+  "app.rankings.loses": "Loses",
+  "app.playboard.mustBeOnline": "You must be online to join the queue."
 }
