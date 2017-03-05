@@ -4,16 +4,17 @@ import LoginModal from '/client/modules/core/containers/loginModal';
 import BackButton from '/client/modules/core/containers/backButton';
 import Footer from '/client/modules/core/containers/footer';
 import styles from '/client/modules/layout/components/pages/learn/learn.scss';
-import LearnContent from '/client/modules/learn/containers/learnContent';
+import LearnGameContent from '/client/modules/learn/containers/learnGameContent';
+import RouteNames from '/lib/constants/routeNames';
 
 const Learn = () => (
     <div className={styles.pageWrapper}>
         <Header/>
         <LoginModal/>
         <Footer/>
-        <BackButton/>
+        <BackButton routeName={RouteNames.learn}/>
         <div className={styles.wrapperContainer}>
-            <LearnContent/>
+           <LearnGameContent/>
         </div>
     </div>
 );

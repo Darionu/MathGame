@@ -1,18 +1,20 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
-import BackButton from '../components/backButton';
+import LearnContent from '../components/learnContent';
 
 export const composer = ({ context }, onData) => {
+    const images = context().providers.pageProvider.getImages();
     onData(null, {
-
+        images
     });
 };
 
 export const depsMapper = (context, actions) => ({
     context: () => context,
-    goToSpecificRoute: actions.interfaceActions.goToSpecificRoute
+    goToGamePage: actions.learnActions.goToGamePage,
+    goToMathPage: actions.learnActions.goToMathPage
 });
 
 export default composeAll(
     composeWithTracker(composer),
     useDeps(depsMapper)
-)(BackButton);
+)(LearnContent);

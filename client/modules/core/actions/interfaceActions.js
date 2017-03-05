@@ -18,6 +18,13 @@ export default {
     goToLearn({ FlowRouter }) {
         FlowRouter.go(RouteNames.learn);
     },
+    goToSpecificRoute({ FlowRouter }, routeName) {
+        if (routeName) {
+            FlowRouter.go(routeName)
+        } else {
+            FlowRouter.go(RouteNames.home);
+        }
+    },
     setLanguage({ LocalState, providers }, language) {
         LocalState.set(LocalStateKeys.language, language);
         providers.localStorageProvider.setLanguage(language);

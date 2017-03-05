@@ -1,0 +1,14 @@
+.cardImageHolder {
+    display: flex;
+    min-height: 40em;
+    height: 65vh;
+    width: 50%;
+    min-width: 50em;
+    margin: 2em auto;
+}
+
+.cardImage {
+    flex: 1;
+    width: 33%;
+    height: 100%;
+}

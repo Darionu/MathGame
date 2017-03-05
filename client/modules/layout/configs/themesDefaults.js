@@ -18,6 +18,8 @@ const themeDefaults = {
             parrot: 'images/parrot.jpg',
             squirrel: '/images/squirrel.jpg',
             lion: 'images/lion.jpg',
+            mathBook: 'images/mathBook.jpg',
+            gameCube: 'images/gameCube.jpg',
             avatars: {
                 bird: 'images/avatars/bird.jpg',
                 bird2: 'images/avatars/bird2.jpg',

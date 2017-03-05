@@ -3,9 +3,17 @@ import styles from './styles/backButton.scss';
 import FontAwesome from 'react-fontawesome';
 
 const BackButton = class extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    goToRoute() {
+        this.props.goToSpecificRoute(this.props.routeName);
+    }
+
     render() {
         return (
-            <div className={styles.backButton} onClick={this.props.goToHomePage}>
+            <div className={styles.backButton} onClick={::this.goToRoute}>
                 <FontAwesome
                     className={styles.backButtonIcon}
                     name='arrow-circle-left'
@@ -17,7 +25,8 @@ const BackButton = class extends React.Component {
 };
 
 BackButton.propTypes = {
-    goToHomePage: React.PropTypes.func.isRequired
+    routeName: React.PropTypes.string,
+    goToSpecificRoute: React.PropTypes.func.isRequired
 };
 
 export default BackButton;

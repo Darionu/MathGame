@@ -17,4 +17,18 @@ export default function (injectDeps, { FlowRouter }) {
             mount(MainLayoutCtx, { content: () => (<Page page={PageNames.learn} />) });
         }
     });
+
+    FlowRouter.route(AppRoutes.learnGame, {
+        name: RouteNames.learnGame,
+        action() {
+            mount(MainLayoutCtx, { content: () => (<Page page={PageNames.learnGame} />) });
+        }
+    });
+
+    FlowRouter.route(AppRoutes.learnMath, {
+        name: RouteNames.learnMath,
+        action() {
+            mount(MainLayoutCtx, { content: () => (<Page page={PageNames.learnMath} />) });
+        }
+    });
 }

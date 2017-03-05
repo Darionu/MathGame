@@ -44,5 +44,11 @@
   "app.rankings.wins": "Wygrane",
   "app.rankings.loses": "Przegrane",
   "app.playboard.mustBeOnline": "Musisz się zalogować by dołączyć do kolejki.",
-  "app.gameBoard.win": "WYGRANA"
+  "app.gameBoard.win": "WYGRANA",
+  "app.learn.gameRelated.title": "System gry",
+  "app.learn.gameRelated.description": "Poznaj wszystkie zasady gry i to w jaki sposób ona działa. Może Ci to pomóc w zrozumieniu jak grać.",
+  "app.learn.gameRelated.button": "Jestem zaciekawiony grą",
+  "app.learn.mathRelated.title": "Matematyka",
+  "app.learn.mathRelated.description": "Zawiera wskazówki i porady matematyczne, które pomogą Ci zrozumieć matematykę by stała się prostsza.",
+  "app.learn.mathRelated.button": "Jestem zaciekawiony matematyką"
 }

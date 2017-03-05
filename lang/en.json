@@ -44,5 +44,11 @@
   "app.rankings.wins": "Wins",
   "app.rankings.loses": "Loses",
   "app.playboard.mustBeOnline": "You must be online to join the queue.",
-  "app.gameBoard.win": "WIN"
+  "app.gameBoard.win": "WIN",
+  "app.learn.gameRelated.title": "Game related",
+  "app.learn.gameRelated.description": "Find out all the information about how the game works in general. It may help you to understand how to play.",
+  "app.learn.gameRelated.button": "I'm curious about the game",
+  "app.learn.mathRelated.title": "Math related",
+  "app.learn.mathRelated.description": "Contains math tips which will help you to understand the math easier.",
+  "app.learn.mathRelated.button": "I'm curious about the math"
 }
