@@ -67,13 +67,14 @@ export default new class GameManager {
      * Handle received answer for a question by specific player.
      * @param {string} playerId - _id of a player.
      * @param {number} answer - chosen answer.
+     * @param {Date} answerDate - date of answer.
      * @returns {boolean} result - success/fail.
      * @public
      */
-    answer(playerId, answer) {
+    answer(playerId, answer, answerDate) {
         const gameObject = this.findGameByPlayer(playerId);
         if (gameObject) {
-            const result = gameObject.game.addAnswer(playerId, answer);
+            const result = gameObject.game.addAnswer(playerId, answer, answerDate);
             if (gameObject.game.gameFinished) {
                 const game = Games.findOne(gameObject.game.gameId);
                 if (game.winnerId !== 'DRAW') {

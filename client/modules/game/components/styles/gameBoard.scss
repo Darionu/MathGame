@@ -18,17 +18,10 @@
 }
 
 .pointsMessage {
-    margin-top: 2em;
+    margin-top: 1em;
     display: block;
     @include themedRule('color', 'formPrimary');
     @extend .fontRoboto30Regular;
-}
-
-.warning {
-    margin-top: 3em;
-    display: block;
-    color: red;
-    @extend .fontRoboto16Light;
 }
 
 .winProgressLeft {
@@ -43,4 +36,11 @@
     height: 40%;
     margin: -3.5em 0 0 41em ;
     transform: translate(50%, 15%);
+}
+
+.pointDifference {
+    display: block;
+    margin-top: 0.5em;
+    @include themedRule('color', 'success');
+    @extend .fontRoboto20Light;
 }

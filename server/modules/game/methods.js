@@ -13,8 +13,9 @@ export default () => {
          */
         sendAnswer: function (answer) {
             check(answer, Number);
+            const answerDate = new Date();
             Logger.info(`[GameMethods] Received answer (${answer}) from a player (${this.userId})`, __dirname);
-            return GameManager.answer(this.userId, answer);
+            return GameManager.answer(this.userId, answer, answerDate);
         },
     });
 };

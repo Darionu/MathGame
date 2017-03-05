@@ -5,6 +5,7 @@ import Equation from '/client/modules/game/containers/equation';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
 import { GamePointsConstants } from '/lib/constants/gameConstants';
 import WinProgress from '/client/modules/game/containers/winProgress';
+import ProgressBar from '/client/modules/game/containers/progressBar';
 
 const messages = defineMessages({
     equation: {
@@ -22,13 +23,40 @@ const messages = defineMessages({
 });
 
 const GameBoard = class extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            differenceRound: 0,
+            pointDifference: -1
+        };
+    }
+
     componentWillMount() {
         this.props.enableAnswerButtons();
+        this.setState({
+            differenceRound: 0,
+            pointDifference: -1
+        });
     }
 
     componentWillReceiveProps(nextProps) {
+        if (nextProps.playerData && nextProps.playerData.points !== this.props.playerData.points) {
+            this.setState({
+                differenceRound: nextProps.roundNumber + 1,
+                pointDifference: nextProps.playerData.points - this.props.playerData.points
+            });
+        }
+
         if (nextProps.roundNumber && nextProps.roundNumber > this.props.roundNumber) {
             this.props.enableAnswerButtons();
+
+            if (this.state.differenceRound < nextProps.roundNumber) {
+                this.setState({
+                    differenceRound: nextProps.roundNumber + 1,
+                    pointDifference: 0
+                });
+            }
         }
     }
 
@@ -39,7 +67,7 @@ const GameBoard = class extends React.Component {
                 <WinProgress
                     className={styles.winProgressLeft}
                     name={this.props.opponentData.username}
-                    value={this.props.opponentData.points / 50}
+                    value={this.props.opponentData.points / 100}
                     points={this.props.opponentData.points}
                     avatar={this.props.opponentData.avatar}
                 />
@@ -47,7 +75,7 @@ const GameBoard = class extends React.Component {
                 <WinProgress
                     className={styles.winProgressRight}
                     name={this.props.playerData.username}
-                    value={this.props.playerData.points / 50}
+                    value={this.props.playerData.points / 100}
                     points={this.props.playerData.points}
                     avatar={this.props.playerData.avatar}
                 />
@@ -76,9 +104,19 @@ const GameBoard = class extends React.Component {
                     <AnswerButton answer={this.props.answerFour} disabled={this.props.areAnswerButtonsDisabled}/>
                 </div>
 
+                <ProgressBar roundNumber={this.props.roundNumber}/>
+
                 <span className={styles.pointsMessage}>
                     {`${formatMessage(messages.yourPoints)}: ${this.props.playerData.points}/${GamePointsConstants.winRequirement}`}
                 </span>
+
+                {this.state.pointDifference > -1
+                    ?
+                        <span className={styles.pointDifference}>
+                            + {this.state.pointDifference}
+                        </span>
+                    : null
+                }
             </div>
         );
     }

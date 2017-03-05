@@ -5,6 +5,7 @@ import GameProtocol from './gameProtocol';
 import { Games, Exercises } from '/lib/collections';
 import ExerciseGenerator from '/server/modules/exerciseGenerator';
 import { GameStatuses, GamePointsConstants } from '/lib/constants/gameConstants';
+import moment from 'moment';
 
 /**
  * SingleGame
@@ -82,29 +83,36 @@ export default class {
 
     /**
      * Adding an answer from a specific player to the exercise.
-     * @param playerId - player which made an answer.
-     * @param answer - chosen answer.
+     * @param {string} playerId - player which made an answer.
+     * @param {number} answer - chosen answer.
+     * @param {Date} answerDate - date of answer.
      * @public
      */
-    addAnswer(playerId, answer) {
+    addAnswer(playerId, answer, answerDate) {
         const game = Games.findOne(this.gameId);
         const currentExercise = _.last(game.exercises);
         const playerType = game.playerA.id === playerId
-            ? 'playerAChoice'
-            : 'playerBChoice';
+            ? 'playerA'
+            : 'playerB';
 
         const exercise = Exercises.findOne(currentExercise);
-        if (exercise[playerType]){
+        if (exercise[playerType].answer){
             Logger.warn('Player already answered to the question', __dirname);
             return;
         }
 
-        const result = Exercises.update(currentExercise, {
-            $set: {
-                [playerType]: answer
+        const query = game.playerA.id === playerId
+            ? {
+                'playerA.answer': answer,
+                'playerA.answerDate': answerDate
             }
-        });
+            : {
+                'playerB.answer': answer,
+                'playerB.answerDate': answerDate
+            };
 
+
+        const result = Exercises.update(currentExercise, { $set: query});
         this.checkIfProcessCurrentTurn();
 
         if (result === 1) {
@@ -172,7 +180,7 @@ export default class {
         const currentExerciseId = _.last(game.exercises);
         const currentExercise = Exercises.findOne(currentExerciseId);
 
-        if (currentExercise && currentExercise.playerAChoice && currentExercise.playerBChoice) {
+        if (currentExercise && currentExercise.playerA.answer && currentExercise.playerB.answer) {
             // TODO: Send to players opponent answer // points difference
             this.calculatePoints(currentExercise);
         }
@@ -185,14 +193,18 @@ export default class {
      * @private
      */
     calculatePoints(currentExercise) {
-        if (currentExercise.playerAChoice === currentExercise.correctAnswer) {
-            Logger.info(`[SingleGame] Adding 10 points to player A (${this.playerOne})`, __dirname);
-            this.addPoints("playerA.points", GamePointsConstants.exercisePoints);
+        if (currentExercise.playerA.answer === currentExercise.correctAnswer) {
+            const difference = moment.duration(moment(currentExercise.playerA.answerDate).diff(moment(currentExercise.date)));
+            const points = GamePointsConstants.exercisePoints - Math.floor(difference.asSeconds());
+            Logger.info(`[SingleGame] Adding ${points} points to player A (${this.playerOne})`, __dirname);
+            this.addPoints("playerA.points", points > 0 ? points : 1);
         }
 
-        if (currentExercise.playerBChoice === currentExercise.correctAnswer) {
-            Logger.info(`[SingleGame] Adding 10 points to player B (${this.playerTwo})`, __dirname);
-            this.addPoints("playerB.points", GamePointsConstants.exercisePoints);
+        if (currentExercise.playerB.answer === currentExercise.correctAnswer) {
+            const difference = moment.duration(moment(currentExercise.playerB.answerDate).diff(moment(currentExercise.date)));
+            const points = GamePointsConstants.exercisePoints - Math.floor(difference.asSeconds());
+            Logger.info(`[SingleGame] Adding ${points} points to player B (${this.playerTwo})`, __dirname);
+            this.addPoints("playerB.points", points > 0 ? points : 1);
         }
 
         const game = Games.findOne(this.gameId);
