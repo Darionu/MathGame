@@ -4,9 +4,9 @@ import { defineMessages, intlShape, injectIntl } from 'react-intl';
 import AvatarCircle from '/client/modules/core/components/avatarCircle';
 
 const messages = defineMessages({
-    avatar: {
-        id: 'app.rankings.avatar',
-        defaultMessage: 'Avatar'
+    position: {
+        id: 'app.rankings.position',
+        defaultMessage: 'Position'
     },
     player: {
         id: 'app.rankings.player',
@@ -23,17 +23,20 @@ const messages = defineMessages({
 });
 
 const RankingTable = class extends React.Component {
-    renderRow(element) {
+    renderRow(element, index) {
         return (
             <tr key={element.player}>
                 <td className={styles.textCenter}>
+                    {index+1}
+                </td>
+                <td className={styles.textLeft}>
                     <AvatarCircle
                         className={styles.avatar}
                         image={element.avatar}
                     />
-                </td>
-                <td className={styles.textLeft}>
-                    {element.player}
+                    <span className={styles.playerName}>
+                            {element.player}
+                    </span>
                 </td>
 
                 <td className={styles.textCenter}>
@@ -53,7 +56,7 @@ const RankingTable = class extends React.Component {
                 <table className={styles.tableFill}>
                     <thead>
                         <tr>
-                            <th className={styles.textCenter}>{formatMessage(messages.avatar)}</th>
+                            <th className={styles.textCenter}>{formatMessage(messages.position)}</th>
                             <th className={styles.textCenter}>{formatMessage(messages.player)}</th>
 
                             <th className={styles.textCenter}>{formatMessage(messages.wins)}</th>
@@ -61,8 +64,8 @@ const RankingTable = class extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.rows.map((element) => {
-                            return this.renderRow(element);
+                        {this.props.rows.map((element, index) => {
+                            return this.renderRow(element, index);
                         })}
                     </tbody>
                 </table>
