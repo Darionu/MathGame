@@ -4,9 +4,12 @@
 .defaultButton {
     border: 0;
     border-radius: 0.2em;
-    box-shadow: 0 0 1px #000;
     cursor: pointer;
     outline: none;
+
+    -moz-box-shadow:    1px 1px 5px #222;
+    -webkit-box-shadow: 1px 1px 5px #222;
+    box-shadow:         1px 1px 5px #222;
 
     @include themedRule('background', 'formPrimary');
     @include themedRule('color', 'primary');

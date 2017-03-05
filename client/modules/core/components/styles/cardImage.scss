@@ -7,6 +7,10 @@
     height: 96%;
     width: 88%;
 
+    -moz-box-shadow:    4px 4px 15px #222;
+    -webkit-box-shadow: 4px 4px 15px #222;
+    box-shadow:         4px 4px 15px #222;
+
     @include themedRule('background-color', 'formPrimary');
 
     .top {
@@ -65,7 +69,7 @@
             border: none;
             cursor: pointer;
             overflow: hidden;
-            border-top: 1px solid #696969;
+            border-top: 1.5px solid #696969;
 
             @include themedRule('color', 'primary');
             @extend .fontRoboto18Light;

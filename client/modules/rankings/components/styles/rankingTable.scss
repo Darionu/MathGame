@@ -13,8 +13,11 @@
     max-width: 40em;
     padding:5px;
     width: 100%;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     animation: float 5s infinite;
+
+    -moz-box-shadow:    3px 3px 15px #222;
+    -webkit-box-shadow: 3px 3px 15px #222;
+    box-shadow:         3px 3px 15px #222;
 
     @include themedRule('background', 'formPrimary');
 }
