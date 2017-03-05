@@ -17,4 +17,11 @@ export default function (injectDeps, { FlowRouter }) {
             mount(MainLayoutCtx, { content: () => (<Page page={PageNames.game} />) });
         }
     });
+
+    FlowRouter.route(AppRoutes.gameResult, {
+        name: RouteNames.gameResult,
+        action() {
+            mount(MainLayoutCtx, { content: () => (<Page page={PageNames.gameResult} />) });
+        }
+    });
 }

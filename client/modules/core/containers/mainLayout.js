@@ -25,6 +25,16 @@ export const composer = ({ context }, onData) => {
         context().FlowRouter.go(RouteNames.home);
     }
 
+    const finishedGameToRead = Games.findOne({
+        status: GameStatuses.finished,
+        read: false
+    });
+
+    if (finishedGameToRead &&
+        context().FlowRouter.current().route.name !== RouteNames.gameResult) {
+        context().FlowRouter.go(RouteNames.gameResult);
+    }
+
     onData(null, {});
 };
 
