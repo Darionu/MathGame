@@ -21,6 +21,8 @@ export default class {
         this.gameId = null;
         this.gameFinished = false;
 
+        this.roundNumber = 0;
+        this.roundTimeout = null;
         this.init();
     }
 
@@ -127,13 +129,27 @@ export default class {
      * @private
      */
     startNewRound() {
+        Meteor.clearTimeout(this.roundTimeout);
         Meteor.setTimeout(() => {
             this.generateExercise().then(() => {
                 this.bumpRound();
+                this.setRoundTimeout();
             }).catch((error) => {
                 Logger.warn(`[SingleGame] Encountered error during creating exercise: ${error}`, __dirname);
             });
         }, 500);
+    }
+
+    setRoundTimeout() {
+        const roundNumber = this.roundNumber;
+        this.roundTimeout = Meteor.setTimeout(() => {
+            if (this.roundNumber === roundNumber) {
+                const game = Games.findOne(this.gameId);
+                const currentExerciseId = _.last(game.exercises);
+                const currentExercise = Exercises.findOne(currentExerciseId);
+                this.calculatePoints(currentExercise);
+            }
+        }, 20000);
     }
 
     /**
@@ -146,6 +162,7 @@ export default class {
                 roundNumber: 1
             }
         });
+        this.roundNumber += 1;
     }
 
     /**
