@@ -50,5 +50,9 @@
   "app.learn.gameRelated.button": "I'm curious about the game",
   "app.learn.mathRelated.title": "Math related",
   "app.learn.mathRelated.description": "Contains math tips which will help you to understand the math easier.",
-  "app.learn.mathRelated.button": "I'm curious about the math"
+  "app.learn.mathRelated.button": "I'm curious about the math",
+  "app.homePage.youWon": "YOU WON",
+  "app.homePage.youLost": "YOU LOST",
+  "app.homePage.winner": "WINNER",
+  "app.homePage.loser": "LOSER"
 }

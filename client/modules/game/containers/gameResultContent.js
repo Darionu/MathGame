@@ -16,13 +16,29 @@ export const composer = ({ context }, onData) => {
         return;
     }
 
-    console.log(game);
     const isWin = Meteor.userId() === game.winnerId;
-    console.log(isWin);
+
+    const firstPlayer = Meteor.users.findOne(game.playerA.id);
+    const secondPlayer = Meteor.users.findOne(game.playerB.id);
+
+    const playerA = {
+        avatar: images.avatars[firstPlayer.userData.avatar],
+        username: firstPlayer.username,
+        isWinner: firstPlayer._id === game.winnerId
+    };
+
+    const playerB = {
+        avatar: images.avatars[secondPlayer.userData.avatar],
+        username: secondPlayer.username,
+        isWinner: secondPlayer._id === game.winnerId
+    };
+
     onData(null, {
         images,
         game,
-        isWin
+        isWin,
+        playerA,
+        playerB
     });
 };
 

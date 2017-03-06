@@ -1,3 +1,59 @@
-.gameResultContent {
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
 
+.gameResultContent {
+    position: relative;
+    width: 45em;
+    margin: 0 auto;
+
+    -moz-box-shadow:    5px 5px 15px #222;
+    -webkit-box-shadow: 5px 5px 15px #222;
+    box-shadow:         5px 5px 15px #222;
+    @include themedRule('background-color', 'primaryDark');
+}
+
+.header {
+    @extend .fontRoboto30Regular;
+    text-align: center;
+    padding: 1em;
+}
+
+.content {
+    height: 20em;
+    padding: 2em;
+    overflow: hidden;
+    @include themedRule('background-color', 'primaryDarker');
+}
+
+.statsLeft {
+    display: inline-block;
+    width: 17.5em;
+    float: left;
+}
+
+.statsRight {
+    display: inline-block;
+    width: 17.5em;
+    float: right;
+}
+
+.statsContent {
+    padding: 1em;
+}
+
+.playerUsername {
+    @include themedRule('color', 'formPrimary');
+    margin-left: 1em;
+}
+
+.resultWon {
+    @include themedRule('color', 'success');
+}
+
+.resultLost {
+    @include themedRule('color', 'error');
+}
+
+.playerResult {
+    float: right;
 }

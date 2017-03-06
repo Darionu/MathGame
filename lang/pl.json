@@ -50,5 +50,9 @@
   "app.learn.gameRelated.button": "Jestem zaciekawiony grą",
   "app.learn.mathRelated.title": "Matematyka",
   "app.learn.mathRelated.description": "Zawiera wskazówki i porady matematyczne, które pomogą Ci zrozumieć matematykę by stała się prostsza.",
-  "app.learn.mathRelated.button": "Jestem zaciekawiony matematyką"
+  "app.learn.mathRelated.button": "Jestem zaciekawiony matematyką",
+  "app.homePage.youWon": "WYGRAŁEŚ",
+  "app.homePage.youLost": "PRZEGRAŁEŚ",
+  "app.homePage.winner": "ZWYCIĘZCA",
+  "app.homePage.loser": "PRZEGRANY"
 }
