@@ -41,6 +41,10 @@
 
             .wrapperInGame {
                 right: calc(15% + 11.5em);
+
+                @media (max-width: 1080px) {
+                    right: calc(7.5% + 11.5em);
+                }
             }
 
             .logo {
