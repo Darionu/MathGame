@@ -3,8 +3,8 @@
 
 .gameResultContent {
     position: relative;
-    width: 45em;
-    margin: 0 auto;
+    width: 52em;
+    margin: 2em auto;
 
     -moz-box-shadow:    5px 5px 15px #222;
     -webkit-box-shadow: 5px 5px 15px #222;
@@ -20,30 +20,21 @@
 
 .content {
     height: 20em;
-    padding: 2em;
+    padding: 2em 2em 8em 2em;
     overflow: hidden;
     @include themedRule('background-color', 'primaryDarker');
 }
 
 .statsLeft {
     display: inline-block;
-    width: 17.5em;
+    width: 23em;
     float: left;
 }
 
 .statsRight {
     display: inline-block;
-    width: 17.5em;
+    width: 23em;
     float: right;
-}
-
-.statsContent {
-    padding: 1em;
-}
-
-.playerUsername {
-    @include themedRule('color', 'formPrimary');
-    margin-left: 1em;
 }
 
 .resultWon {
@@ -54,6 +45,29 @@
     @include themedRule('color', 'error');
 }
 
-.playerResult {
-    float: right;
+.bottom {
+    position: absolute;
+    bottom: 0;
+    height: 15%;
+    width: 100%;
+
+    @include themedRule('background-color', 'primaryDark');
+}
+
+.button {
+    height: 100%;
+    width: 100%;
+    background: transparent no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+
+    @include themedRule('color', 'formPrimary');
+    @extend .fontRoboto18Light;
+
+    &:hover {
+        opacity: 0.30;
+        @include themedRule('color', 'formPrimary', '!important');
+        @include themedRule('background-color', 'primaryDarker');
+    }
 }

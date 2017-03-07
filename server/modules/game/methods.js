@@ -1,5 +1,6 @@
 import GameManager from './index';
 import Logger from '/lib/logging/Logger';
+import { Games } from '/lib/collections';
 
 /**
  * Methods related to GameSystem to be called from the client.
@@ -17,5 +18,13 @@ export default () => {
             Logger.info(`[GameMethods] Received answer (${answer}) from a player (${this.userId})`, __dirname);
             return GameManager.answer(this.userId, answer, answerDate);
         },
+        markResultScreenAsSeen: function (gameId) {
+            check(gameId, String);
+            Games.update(gameId, {
+               $set: {
+                   read: true
+               }
+            });
+        }
     });
 };

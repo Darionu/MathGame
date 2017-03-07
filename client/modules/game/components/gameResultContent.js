@@ -1,30 +1,29 @@
 import React from 'react';
 import styles from './styles/gameResultContent.scss';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
-import AvatarCircle from '/client/modules/core/components/avatarCircle';
+import GameResultPlayerStat from '/client/modules/game/containers/playerStatistic';
+import Button from '/client/modules/core/components/button';
 
 const messages = defineMessages({
     youWon: {
-        id: 'app.homePage.youWon',
+        id: 'app.game.result.youWon',
         defaultMessage: 'YOU WON'
     },
     youLost: {
-        id: 'app.homePage.youLost',
+        id: 'app.game.result.youLost',
         defaultMessage: 'YOU LOST'
     },
-    winner: {
-        id: 'app.homePage.winner',
-        defaultMessage: 'WINNER'
-    },
-    loser: {
-        id: 'app.homePage.loser',
-        defaultMessage: 'LOSER'
+    backPlayboard: {
+        id: 'app.game.result.backPlayboard',
+        defaultMessage: 'Back to playboard'
     }
 });
 
 const GameResultContent = class extends React.Component {
-    constructor(props) {
-        super(props);
+    componentWillUnmount() {
+        if (this.props.game) {
+            this.props.markResultScreenAsSeen(this.props.game._id);
+        }
     }
 
     getGameResult() {
@@ -34,21 +33,8 @@ const GameResultContent = class extends React.Component {
             : formatMessage(messages.youLost);
     }
 
-    getPlayerResult(player) {
-        const { formatMessage } = this.props.intl;
-        return this.props[player].isWinner
-            ?   formatMessage(messages.winner)
-            :   formatMessage(messages.loser)
-    }
-
     getResultClass() {
         return this.props.isWin
-            ?   styles.resultWon
-            :   styles.resultLost
-    }
-
-    getPlayerResultClass(player) {
-        return this.props[player].isWinner
             ?   styles.resultWon
             :   styles.resultLost
     }
@@ -62,27 +48,27 @@ const GameResultContent = class extends React.Component {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.statsLeft}>
-                        <div className={styles.statsContent}>
-                            <AvatarCircle image={this.props.playerA.avatar} />
-                            <span className={styles.playerUsername}>
-                                {this.props.playerA.username}
-                            </span>
-                            <span className={`${styles.playerResult} ${this.getPlayerResultClass("playerA")}`}>
-                                {this.getPlayerResult("playerA")}
-                            </span>
-                        </div>
+                        <GameResultPlayerStat
+                            isWinner={this.props.playerA.isWinner}
+                            playerId={this.props.playerA.id}
+                            gameId={this.props.game._id}
+                        />
                     </div>
                     <div className={styles.statsRight}>
-                        <div className={styles.statsContent}>
-                            <AvatarCircle image={this.props.playerB.avatar} />
-                            <span className={styles.playerUsername}>
-                                {this.props.playerB.username}
-                            </span>
-                            <span className={`${styles.playerResult} ${this.getPlayerResultClass("playerB")}`}>
-                                {this.getPlayerResult("playerB")}
-                            </span>
-                        </div>
+                        <GameResultPlayerStat
+                            isWinner={this.props.playerB.isWinner}
+                            playerId={this.props.playerB.id}
+                            gameId={this.props.game._id}
+                        />
                     </div>
+                </div>
+                <div className={styles.bottom}>
+                    <Button
+                        text={`< ${formatMessage(messages.backPlayboard)}`}
+                        overrideDefault
+                        className={styles.button}
+                        onClick={this.props.goToPlayBoard}
+                    />
                 </div>
             </div>
         );
@@ -90,7 +76,12 @@ const GameResultContent = class extends React.Component {
 };
 
 GameResultContent.propTypes = {
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    isWin: React.PropTypes.bool.isRequired,
+    game: React.PropTypes.object.isRequired,
+    playerA: React.PropTypes.object.isRequired,
+    playerB: React.PropTypes.object.isRequired,
+    goToPlayBoard: React.PropTypes.func.isRequired
 };
 
 export default injectIntl(GameResultContent);

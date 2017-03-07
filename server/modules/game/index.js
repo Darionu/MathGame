@@ -4,6 +4,7 @@ import { Games } from '/lib/collections';
 import _ from 'lodash';
 import { GameStatuses } from '/lib/constants/gameConstants';
 import SingleGame from './singleGame';
+import GameStatistics from './gameStatistics';
 
 /**
  * GameManager
@@ -145,9 +146,22 @@ export default new class GameManager {
      * @protected
      */
     removeGame(playerId) {
+        this.generateStatistics(playerId);
         Logger.info(`[GameManager] Remove game for player ${playerId} from game list.`, __dirname);
         _.remove(this.gameList, (singleGame) => {
             return singleGame.playerA === playerId || singleGame.playerB === playerId;
         });
+    }
+
+    /**
+     * Generates game statistic for a game with provided participant.
+     * @param playerId - _id of participant of the game.
+     */
+    generateStatistics(playerId) {
+        const gameObject = this.findGameByPlayer(playerId);
+        if (gameObject && gameObject.game && gameObject.game.gameId) {
+            const gameStatistics = new GameStatistics(gameObject.game.gameId);
+            gameStatistics.calculateStatistics();
+        }
     }
 };
