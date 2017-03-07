@@ -27,7 +27,7 @@ const RankingTable = class extends React.Component {
         return (
             <tr key={element.player}>
                 <td className={styles.textCenter}>
-                    {index+1}
+                    {index+1}.
                 </td>
                 <td className={styles.textLeft}>
                     <AvatarCircle
