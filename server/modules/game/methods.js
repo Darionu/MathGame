@@ -20,11 +20,15 @@ export default () => {
         },
         markResultScreenAsSeen: function (gameId) {
             check(gameId, String);
-            Games.update(gameId, {
-               $set: {
-                   read: true
-               }
-            });
+            const game = Games.findOne(gameId);
+            if (game) {
+                const fieldToSet = (game.playerA.id === this.userId) ? "playerA.read" : "playerB.read";
+                Games.update(gameId, {
+                    $set: {
+                        [fieldToSet]: true
+                    }
+                });
+            }
         }
     });
 };

@@ -7,7 +7,19 @@ import RouteNames from '/lib/constants/routeNames';
 export const composer = ({ context }, onData) => {
     const game = Games.findOne({
         status: GameStatuses.finished,
-        read: false
+        $or: [
+            {
+                $and: [
+                    { "playerA.id": Meteor.userId() },
+                    { "playerA.read": false }
+                ]
+            }, {
+                $and: [
+                    { "playerB.id": Meteor.userId() },
+                    { "playerB.read": false }
+                ]
+            }
+        ]
     });
 
     if (!game) {
