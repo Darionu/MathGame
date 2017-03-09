@@ -18,5 +18,8 @@ export default {
     },
     enableAnswerButtons({ LocalState }) {
         LocalState.set(LocalStateKeys.waitingForNextRound, false);
+    },
+    markResultScreenAsSeen({}, gameId) {
+        Meteor.call(ServerMethodsNames.markResultScreenAsSeen, gameId);
     }
 };

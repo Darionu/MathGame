@@ -1,0 +1,70 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
+.playerStatistic {
+    position: relative;
+    padding: 1em;
+}
+
+.userName {
+    display: inline-block;
+    margin-top: 1.5em;
+    @include themedRule('color', 'formPrimary');
+}
+
+.singleLine {
+    display: inline-block;
+    margin-left: 0.5em;
+}
+
+.result {
+    position: absolute;
+    right: 0.5em;
+}
+
+.resultWon {
+    @include themedRule('color', 'success');
+}
+
+.resultLost {
+    @include themedRule('color', 'error');
+}
+
+.wins {
+    display: block;
+    @include themedRule('color', 'formPrimary');
+}
+
+.loses {
+    display: block;
+    @include themedRule('color', 'formPrimary');
+}
+
+.stat {
+    margin-right: 0.5em;
+    display: inline-block;
+    @include themedRule('color', 'formPrimary');
+}
+
+.gameCount {
+    display: inline-block;
+    position: absolute;
+    top: 4.25em;
+    right: 0;
+    @extend .fontRoboto14Light;
+}
+
+.gameStatistics {
+    @include themedRule('color', 'formPrimary');
+    margin-top: 1.5em;
+    @extend .fontRoboto17Regular;
+}
+
+.gameStat {
+    display: block;
+    margin: 0.25em 0;
+}
+
+.space {
+    padding-bottom: 1em;
+}

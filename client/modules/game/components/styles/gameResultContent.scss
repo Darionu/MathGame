@@ -1,0 +1,73 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
+.gameResultContent {
+    position: relative;
+    width: 52em;
+    margin: 2em auto;
+
+    -moz-box-shadow:    5px 5px 15px #222;
+    -webkit-box-shadow: 5px 5px 15px #222;
+    box-shadow:         5px 5px 15px #222;
+    @include themedRule('background-color', 'primaryDark');
+}
+
+.header {
+    @extend .fontRoboto30Regular;
+    text-align: center;
+    padding: 1em;
+}
+
+.content {
+    height: 20em;
+    padding: 2em 2em 8em 2em;
+    overflow: hidden;
+    @include themedRule('background-color', 'primaryDarker');
+}
+
+.statsLeft {
+    display: inline-block;
+    width: 23em;
+    float: left;
+}
+
+.statsRight {
+    display: inline-block;
+    width: 23em;
+    float: right;
+}
+
+.resultWon {
+    @include themedRule('color', 'success');
+}
+
+.resultLost {
+    @include themedRule('color', 'error');
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    height: 15%;
+    width: 100%;
+
+    @include themedRule('background-color', 'primaryDark');
+}
+
+.button {
+    height: 100%;
+    width: 100%;
+    background: transparent no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+
+    @include themedRule('color', 'formPrimary');
+    @extend .fontRoboto18Light;
+
+    &:hover {
+        opacity: 0.30;
+        @include themedRule('color', 'formPrimary', '!important');
+        @include themedRule('background-color', 'primaryDarker');
+    }
+}

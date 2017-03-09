@@ -50,5 +50,21 @@
   "app.learn.gameRelated.button": "I'm curious about the game",
   "app.learn.mathRelated.title": "Math related",
   "app.learn.mathRelated.description": "Contains math tips which will help you to understand the math easier.",
-  "app.learn.mathRelated.button": "I'm curious about the math"
+  "app.learn.mathRelated.button": "I'm curious about the math",
+  "app.homePage.youWon": "YOU WON",
+  "app.homePage.youLost": "YOU LOST",
+  "app.homePage.winner": "WINNER",
+  "app.homePage.loser": "LOSER",
+  "app.game.result.youWon": "YOU WON",
+  "app.game.result.youLost": "YOU LOST",
+  "app.game.result.backPlayboard": "Back to playboard",
+  "app.game.result.winner": "WINNER",
+  "app.game.result.loser": "LOSER",
+  "app.game.result.wins": "Wins",
+  "app.game.result.loses": "Loses",
+  "app.game.result.points": "Points",
+  "app.game.result.averageTime": "Average answer time",
+  "app.game.result.answers": "Answers",
+  "app.game.result.correct": "Correct",
+  "app.game.result.wrong": "Wrong"
 }

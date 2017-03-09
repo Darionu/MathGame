@@ -1,8 +1,10 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import UserName from '../components/userName';
 
-export const composer = ({ context }, onData) => {
-    const user = Meteor.users.findOne({ _id: Meteor.userId() });
+export const composer = ({ context, userId }, onData) => {
+    const user = userId
+        ? Meteor.users.findOne(userId)
+        : Meteor.user();
     let userAvatar = '';
     let statistics = {
         wins: '?',

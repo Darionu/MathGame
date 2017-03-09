@@ -50,5 +50,21 @@
   "app.learn.gameRelated.button": "Jestem zaciekawiony grą",
   "app.learn.mathRelated.title": "Matematyka",
   "app.learn.mathRelated.description": "Zawiera wskazówki i porady matematyczne, które pomogą Ci zrozumieć matematykę by stała się prostsza.",
-  "app.learn.mathRelated.button": "Jestem zaciekawiony matematyką"
+  "app.learn.mathRelated.button": "Jestem zaciekawiony matematyką",
+  "app.homePage.youWon": "WYGRAŁEŚ",
+  "app.homePage.youLost": "PRZEGRAŁEŚ",
+  "app.homePage.winner": "ZWYCIĘZCA",
+  "app.homePage.loser": "PRZEGRANY",
+  "app.game.result.youWon": "WYGRAŁEŚ",
+  "app.game.result.youLost": "PRZEGRAŁEŚ",
+  "app.game.result.backPlayboard": "Wróć do listy gier",
+  "app.game.result.winner": "ZWYCIĘZCA",
+  "app.game.result.loser": "PRZEGRANY",
+  "app.game.result.wins": "Wygrane",
+  "app.game.result.loses": "Przegrane",
+  "app.game.result.points": "Punkty",
+  "app.game.result.averageTime": "Średni czas odpowiedzi",
+  "app.game.result.answers": "Odpowiedz",
+  "app.game.result.correct": "Poprawne",
+  "app.game.result.wrong": "Niepoprawne"
 }

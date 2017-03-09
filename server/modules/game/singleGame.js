@@ -73,14 +73,12 @@ export default class {
     finishGame(winnerId) {
         Logger.info(`[SingleGame] Finishing game. Winner of the game is ${winnerId}`, __dirname);
         this.gameFinished = true;
-        Meteor.setTimeout(() => {
-            Games.update(this.gameId, {
-                $set: {
-                    status: GameStatuses.finished,
-                    winnerId
-                }
-            });
-        }, 1500);
+        return Games.update(this.gameId, {
+            $set: {
+                status: GameStatuses.finished,
+                winnerId
+            }
+        });
     }
 
     /**
