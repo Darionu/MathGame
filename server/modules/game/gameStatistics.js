@@ -64,7 +64,8 @@ export default class {
             if (exercise[playerType].answer) {
                 answers++;
                 exercise[playerType].answer === exercise.correctAnswer ? correct++ : wrong++;
-                const timeDifference = moment.duration(moment(exercise[playerType].answerDate).diff(moment(exercise.date)));
+                const timeDifference =
+                    moment.duration(moment(exercise[playerType].answerDate).diff(moment(exercise.date)));
                 answerTime.push(Math.floor(timeDifference.asSeconds()));
             }
         });

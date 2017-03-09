@@ -12,12 +12,12 @@ export default () => {
         }
     }));
     Meteor.publish(PublicationNames.userData, function() {
-       return Meteor.users.find({ _id: this.userId }, {
-           sort: {
-               "gameData.wins": -1,
-               "gameData.loses": 1
-           }
-       });
+        return Meteor.users.find({ _id: this.userId }, {
+            sort: {
+                "gameData.wins": -1,
+                "gameData.loses": 1
+            }
+        });
     });
     Meteor.publish(PublicationNames.userQueue, function() {
         return QueueHistory.find({ userId: this.userId });

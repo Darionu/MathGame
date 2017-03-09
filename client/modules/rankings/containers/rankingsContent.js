@@ -5,18 +5,17 @@ export const composer = ({ context }, onData) => {
     const images = context().providers.pageProvider.getImages();
     const userData = [];
     Meteor.users.find({}, {
-            fields: {
-                username: 1,
-                gameData: 1,
-                userData: 1
-            },
-            sort: {
-                "gameData.wins": -1,
-                "gameData.loses": 1
-            }
-        }).forEach((user) => {
+        fields: {
+            username: 1,
+            gameData: 1,
+            userData: 1
+        },
+        sort: {
+            "gameData.wins": -1,
+            "gameData.loses": 1
+        }
+    }).forEach((user) => {
         if (user.userData && user.gameData) {
-
             userData.push({
                 avatar: images.avatars[user.userData.avatar],
                 player: user.username,

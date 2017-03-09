@@ -209,14 +209,16 @@ export default class {
      */
     calculatePoints(currentExercise) {
         if (currentExercise.playerA.answer === currentExercise.correctAnswer) {
-            const difference = moment.duration(moment(currentExercise.playerA.answerDate).diff(moment(currentExercise.date)));
+            const difference =
+                moment.duration(moment(currentExercise.playerA.answerDate).diff(moment(currentExercise.date)));
             const points = GamePointsConstants.exercisePoints - Math.floor(difference.asSeconds());
             Logger.info(`[SingleGame] Adding ${points} points to player A (${this.playerOne})`, __dirname);
             this.addPoints("playerA.points", points > 0 ? points : 1);
         }
 
         if (currentExercise.playerB.answer === currentExercise.correctAnswer) {
-            const difference = moment.duration(moment(currentExercise.playerB.answerDate).diff(moment(currentExercise.date)));
+            const difference =
+                moment.duration(moment(currentExercise.playerB.answerDate).diff(moment(currentExercise.date)));
             const points = GamePointsConstants.exercisePoints - Math.floor(difference.asSeconds());
             Logger.info(`[SingleGame] Adding ${points} points to player B (${this.playerTwo})`, __dirname);
             this.addPoints("playerB.points", points > 0 ? points : 1);
