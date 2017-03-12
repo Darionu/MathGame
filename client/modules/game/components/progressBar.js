@@ -1,12 +1,6 @@
 import React from 'react';
 import styles from './styles/progressBar.scss';
 import LinearProgress from 'material-ui/LinearProgress';
-import { defineMessages, intlShape, injectIntl } from 'react-intl';
-
-
-const messages = defineMessages({
-
-});
 
 const ProgressBar = class extends React.Component {
     constructor(props) {
@@ -45,7 +39,6 @@ const ProgressBar = class extends React.Component {
     }
 
     render() {
-        const { formatMessage } = this.props.intl;
         return (
             <div className={styles.progressBar}>
                 <LinearProgress mode="determinate" value={this.state.barValue} />
@@ -54,8 +47,4 @@ const ProgressBar = class extends React.Component {
     }
 };
 
-ProgressBar.propTypes = {
-    intl: intlShape.isRequired
-};
-
-export default injectIntl(ProgressBar);
+export default ProgressBar;

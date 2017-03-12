@@ -2,6 +2,7 @@ import React from 'react';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
 import styles from './playBoardContent.scss';
 import GameTypeItem from '/client/modules/playboard/containers/gameTypeItem';
+import OpponentTypeSelect from '/client/modules/playboard/containers/opponentTypeSelect';
 import { GameTypes } from '/lib/constants/gameConstants';
 
 const messages = defineMessages({
@@ -57,6 +58,7 @@ const PlayBoardContent = class extends React.Component {
                             gameType={GameTypes.division}
                         />
                     </div>
+                    <OpponentTypeSelect/>
                     <img
                         className={styles.lion}
                         src={this.props.images.lion}

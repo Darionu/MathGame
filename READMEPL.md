@@ -5,9 +5,9 @@ Prywatny projekt na potrzeby pracy dyplomowej utworzony przy użyciu architektur
 Gra matematyczna w czasie rzeczywistym z zadaniami matematycznymi na poziomie klas 1-3 szkoły podstawowej.
 
 ### Aktualna lista DO ZROBIENIA
-- Rozgrywka z botem (dla użytkowników offline jak i po przekroczeniu limitu oczekiwania w kolejce)
+<strike> - Rozgrywka z botem </strike>
 - Uzupełnienie podstrony NAUKA
-- Ekran końca rozgrywki z rezultatem wygranej/przegranej
+<strike> - Ekran końca rozgrywki z rezultatem wygranej/przegranej </strike>
 
 ### Strona DEMO
 - [Strona DEMO](http://darionu.pl:3000)

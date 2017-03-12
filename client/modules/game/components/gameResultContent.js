@@ -16,6 +16,10 @@ const messages = defineMessages({
     backPlayboard: {
         id: 'app.game.result.backPlayboard',
         defaultMessage: 'Back to playboard'
+    },
+    gameWithBot: {
+        id: 'app.game.result.gameWithBot',
+        defaultMessage: 'You played against bot opponent. The win/loss will not be added to your account.'
     }
 });
 
@@ -52,6 +56,7 @@ const GameResultContent = class extends React.Component {
                             isWinner={this.props.playerA.isWinner}
                             playerId={this.props.playerA.id}
                             gameId={this.props.game._id}
+                            isGameAgainstBot={this.props.isGameAgainstBot}
                         />
                     </div>
                     <div className={styles.statsRight}>
@@ -61,6 +66,10 @@ const GameResultContent = class extends React.Component {
                             gameId={this.props.game._id}
                         />
                     </div>
+                    {this.props.isGameAgainstBot
+                        ? <span className={styles.gameWithBot}>{`* ${formatMessage(messages.gameWithBot)}`}</span>
+                        : null
+                    }
                 </div>
                 <div className={styles.bottom}>
                     <Button
@@ -81,7 +90,8 @@ GameResultContent.propTypes = {
     game: React.PropTypes.object.isRequired,
     playerA: React.PropTypes.object.isRequired,
     playerB: React.PropTypes.object.isRequired,
-    goToPlayBoard: React.PropTypes.func.isRequired
+    goToPlayBoard: React.PropTypes.func.isRequired,
+    isGameAgainstBot: React.PropTypes.bool.isRequired
 };
 
 export default injectIntl(GameResultContent);

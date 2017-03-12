@@ -2,9 +2,11 @@ import methods from './methods';
 import Logger from '/lib/logging/Logger';
 import { Games } from '/lib/collections';
 import _ from 'lodash';
-import { GameStatuses } from '/lib/constants/gameConstants';
+import { GameStatuses, GameResult } from '/lib/constants/gameConstants';
 import SingleGame from './singleGame';
+import SingleGameBot from './singleGameBot';
 import GameStatistics from './gameStatistics';
+import OpponentTypes from '/lib/constants/opponentTypes';
 
 /**
  * GameManager
@@ -65,6 +67,22 @@ export default new class GameManager {
     }
 
     /**
+     * Creates new single game with bot instance and pushes it to the game list.
+     * @param {Object} player
+     * @param {number} gameType - chosen game type
+     * @public
+     */
+    startGameWithBot(player, gameType) {
+        const game = new SingleGameBot(player, gameType);
+        this.gameList.push({
+            type: this.gameType,
+            playerA: player._id,
+            playerB: OpponentTypes.bot,
+            game
+        });
+    }
+
+    /**
      * Handle received answer for a question by specific player.
      * @param {string} playerId - _id of a player.
      * @param {number} answer - chosen answer.
@@ -78,7 +96,7 @@ export default new class GameManager {
             const result = gameObject.game.addAnswer(playerId, answer, answerDate);
             if (gameObject.game.gameFinished) {
                 const game = Games.findOne(gameObject.game.gameId);
-                if (game.winnerId !== 'DRAW') {
+                if (game.winnerId !== GameResult.draw) {
                     if (game.winnerId === game.playerA.id) {
                         this.announceWinnerAndLoser(game.playerA.id, game.playerB.id);
                     } else {
@@ -115,17 +133,31 @@ export default new class GameManager {
      * @param looser - id of a player who lost the game
      */
     announceWinnerAndLoser(winner, looser) {
-        Meteor.users.update(winner, {
-            $inc: {
-                "gameData.wins": 1
-            }
-        });
+        if (winner === OpponentTypes.bot) {
+            Meteor.users.update(winner, {
+                $inc: {
+                    "gameData.wins": 1
+                }
+            });
+        } else if (looser === OpponentTypes.bot) {
+            Meteor.users.update(looser, {
+                $inc: {
+                    "gameData.loses": 1
+                }
+            });
+        } else {
+            Meteor.users.update(winner, {
+                $inc: {
+                    "gameData.wins": 1
+                }
+            });
 
-        Meteor.users.update(looser, {
-            $inc: {
-                "gameData.loses": 1
-            }
-        });
+            Meteor.users.update(looser, {
+                $inc: {
+                    "gameData.loses": 1
+                }
+            });
+        }
     }
 
     /**

@@ -66,5 +66,10 @@
   "app.game.result.averageTime": "Średni czas odpowiedzi",
   "app.game.result.answers": "Odpowiedz",
   "app.game.result.correct": "Poprawne",
-  "app.game.result.wrong": "Niepoprawne"
+  "app.game.result.wrong": "Niepoprawne",
+  "app.playboard.yourOpponent": "Typ przeciwnika",
+  "app.playboard.player": "GRACZ",
+  "app.playboard.bot": "KOMPUTER",
+  "app.game.result.gameWithBot": "Grałeś przeciwko komputerowi. Rezultat rozgrywki nie zostanie dodany do statystyk Twojego konta.",
+  "app.core.userName": "Ty"
 }

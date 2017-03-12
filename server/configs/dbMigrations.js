@@ -2,6 +2,7 @@ import Logger from '/lib/logging/Logger';
 import MigrationConstants from '/lib/constants/migrationConstants';
 import { setSchemas } from '/lib/collections/index';
 import migrationV1Up from './migrations/migrationV1Up';
+import migrationV2Up from './migrations/migrationV2Up';
 
 export default () => {
   /* Add migrations here */
@@ -10,6 +11,14 @@ export default () => {
         up: () => {
             setSchemas(MigrationConstants.DB_MIGRATION_VERSION_1);
             migrationV1Up();
+        }
+    });
+
+    Migrations.add({
+        version: MigrationConstants.DB_MIGRATION_VERSION_2,
+        up: () => {
+            setSchemas(MigrationConstants.DB_MIGRATION_VERSION_2);
+            migrationV2Up();
         }
     });
 
@@ -46,5 +55,5 @@ export default () => {
     }
 
   /* DB migration target */
-    Migrations.migrateTo(MigrationConstants.DB_MIGRATION_VERSION_1);
+    Migrations.migrateTo(MigrationConstants.DB_TARGET_VERSION);
 };

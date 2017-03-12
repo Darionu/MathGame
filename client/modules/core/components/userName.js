@@ -1,7 +1,15 @@
 import React from 'react';
 import styles from './styles/userName.scss';
-
+import AccountTypes from '/lib/constants/accountTypes';
 import AvatarCircle from '/client/modules/core/components/avatarCircle';
+import { defineMessages, intlShape, injectIntl } from 'react-intl';
+
+const messages = defineMessages({
+    you: {
+        id: 'app.core.userName',
+        defaultMessage: 'You'
+    }
+});
 
 const UserName = class extends React.Component {
     getComponentStyle() {
@@ -25,10 +33,16 @@ const UserName = class extends React.Component {
     }
 
     render() {
+        const { formatMessage } = this.props.intl;
         return (
             <div className={this.getComponentStyle()}>
                 <AvatarCircle image={this.props.userAvatar} />
-                <span className={styles.userNameLabel}>{this.props.user.username}</span>
+                <span className={styles.userNameLabel}>
+                    {this.props.user && this.props.user.userData.accountType === AccountTypes.player
+                        ? this.props.user.username
+                        : formatMessage(messages.you)
+                    }
+                    </span>
                 {this.props.hideScore
                     ? null
                     : this.getStatisticTemplate()
@@ -39,8 +53,9 @@ const UserName = class extends React.Component {
 };
 
 UserName.propTypes = {
+    intl: intlShape.isRequired,
     user: React.PropTypes.object.isRequired,
     userAvatar: React.PropTypes.string
 };
 
-export default UserName;
+export default injectIntl(UserName);

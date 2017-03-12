@@ -66,18 +66,16 @@ const GameBoard = class extends React.Component {
             <div className={styles.gameBoard}>
                 <WinProgress
                     className={styles.winProgressLeft}
-                    name={this.props.opponentData.username}
+                    playerId={this.props.opponentData._id}
                     value={this.props.opponentData.points / 100}
                     points={this.props.opponentData.points}
-                    avatar={this.props.opponentData.avatar}
                 />
 
                 <WinProgress
                     className={styles.winProgressRight}
-                    name={this.props.playerData.username}
+                    playerId={this.props.playerData._id}
                     value={this.props.playerData.points / 100}
                     points={this.props.playerData.points}
-                    avatar={this.props.playerData.avatar}
                 />
 
                 <span className={styles.gameBoardFont}>

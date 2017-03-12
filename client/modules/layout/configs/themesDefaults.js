@@ -26,7 +26,8 @@ const themeDefaults = {
                 eagle: 'images/avatars/eagle.jpg',
                 giraffe: 'images/avatars/giraffe.jpg',
                 otter: 'images/avatars/otter.jpg',
-                tiger: 'images/avatars/tiger.jpg'
+                tiger: 'images/avatars/tiger.jpg',
+                robot: 'images/avatars/robot.jpg'
             },
             mathSigns: {
                 plus: 'images/mathOperations/plus.png',

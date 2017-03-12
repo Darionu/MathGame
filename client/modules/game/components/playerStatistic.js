@@ -71,16 +71,16 @@ const PlayerStatistic = class extends React.Component {
 
     getWins() {
         const { formatMessage } = this.props.intl;
-        const wins = this.props.isWinner
+        const wins = this.props.isWinner && !this.props.isGameAgainstBot
             ? this.props.player.gameData.wins - 1
             : this.props.player.gameData.wins;
-
+        const pointDifference = this.props.isGameAgainstBot ? '+0' : '+1';
         return (
             <div>
                 <span className={styles.resultWon}>{formatMessage(messages.wins)}:</span> {wins}
                 {this.props.isWinner
                     ? <div className={styles.singleLine}>
-                        (<span className={styles.resultWon}>+1</span>)
+                        (<span className={styles.resultWon}>{pointDifference}</span>)
                       </div>
                     : null
                 }
@@ -90,17 +90,17 @@ const PlayerStatistic = class extends React.Component {
 
     getLoses() {
         const { formatMessage } = this.props.intl;
-        const loses = this.props.isWinner
-            ? this.props.player.gameData.loses
-            : this.props.player.gameData.loses - 1;
-
+        const loses = !this.props.isWinner || !this.props.isGameAgainstBot
+            ? this.props.player.gameData.loses - 1
+            : this.props.player.gameData.loses;
+        const pointDifference = this.props.isGameAgainstBot ? '+0' : '+1';
         return (
             <div>
                 <span className={styles.resultLost}>{formatMessage(messages.loses)}:</span> {loses}
                 {this.props.isWinner
                     ? null
                     : <div className={styles.singleLine}>
-                        (<span className={styles.resultLost}>+1</span>)
+                        (<span className={styles.resultLost}>{pointDifference}</span>)
                       </div>
                 }
             </div>
@@ -157,7 +157,8 @@ PlayerStatistic.propTypes = {
     intl: intlShape.isRequired,
     isWinner: React.PropTypes.bool.isRequired,
     player: React.PropTypes.object.isRequired,
-    playerData: React.PropTypes.object.isRequired
+    playerData: React.PropTypes.object.isRequired,
+    isGameAgainstBot: React.PropTypes.bool
 };
 
 export default injectIntl(PlayerStatistic);

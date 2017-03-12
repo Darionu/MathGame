@@ -1,0 +1,44 @@
+@import '../../../../styles/fontSettings';
+@import '../../../layout/styles/themes';
+
+.opponentTypeSelect {
+    width: 23em;
+    margin: 1em auto;
+    text-align: left;
+}
+
+.description {
+    display: inline-block;
+    vertical-align: middle;
+
+    @extend .fontRoboto22Medium;
+    @include themedRule('color', 'formPrimary');
+}
+
+.buttonStyle {
+    display: inline-block;
+    vertical-align: bottom;
+    border: 0;
+    border-radius: 0.2em;
+    cursor: pointer;
+    outline: none;
+    padding: 0.25em 0.75em;
+    margin-left: 1em;
+
+    -moz-box-shadow:    1px 1px 5px #222;
+    -webkit-box-shadow: 1px 1px 5px #222;
+    box-shadow:         1px 1px 5px #222;
+
+    @include themedRule('color', 'formPrimary');
+    @extend .fontRoboto15Medium;
+}
+
+.buttonWithPlayer {
+    @extend .buttonStyle;
+    @include themedRule('background', 'primaryDarker');
+}
+
+.buttonWithBot {
+    @extend .buttonStyle;
+    @include themedRule('background', 'primaryDark');
+}

@@ -39,10 +39,10 @@ export default new class {
     }
 
     /**
-     * Stops the queue for two users.
+     * Stops the queue for two players.
      * Mostly used after they are matched together.
      * @param {string} playerOne - id of a first user.
-     * @param {string} playerTwo - id of a second user.
+     * @param {string | null} playerTwo - id of a second user.
      */
     stopQueue(playerOne, playerTwo) {
         Logger.info(

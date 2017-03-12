@@ -57,8 +57,8 @@ export default class QueueInterval {
     }
 
     /**
-     * Finding all awaiting users in queue.
-     * For each of the users invoke priority set method.
+     * Finding all awaiting players in queue.
+     * For each of the players invoke priority set method.
      */
     initPrioritySystem() {
         return new Promise((resolve) => {
