@@ -71,3 +71,13 @@
         @include themedRule('background-color', 'primaryDarker');
     }
 }
+
+.gameWithBot {
+    @include themedRule('color', 'error');
+    @extend .fontRoboto12Light;
+
+    display: block;
+    padding: 2em 1em;
+    width: 100%;
+    overflow: auto;
+}

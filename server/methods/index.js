@@ -1,3 +1,5 @@
+import AccountTypes from '/lib/constants/accountTypes';
+
 export default () => {
     Meteor.methods({
         registerUser: (username, password, language, avatar) => {
@@ -14,6 +16,7 @@ export default () => {
             const result = Meteor.users.update(userId, {
                 $set: {
                     userData: {
+                        accountType: AccountTypes.player,
                         avatar: avatar,
                         language: language
                     },

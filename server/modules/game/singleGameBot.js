@@ -1,23 +1,20 @@
 import QueueManager from '../queue';
 import Logger from '/lib/logging/Logger';
-import ReadyCheck from './readyCheck';
-import GameProtocol from './gameProtocol';
 import { Games, Exercises } from '/lib/collections';
 import ExerciseGenerator from '/server/modules/exerciseGenerator';
 import { GameStatuses, GamePointsConstants } from '/lib/constants/gameConstants';
 import moment from 'moment';
+import OpponentTypes from '/lib/constants/opponentTypes';
 
 /**
- * SingleGame
+ * SingleGameBot
  *
- * Instance of a single game between two players.
+ * Instance of a single game between player and bot.
  */
 export default class {
-    constructor(playerOne, playerTwo, gameType) {
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
+    constructor(player, gameType) {
+        this.player = player;
         this.gameType = gameType;
-        this._protocol = GameProtocol.getProtocol();
         this.gameId = null;
         this.gameFinished = false;
 
@@ -32,12 +29,9 @@ export default class {
      * @private
      */
     init() {
-        Logger.info(`[SingleGame] Initialization for players ${this.playerOne.username}(${this.playerOne._id}) & ${this.playerTwo.username}(${this.playerTwo._id})`, __dirname);
-        QueueManager.stopQueue(this.playerOne._id, this.playerTwo._id);
-        const readyCheck = new ReadyCheck(this.playerOne, this.playerTwo);
-        readyCheck.performReadyCheck().then(() => {
-            this.createGame();
-        });
+        Logger.info(`[SingleGameBot] Initialization for player ${this.player.username}(${this.player._id}).`, __dirname);
+        QueueManager.stopQueue(this.player._id, null);
+        this.createGame();
     }
 
     /**
@@ -46,21 +40,21 @@ export default class {
      * @public
      */
     createGame() {
-        Logger.info(`[SingleGame] Game manager initialization for players ${this.playerOne.username}(${this.playerOne._id}) & ${this.playerTwo.username}(${this.playerTwo._id})`, __dirname);
+        Logger.info(`[SingleGameBot] Game manager initialization for player ${this.player.username}(${this.player._id})`, __dirname);
         this.gameId = Games.insert({
             type: this.gameType,
             playerA: {
-                id: this.playerOne._id
+                id: this.player._id
             },
             playerB: {
-                id: this.playerTwo._id
+                id: OpponentTypes.bot
             }
         });
 
         if (this.gameId) {
             this.startNewRound();
         } else {
-            Logger.error(`[SingleGame] Encountered error during inserting game to the database.`, __dirname);
+            Logger.error(`[SingleGameBot] Encountered error during inserting game to the database.`, __dirname);
             // TODO: Put players back to the queue.
         }
     }
@@ -71,7 +65,7 @@ export default class {
      * @public
      */
     finishGame(winnerId) {
-        Logger.info(`[SingleGame] Finishing game. Winner of the game is ${winnerId}`, __dirname);
+        Logger.info(`[SingleGameBot] Finishing game. Winner of the game is ${winnerId}`, __dirname);
         Meteor.clearTimeout(this.roundTimeout);
         this.gameFinished = true;
         return Games.update(this.gameId, {
@@ -83,7 +77,7 @@ export default class {
     }
 
     /**
-     * Adding an answer from a specific player to the exercise.
+     * Adding an answer from a player to the exercise.
      * @param {string} playerId - player which made an answer.
      * @param {number} answer - chosen answer.
      * @param {Date} answerDate - date of answer.
@@ -92,28 +86,20 @@ export default class {
     addAnswer(playerId, answer, answerDate) {
         const game = Games.findOne(this.gameId);
         const currentExercise = _.last(game.exercises);
-        const playerType = game.playerA.id === playerId
-            ? 'playerA'
-            : 'playerB';
-
         const exercise = Exercises.findOne(currentExercise);
-        if (exercise[playerType].answer){
+        if (exercise.playerA.answer){
             Logger.warn('Player already answered to the question', __dirname);
             return;
         }
 
-        const query = game.playerA.id === playerId
-            ? {
+        const result = Exercises.update(currentExercise, {
+            $set: {
                 'playerA.answer': answer,
                 'playerA.answerDate': answerDate
             }
-            : {
-                'playerB.answer': answer,
-                'playerB.answerDate': answerDate
-            };
+        });
 
-
-        const result = Exercises.update(currentExercise, { $set: query});
+        this.generateBotAnswer(exercise);
         this.checkIfProcessCurrentTurn();
 
         if (result === 1) {
@@ -121,6 +107,26 @@ export default class {
         } else {
             return result;
         }
+    }
+
+    /**
+     * Generates random answer and delay time for a bot player.
+     * @param {object} exercise - current exercise.
+     */
+    generateBotAnswer(exercise) {
+        const answerDate = new Date(exercise.date.getTime() + Math.floor((Math.random() * 15000) + 1));
+        const rollValue = Math.floor((Math.random() * 10) + 1);
+        const randomAnswer = Math.floor((Math.random() * 4));
+        const botAnswer = (rollValue >= 4)
+            ? exercise.correctAnswer
+            : exercise.answers[randomAnswer];
+
+        Exercises.update(exercise._id, {
+            $set: {
+                'playerB.answer': botAnswer,
+                'playerB.answerDate': answerDate
+            }
+        });
     }
 
     /**
@@ -134,7 +140,7 @@ export default class {
                 this.bumpRound();
                 this.setRoundTimeout();
             }).catch((error) => {
-                Logger.warn(`[SingleGame] Encountered error during creating exercise: ${error}`, __dirname);
+                Logger.warn(`[SingleGameBot] Encountered error during creating exercise: ${error}`, __dirname);
             });
         }, 500);
     }
@@ -170,7 +176,7 @@ export default class {
      */
     generateExercise() {
         return new Promise((resolve, reject) => {
-            Logger.info('[SingleGame] Creating ExerciseGenerator', __dirname);
+            Logger.info('[SingleGameBot] Creating ExerciseGenerator', __dirname);
             const exerciseGenerator = new ExerciseGenerator(this.gameType);
             const exerciseId = exerciseGenerator.init();
             if (exerciseId) {
@@ -196,8 +202,7 @@ export default class {
         const currentExerciseId = _.last(game.exercises);
         const currentExercise = Exercises.findOne(currentExerciseId);
 
-        if (currentExercise && currentExercise.playerA.answer && currentExercise.playerB.answer) {
-            // TODO: Send to players opponent answer // points difference
+        if (currentExercise && currentExercise.playerA.answer) {
             this.calculatePoints(currentExercise);
         }
     }
@@ -213,7 +218,7 @@ export default class {
             const difference =
                 moment.duration(moment(currentExercise.playerA.answerDate).diff(moment(currentExercise.date)));
             const points = GamePointsConstants.exercisePoints - Math.floor(difference.asSeconds());
-            Logger.info(`[SingleGame] Adding ${points} points to player A (${this.playerOne})`, __dirname);
+            Logger.info(`[SingleGameBot] Adding ${points} points to player A (${this.player.username})`, __dirname);
             this.addPoints("playerA.points", points > 0 ? points : 1);
         }
 
@@ -230,19 +235,19 @@ export default class {
             if (game.playerA.points >= GamePointsConstants.winRequirement &&
                 game.playerB.points >= GamePointsConstants.winRequirement) {
                 this.finishGame("DRAW");
-                Logger.info(`[SingleGame] Game ended with draw.`, __dirname);
+                Logger.info(`[SingleGameBot] Game ended with draw.`, __dirname);
             } else if (game.playerA.points >= GamePointsConstants.winRequirement) {
                 this.finishGame(game.playerA.id);
-                Logger.info(`[SingleGame] Player A (${game.playerA.id}) won the game.`, __dirname);
+                Logger.info(`[SingleGameBot] Player A (${game.playerA.id}) won the game.`, __dirname);
             } else if (game.playerB.points >= GamePointsConstants.winRequirement) {
                 this.finishGame(game.playerB.id);
-                Logger.info(`[SingleGame] Player B (${game.playerB.id}) won the game.`, __dirname);
+                Logger.info(`[SingleGameBot] Player B (${game.playerB.id}) won the game.`, __dirname);
             } else {
-                Logger.info(`[SingleGame] Starting new round of the game ${this.gameId}.`, __dirname);
+                Logger.info(`[SingleGameBot] Starting new round of the game ${this.gameId}.`, __dirname);
                 this.startNewRound();
             }
         } else {
-            Logger.error(`[SingleGame] Couldn't calculate points because game object is undefined.`, __dirname);
+            Logger.error(`[SingleGameBot] Couldn't calculate points because game object is undefined.`, __dirname);
         }
     }
 

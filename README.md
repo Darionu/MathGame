@@ -5,9 +5,9 @@ Personal diploma project created using mantra architecture with Meteor/React.<br
 Realtime math game around basic mathematical operations with the level of primary school classes 1-3.
 
 ### Current TODO LIST
-- Playing a game with the bot (for offline users or after exceeding queue time limit)
+<strike>- Playing a game with the bot </<strike>
 - Fill LEARN page
-- Postgame winning/losing screen
+<strike>- Post game winning/losing screen</<strike>
 
 ### Demo
 - [demo website](http://darionu.pl:3000)

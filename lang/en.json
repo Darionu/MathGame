@@ -66,5 +66,10 @@
   "app.game.result.averageTime": "Average answer time",
   "app.game.result.answers": "Answers",
   "app.game.result.correct": "Correct",
-  "app.game.result.wrong": "Wrong"
+  "app.game.result.wrong": "Wrong",
+  "app.playboard.yourOpponent": "Your opponent type",
+  "app.playboard.player": "PLAYER",
+  "app.playboard.bot": "BOT",
+  "app.game.result.gameWithBot": "You played against bot opponent. The win/loss will not be added to your account.",
+  "app.core.userName": "You"
 }

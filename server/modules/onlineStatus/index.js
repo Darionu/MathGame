@@ -5,6 +5,7 @@ import Logger from '/lib/logging/Logger';
 import publications from './publications';
 import QueueManager from '../queue';
 import GameManager from '../game';
+import PlayersManager from '../players';
 
 export default class OnlineStatus {
     constructor() {
@@ -22,6 +23,7 @@ export default class OnlineStatus {
                     });
                     QueueManager.removeUserFromQueue(user._id);
                     GameManager.forfeitGame(user._id);
+                    PlayersManager.deleteTemporaryUser(user._id);
 
                     Logger.debug(
                         `[OnlineStatus] Connection close for user id: ${user._id} and connection id: ${connectionId}`,

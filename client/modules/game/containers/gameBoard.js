@@ -5,7 +5,6 @@ import { GameStatuses } from '/lib/constants/gameConstants';
 import LocalStateKeys from '/lib/constants/localStateKeys';
 
 export const composer = ({ context }, onData) => {
-    const images = context().providers.pageProvider.getImages();
     const game = Games.findOne({
         status: {
             $in: [
@@ -26,14 +25,14 @@ export const composer = ({ context }, onData) => {
         const myself = Meteor.users.findOne(Meteor.userId());
         const opponent = Meteor.users.findOne(game[opponentType].id);
         const playerData = {
+            _id: myself._id,
             username: myself.username,
-            points: game[playerType].points,
-            avatar: images.avatars[myself.userData.avatar]
+            points: game[playerType].points
         };
         const opponentData = {
+            _id: opponent._id,
             username: opponent.username,
-            points: game[opponentType].points,
-            avatar: images.avatars[opponent.userData.avatar]
+            points: game[opponentType].points
         };
 
         if (currentExercise) {

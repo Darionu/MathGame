@@ -3,6 +3,7 @@ import GameResultContent from '../components/gameResultContent';
 import { Games } from '/lib/collections';
 import { GameStatuses } from '/lib/constants/gameConstants';
 import RouteNames from '/lib/constants/routeNames';
+import OpponentTypes from '/lib/constants/opponentTypes';
 
 export const composer = ({ context }, onData) => {
     const game = Games.findOne({
@@ -41,11 +42,14 @@ export const composer = ({ context }, onData) => {
         isWinner: secondPlayer._id === game.winnerId
     };
 
+    const isGameAgainstBot = (playerB.id === OpponentTypes.bot);
+
     onData(null, {
         game,
         isWin,
         playerA,
-        playerB
+        playerB,
+        isGameAgainstBot
     });
 };
 

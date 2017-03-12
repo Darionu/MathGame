@@ -2,6 +2,7 @@ import PublicationNames from '/lib/constants/publicationsNames';
 import Logger from '/lib/logging/Logger';
 import QueueManager from '../queue';
 import GameManager from '../game';
+import PlayersManager from '../players';
 
 export default function () {
     Meteor.publish(PublicationNames.myStatus, function myStatus() {
@@ -23,6 +24,7 @@ export default function () {
                         sessionIds: connectionId
                     }
                 });
+                PlayersManager.deleteTemporaryUser(this.userId);
                 Logger.debug(
                     `[OnlineStatus] Close publication for user id: ${this.userId} with connection id: ${this.connection.id}`,
                     __filename

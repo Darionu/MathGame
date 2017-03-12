@@ -138,7 +138,7 @@ export default class Matchmaking {
     }
 
     /**
-     * Finds and returns list of active queue records for specific users.
+     * Finds and returns list of active queue records for specific players.
      * @returns {Array} playerList
      */
     getAwaitingPlayers() {
