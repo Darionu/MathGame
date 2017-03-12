@@ -6,6 +6,8 @@ Realtime math game around basic mathematical operations with the level of primar
 
 ### Current TODO LIST
 - Fill LEARN page
+- User profiles
+- Badges/Achievements
 
 <strike> Playing a game with the bot </strike>
 

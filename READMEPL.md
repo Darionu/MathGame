@@ -6,6 +6,8 @@ Gra matematyczna w czasie rzeczywistym z zadaniami matematycznymi na poziomie kl
 
 ### Aktualna lista DO ZROBIENIA
 - Uzupełnienie podstrony NAUKA
+- Profile graczy
+- Odznaki/Osiągnięcia
 
 <strike> Rozgrywka z botem </strike>
 
