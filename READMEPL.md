@@ -8,6 +8,7 @@ Gra matematyczna w czasie rzeczywistym z zadaniami matematycznymi na poziomie kl
 - Uzupełnienie podstrony NAUKA
 
 <strike> Rozgrywka z botem </strike>
+
 <strike> Ekran końca rozgrywki z rezultatem wygranej/przegranej </strike>
 
 ### Strona DEMO

@@ -8,6 +8,7 @@ Realtime math game around basic mathematical operations with the level of primar
 - Fill LEARN page
 
 <strike> Playing a game with the bot </strike>
+
 <strike> Post game winning/losing screen</strike>
 
 ### Demo
