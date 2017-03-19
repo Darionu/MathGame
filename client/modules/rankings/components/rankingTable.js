@@ -26,25 +26,17 @@ const RankingTable = class extends React.Component {
     renderRow(element, index) {
         return (
             <tr key={element.player}>
-                <td className={styles.textCenter}>
-                    {index+1}.
-                </td>
+                <td className={styles.textCenter}> {index+1}. </td>
                 <td className={styles.textLeft}>
                     <AvatarCircle
                         className={styles.avatar}
                         image={element.avatar}
                     />
-                    <span className={styles.playerName}>
-                            {element.player}
-                    </span>
+                    <span className={styles.playerName}> {element.player} </span>
                 </td>
 
-                <td className={styles.textCenter}>
-                    {element.wins}
-                </td>
-                <td className={styles.textCenter}>
-                    {element.loses}
-                </td>
+                <td className={styles.textCenter}> {element.wins} </td>
+                <td className={styles.textCenter}> {element.loses} </td>
             </tr>
         );
     }
