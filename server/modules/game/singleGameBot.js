@@ -231,24 +231,37 @@ export default class {
         }
 
         const game = Games.findOne(this.gameId);
-        if (game) {
-            if (game.playerA.points >= GamePointsConstants.winRequirement &&
-                game.playerB.points >= GamePointsConstants.winRequirement) {
-                this.finishGame("DRAW");
-                Logger.info(`[SingleGameBot] Game ended with draw.`, __dirname);
-            } else if (game.playerA.points >= GamePointsConstants.winRequirement) {
-                this.finishGame(game.playerA.id);
-                Logger.info(`[SingleGameBot] Player A (${game.playerA.id}) won the game.`, __dirname);
-            } else if (game.playerB.points >= GamePointsConstants.winRequirement) {
-                this.finishGame(game.playerB.id);
-                Logger.info(`[SingleGameBot] Player B (${game.playerB.id}) won the game.`, __dirname);
-            } else {
-                Logger.info(`[SingleGameBot] Starting new round of the game ${this.gameId}.`, __dirname);
-                this.startNewRound();
-            }
-        } else {
+        if (!game) {
             Logger.error(`[SingleGameBot] Couldn't calculate points because game object is undefined.`, __dirname);
+            return;
         }
+
+        if (game.playerA.points >= GamePointsConstants.winRequirement ||
+            game.playerB.points >= GamePointsConstants.winRequirement) {
+            const winner = this.getWinnerId(game.playerA, game.playerB);
+            this.finishGame(winner);
+        } else {
+            Logger.info(`[SingleGameBot] Starting new round of the game ${this.gameId}.`, __dirname);
+            this.startNewRound();
+        }
+    }
+
+    /**
+     *  Returns id of player which has the most points.
+     *  @param {Object} playerA
+     *  @param {Object} playerB
+     *  @returns {String} result = winnerId or DRAW
+     */
+    getWinnerId(playerA, playerB) {
+        if (playerA.points > playerB.points) {
+            Logger.info(`[SingleGame] Player A (${playerA.id}) won the game.`, __dirname);
+            return playerA.id;
+        } else if (playerA.points < playerB.points) {
+            Logger.info(`[SingleGame] Player B (${playerB.id}) won the game.`, __dirname);
+            return playerB.id;
+        }
+
+        return 'DRAW';
     }
 
     /**
